@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Eduneeds | Service Marketplace</title>
+    <link rel="stylesheet" href="../css/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <!-- Brand -->
+            <div class="brand">
+                <!-- <img alt="Eduneeds Logo" class="brand-logo" src="https://lh3.googleusercontent.com/aida/AEtjO1WQ0q0TghtvG2g1DuBTkoWVxjBuNpcPnuB5uSVjOLG3egJ9lKO6wOpf38vSrUl5j14v9GtXU5Fv4TdMkIeT9EHikaTFMn1vL8OBeXRxe2FeMIKyGJxe5zqRgE7zFj1eEzGBZqMrBI9ap5xWubn-rJzFWJj18mDqi5j62pWuKwJdqR5wQ5d47OJJJczlJrcGwogdc_ch0D6SFEA-NqaVqDUSvxa1VI9TDxSyFSazFGuPdAEYXplNXEPae-y4" /> -->
+                <span class="brand-name">Eduneeds</span>
+            </div>
+
+            <!-- Search -->
+            <!-- <div class="search-wrapper">
+                <input class="search-input" placeholder="Search services..." type="text" />
+                <span class="material-symbols-outlined search-icon">search</span>
+            </div> -->
+
+            <!-- Navigation -->
+            <nav class="nav-links">
+                <a class="nav-link active" data-target="academic-materials" href="#academic-materials">Home</a>
+                <a class="nav-link" data-target="jamb-services" href="#jamb-services">About</a>
+                <!-- <a class="nav-link" data-target="bills-identity" href="#bills-identity">Utilities</a> -->
+                <a class="nav-link" data-target="bills-identity" href="#jamb-services"> Services</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="header-actions">
+                <button class="icon-btn" aria-label="Notifications">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button class="icon-btn" aria-label="Help">
+                    <span class="material-symbols-outlined">help_outline</span>
+                </button>
+                <!-- <button class="cart-btn">
+                    <span class="material-symbols-outlined">shopping_cart</span> Cart
+                </button> -->
+                <div class="user-menu">
+                    <button class="user-btn">
+                        <span class="material-symbols-outlined">account_circle</span>
+                        <span class="user-name">GET STARTED</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </button>
+                    <div class="user-dropdown">
+                        <a href="../pages/login.html"><span class="material-symbols-outlined">login</span> Login</a>
+                        <a href="../pages/register.html"><span class="material-symbols-outlined">person_add</span> Sign up</a>
+                        <a href="#"><span class="material-symbols-outlined">contact_support</span> Contact us</a>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img alt="Background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6nwk0YqBt6LogrsQk9-0lgnu8vH9tWv13fiioeD0-EqweA6jy0jXPBxjTPDB6jtYIPZTC9jaYvyjFpPb7EMZ7DwXL3Pz6wCxK-4hW7gvjGLhcAUvnAEIHCXnSW6MT5xBheGaRWm274bTUSNsT0C-KqQhDl5tMAPsY2u4QLPZ601aOhtusRKKzdzQC-PBjPTfGrcc9RmflC0CDlj61gRrKIiU_lMpd-YO6o8hjKLVjp2L3Bdtsz9kWKw" />
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1>Eduneeds Service Marketplace</h1>
+                <p>Your trusted hub for exam pins, JAMB services, bills &amp; identity verification — all in one place.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary"><a href="../pages/register.html" style="text-decoration: none; color: white;">Get Started</a></button>
+                    <button class="btn-outline"><a href="#" style="text-decoration: none; color: blck;">Services</a> </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTENT WRAPPER ===== -->
+        <div class="container">
+
+            <!-- ===== ACADEMIC MATERIALS SLIDER ===== -->
+            <section class="slider-section" id="academic-materials">
+                <div class="slider-wrapper">
+                    <div class="slider-track" id="academicSlider">
+
+                        <!-- SLIDE 1: Academic Resources -->
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="material-symbols-outlined slide-icon">library_books</span>
+                                <h2>Academic Resources</h2>
+                            </div>
+                            <div class="slide-grid">
+                                <!-- Item 1 -->
+                                <div class="product-card popular">
+                                    <span class="badge popular">Popular</span>
+                                    <span class="product-icon material-symbols-outlined">menu_book</span>
+                                    <h3>Post-UTME Success Packs</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Detailed Solutions</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Offline Access</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Updated Syllabus</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★☆</span> <span>(128 reviews)</span> <span class="sold">500+ sold</span></div>
+                                    <div class="price"><span class="current">₦1,500</span> <span class="old">₦2,500</span></div>
+                                    <button class="btn-buy">Buy Now</button>
+                                </div>
+
+                                <!-- Item 2 -->
+                                <div class="product-card best-seller">
+                                    <span class="badge best-seller">Best Seller</span>
+                                    <span class="product-icon material-symbols-outlined">quiz</span>
+                                    <h3>JAMB 2024 Past Questions</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> 10 Years Archive</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Step-by-step Answers</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> CBT Practice Mode</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★★</span> <span>(342 reviews)</span> <span class="sold">1.2k+ sold</span></div>
+                                    <div class="price"><span class="current">₦2,000</span> <span class="old">₦3,000</span></div>
+                                    <button class="btn-buy">Buy Now</button>
+                                </div>
+
+                                <!-- Item 3 -->
+                                <div class="product-card">
+                                    <span class="product-icon material-symbols-outlined">edit_document</span>
+                                    <h3>Comprehensive Study Notes</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Subject Summaries</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Key Formulas</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Printable PDF</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★☆</span> <span>(89 reviews)</span> <span class="sold">300+ sold</span></div>
+                                    <div class="price"><span class="current">₦1,200</span></div>
+                                    <button class="btn-outline-buy">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SLIDE 2: Practice & Bundles -->
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="material-symbols-outlined slide-icon">target</span>
+                                <h2>Practice &amp; Bundles</h2>
+                            </div>
+                            <div class="slide-grid">
+                                <!-- Item 4 -->
+                                <div class="product-card sale">
+                                    <span class="badge sale-badge">Sale</span>
+                                    <span class="product-icon material-symbols-outlined">layers</span>
+                                    <h3>Science Subjects Bundle</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Phy, Chem, Bio, Math</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Video Explanations</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Mock Exams</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★★</span> <span>(210 reviews)</span> <span class="sold">800+ sold</span></div>
+                                    <div class="price"><span class="current">₦4,500</span> <span class="old">₦6,000</span></div>
+                                    <button class="btn-buy">Buy Now</button>
+                                </div>
+
+                                <!-- Item 5 -->
+                                <div class="product-card">
+                                    <span class="product-icon material-symbols-outlined">computer</span>
+                                    <h3>CBT Simulator Pro</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Real Exam Interface</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Time Management Stats</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Desktop App</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★☆</span> <span>(145 reviews)</span> <span class="sold">450+ sold</span></div>
+                                    <div class="price"><span class="current">₦2,500</span></div>
+                                    <button class="btn-outline-buy">Buy Now</button>
+                                </div>
+
+                                <!-- Item 6 -->
+                                <div class="product-card">
+                                    <span class="product-icon material-symbols-outlined">school</span>
+                                    <h3>WAEC/NECO Prep Kit</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Essay Guidelines</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Past Objective Qs</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Practical Manuals</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★☆</span> <span>(67 reviews)</span> <span class="sold">200+ sold</span></div>
+                                    <div class="price"><span class="current">₦3,000</span></div>
+                                    <button class="btn-outline-buy">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SLIDE 3: Freebies & Specials -->
+                        <div class="slide">
+                            <div class="slide-header">
+                                <span class="material-symbols-outlined slide-icon">redeem</span>
+                                <h2>Freebies &amp; Specials</h2>
+                            </div>
+                            <div class="slide-grid">
+                                <!-- Item 7 -->
+                                <div class="product-card free">
+                                    <span class="badge free-badge">Free</span>
+                                    <span class="product-icon material-symbols-outlined">calendar_month</span>
+                                    <h3>2024 Exam Timetable</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> WAEC &amp; NECO</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> JAMB Dates</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Printable Planner</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★★</span> <span>(500+ ratings)</span> <span class="sold">5k+ DLs</span></div>
+                                    <div class="price"><span class="free-price">Free</span></div>
+                                    <button class="btn-download">Download</button>
+                                </div>
+
+                                <!-- Item 8 -->
+                                <div class="product-card">
+                                    <span class="product-icon material-symbols-outlined">fact_check</span>
+                                    <h3>University Cut-off Marks</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> All Federal Unis</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Departmental Breakdown</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Admission Guide</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★☆</span> <span>(280 reviews)</span> <span class="sold">2k+ sold</span></div>
+                                    <div class="price"><span class="current">₦500</span></div>
+                                    <button class="btn-outline-buy">Buy Now</button>
+                                </div>
+
+                                <!-- Item 9 -->
+                                <div class="product-card free">
+                                    <span class="badge free-badge">Free</span>
+                                    <span class="product-icon material-symbols-outlined">tips_and_updates</span>
+                                    <h3>Exam Success Guide</h3>
+                                    <ul>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Study Techniques</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Exam Day Tips</li>
+                                        <li><span class="material-symbols-outlined check">check_circle</span> Motivation</li>
+                                    </ul>
+                                    <div class="rating"><span class="stars">★★★★★</span> <span>(410 reviews)</span> <span class="sold">3.5k+ DLs</span></div>
+                                    <div class="price"><span class="free-price">Free</span></div>
+                                    <button class="btn-download">Download</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Slider Controls (Prev/Next) -->
+                    <button class="slider-btn prev" id="prevSlide">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button class="slider-btn next" id="nextSlide">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+
+                    <!-- Dots -->
+                    <div class="slider-dots">
+                        <button class="dot active" data-index="0"></button>
+                        <button class="dot" data-index="1"></button>
+                        <button class="dot" data-index="2"></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== EDUCATIONAL PINS ===== -->
+            <section class="section" id="educational-pins">
+                <div class="section-header">
+                    <h2>Educational Pins</h2>
+                    <a href="#">View All Pins <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="pins-grid">
+                    <!-- 1. WAEC Scratch Card -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="WAEC Scratch Card" src="https://lh3.googleusercontent.com/aida/AEtjO1VTxaTRLuEUnHx3D2Q3SC7O7DL64aIxO14ViWV3GgegtUmPAzSvfzbavh6DV7Fyq3UENhvJwrOsjioIIX7Fx-wPbxjwvwcZtKXJPhMr3Sk9eDfnX2tQ8S9SeHXdEiEHyZBuXRV8JjAv-VQimDUuzt6godTTjT10VIySU7CsQP3ERdIPpIhR6g4HcAQXqKQOdNk0vD5rvDZ38xp67b4gc0qYbermO7tIFnF4xK8VwDoQSz_9M5b075xOKGg" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>WAEC Scratch Card</h3>
+                            <p class="pin-price">₦5,450</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 2. WAEC Ver. Pin NYSC -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="WAEC Ver. Pin NYSC" src="https://lh3.googleusercontent.com/aida/AEtjO1XBSBf96d-8d1JqLHVpBRy0-lYhUhAkZHT7BlrxDydS2z3gOC3U1u2q6OMQ77Ulb8PjcoGuYoKy7VjBdN6f-pQrgnliGgT7e1MNnGBZLifUukpaKppOkqVmADGLNxLVqIBGqr7L4javGm1kWAjE0ip6x4NQ4o5u3lsWk2ApJXtTrin2HxJeNnQ77dgktUF7jL957CeztwSuhjKqmjYT_eiwtujhxLMN5xhs093wwWTGd0l1lZHd7QB6VbU" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>WAEC Ver. Pin NYSC</h3>
+                            <p class="pin-price">₦5,600</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 3. NECO Result Token -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="NECO Result Token" src="https://lh3.googleusercontent.com/aida/AEtjO1VSTFGcZ8OO9A4XnfC7-PvBF5U2SlSneMtCYO-sx_5mz8aixyY9IVDGaSrrVR7o7aangG2B_VKskeCAPjB3RybFNWsGcjdgW9e-GGx8vODboJz50BEb1cxAXzXC9_FXtnyK8Bx8mcwwUcFKNme4c3akNtIRNpeRoswGtdgDezE4p5hzkHDgUwgtkxFhFPbJ757YExiIDYK4qJ0sa8DNrCJOiRnnFL5WaIsPpVpIHgYBNVV4Jqu6A5yAWd4i" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>NECO Result Token</h3>
+                            <p class="pin-price">₦2,200</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 4. NABTEB Scratch Card -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="NABTEB Scratch Card" src="https://lh3.googleusercontent.com/aida/AEtjO1Vpi04P6mHgqazOLZkImayrHXIU3hD9rxsVgTtBv0ch5fHlACZW0JxS9HzAJ0QzJUNelLLaoWSX3aCD8H8mvINJ4uL51lMwoS1FKKVbzAblNzk7kije7v8EAoVzPm52ocfiWVg1Mc9w9jCeYzAqPgdECeK9TdXJH02ligmHIocPoJWvszn2v25dyrq98sPgWOzzC_eCHoD3CVGYEnZs4T9z4bw2Cj_aeqhTqJOepO48d1EPedmaLNdAwsCC" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>NABTEB Scratch Card</h3>
+                            <p class="pin-price">₦1,000</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 5. NBAIS Scratch Card -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="NBAIS Scratch Card" src="https://lh3.googleusercontent.com/aida/AEtjO1UDbwtKs7Pyqvi9j3masnULW8IA4WIm99Zui-u-WkD61iUFT8N8mpXnqzXMrqpoLzXmNELhxSIxBe3ManZ4ZLhnqg6oSsylwHJfyYf-mAECzf5YLakMqRUy0Rm8S5eSARXXxsDYBURWA_dz9LfhamND1uN3ah_8UVHvhoVdrDDnSMkVdeq8olmX8e_h3FKUeIfbwrlFhjWOpQozUsZQGJJ41MPuNtQbNeM21TqBqKaYkK0RP5Jr40S3mRjP" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>NBAIS Scratch Card</h3>
+                            <p class="pin-price">₦2,000</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 6. WAEC GCE Registration Pin -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="WAEC GCE Registration Pin" src="https://lh3.googleusercontent.com/aida/AEtjO1UZ5ZUmWzWKA34W_WejmVy6hrmd5GCuQf1k1JgUA6dCSWd9z2XITdlR94tvNSudKxFb6V0LybpKiomAr014ax9y4SbtwcnYpyf_dbAwqC_VBw1IJ-1z7VRl8l9ro3f8ZKXZ4RnbtN_9eq6PWXtWBTgz-Lw_Kom5BZ6JyVvhQh4u9Sqan42pp7bMrsGuZ0Kgw5Acgxru5rgRI0rxCAGQQ61wFk3WWys3p7iigVw9LxEjngueAAek7ChEpzk" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>WAEC GCE Registration Pin</h3>
+                            <p class="pin-price">₦38,200</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 7. NABTEB Nov Dec Olevel -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="NABTEB Nov Dec Olevel" src="https://lh3.googleusercontent.com/aida/AEtjO1X4vOxDs78T1Jm9GBAC5kbxt4AePxCkQRe1w-R2DMVLb2P5u0MDAiXtn_ArLeKYsD-51LzB-8_4ysgn9-LO4B3voTrlxr66ZjpXansQGuiyV8sjM31RHH-4qN4rW3Qc1LpKKmb0Uf_n2E8sL91nfTZa-Nq8z5J6an2j3sTI9CbXWOvuSH2LiLwvx9YyjKam9nIJKK1k2j2B00YpGn5dZDDjUZK-6E0aYZ2VtCdDFzR0xwZH2zJ0ztZaIqo" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>NABTEB Nov Dec Olevel</h3>
+                            <p class="pin-price">₦23,500</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 8. NABTEB Nov Dec Alevel -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="NABTEB Nov Dec Alevel" src="https://lh3.googleusercontent.com/aida/AEtjO1VtewmCfRDJvTFr4uhwXUXc9j_lSfoIbMXzjJPIZQie3yvcOCkY-A2j0d3WUa0iHCHpVqjWGz3w_k5rhGOIjxFCOf9i5fbeSuKqkC46Po0yQjdyxgIgnNQ7It-klRUXRaUmz8-ZlLNG_NL_HmulHsjwbCY5tEmCzT8ZmNdMvsSNS1l8SHZkl_Ce8swadiPwNzcY2nFjuP3DzIHwI67F-8Tu30PlKXilKvkVpzq0L7ADE8okdcClyMOcXZ5Z" />
+                            <span class="stock-badge out-of-stock">Out of Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>NABTEB Nov Dec Alevel</h3>
+                            <p class="pin-price">₦27,000</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+
+                    <!-- 9. NECO Result Verification Pin -->
+                    <article class="pin-card">
+                        <div class="pin-image">
+                            <img alt="NECO Result Verification Pin" src="https://lh3.googleusercontent.com/aida/AEtjO1X9JaFhjc_sjw3brYzC263I5ioMkS6O1QkVhz0siZBoSpqWfEPKwP_V2STQDaMuld2oBgRSzQsR7idBFWOcBF7M8O_mQ1q2xZHtIN8sLxtYahQwe6DZGOSbTJk_UVkg8Nr_uSCBcsqHy211cWLI5_4u0LrkogoYF6fcaDSAibzBf8np6oLB3JeJmrPH3n5g6kpqnZBpEuh2ZKitpMRQAntTOz2vdMsG1qC-b1QYrZLRN9VuT8bM7iybc4Y" />
+                            <span class="stock-badge in-stock">In Stock</span>
+                        </div>
+                        <div class="pin-details">
+                            <h3>NECO Result Verification Pin</h3>
+                            <p class="pin-price">₦6,000</p>
+                            <button class="btn-buy">Buy Now</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ===== JAMB PINS ===== -->
+            <section class="section" id="jamb-services">
+                <div class="section-header">
+                    <h2>JAMB PINS</h2>
+                </div>
+                <div class="jamb-pins-grid">
+                    <!-- Direct Entry (DE) -->
+                    <div class="jamb-pin-card">
+                        <div class="jamb-pin-icon">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+                        <div>
+                            <h4>Direct Entry (DE)</h4>
+                            <p class="jamb-price">₦5,600</p>
+                            <p class="jamb-status unavailable">Unavailable</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- UTME PIN (Without Mock) -->
+                    <div class="jamb-pin-card">
+                        <div class="jamb-pin-icon">
+                            <span class="material-symbols-outlined">edit_note</span>
+                        </div>
+                        <div>
+                            <h4>UTME PIN (Without Mock)</h4>
+                            <p class="jamb-price">₦7,100</p>
+                            <p class="jamb-status unavailable">Unavailable</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- UTME PIN (With Mock) -->
+                    <div class="jamb-pin-card">
+                        <div class="jamb-pin-icon">
+                            <span class="material-symbols-outlined">history_edu</span>
+                        </div>
+                        <div>
+                            <h4>UTME PIN (With Mock)</h4>
+                            <p class="jamb-price">₦8,580</p>
+                            <p class="jamb-status unavailable">Unavailable</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== JAMB SERVICES ===== -->
+            <section>
+                <div class="section-header">
+                    <h2>JAMB Services</h2>
+                </div>
+                <div class="jamb-services-grid">
+                    <!-- 1. Olevel Confirmation -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">verified</span>
+                        </div>
+                        <div>
+                            <h4>Olevel Confirmation</h4>
+                            <p class="jamb-price">₦500</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 2. JAMB Original Result -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                        </div>
+                        <div>
+                            <h4>JAMB Original Result</h4>
+                            <p class="jamb-price">₦2,100</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 3. JAMB Admission Letter -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <div>
+                            <h4>JAMB Admission Letter</h4>
+                            <p class="jamb-price">₦1,600</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 4. Retrieve JAMB Reg Number -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">badge</span>
+                        </div>
+                        <div>
+                            <h4>Retrieve JAMB Reg Number</h4>
+                            <p class="jamb-price">₦500</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 5. Retrieve JAMB Profile Code -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">key</span>
+                        </div>
+                        <div>
+                            <h4>Retrieve JAMB Profile Code</h4>
+                            <p class="jamb-price">₦500</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 6. Check Admission Status -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">fact_check</span>
+                        </div>
+                        <div>
+                            <h4>Check Admission Status</h4>
+                            <p class="jamb-price">₦500</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 7. JAMB Reprinting Services -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">print</span>
+                        </div>
+                        <div>
+                            <h4>JAMB Reprinting Services</h4>
+                            <p class="jamb-price">₦500</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 8. JAMB CHANGE OF COURSE Payment Only -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">published_with_changes</span>
+                        </div>
+                        <div>
+                            <h4>JAMB CHANGE OF COURSE Payment Only</h4>
+                            <p class="jamb-price">₦3,300</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+
+                    <!-- 9. Admission Letter With Picture -->
+                    <div class="jamb-service-card">
+                        <div class="jamb-service-icon">
+                            <span class="material-symbols-outlined">account_box</span>
+                        </div>
+                        <div>
+                            <h4>Admission Letter With Picture</h4>
+                            <p class="jamb-price">₦500</p>
+                        </div>
+                        <span class="material-symbols-outlined jamb-arrow">chevron_right</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== BILLS & IDENTITY ===== -->
+            <section class="section" id="bills-identity">
+                <div class="section-header">
+                    <h2>Bills &amp; Identity</h2>
+                </div>
+                <div class="bills-grid">
+                    <!-- 1. Airtime -->
+                    <article class="bill-card">
+                        <div class="bill-image">
+                            <img alt="Airtime Topup" src="https://lh3.googleusercontent.com/aida/AEtjO1UFF3W_xsEp_8GbFJAmPgXfclqN4nI-zzyX9u-LnTqdou1c1nctFIBPP_8sRjXpAy2A8fITTIlU3evjqGkHZ-qXFm0dg8QscmpKR1WxvgyIMYX7gJ3mmnNgZN0NIEYarILMhZ5e0KobK6CwEpzicq1-R9CFw2J8jkAQAl3DXhSbw6NR1NsmVUBqLh4dCSnwxyqf2FUE-GNxSRtVeOGbLnPTVXWjdY9mpWZakhkkl5NTiDMIKL-ZgNcyyywj" />
+                        </div>
+                        <div class="bill-details">
+                            <h3>Airtime Topup</h3>
+                            <p>Instant recharge for all major networks.</p>
+                            <button class="btn-proceed">Proceed</button>
+                        </div>
+                    </article>
+
+                    <!-- 2. Data -->
+                    <article class="bill-card">
+                        <div class="bill-image">
+                            <img alt="Data Subscription" src="https://lh3.googleusercontent.com/aida/AEtjO1WiWsAxLcTwM_0t_q19UbyqDn1u0yi3P9ozk9UpJqfsSp_7wSNQfc5y01Cc0OoLRNdL5J784tt3CS4T9AyRMCJXn3o4hLIb_0dZDmvh94K9KOkCptB5dCj-JAcKL9HiIMkdh09XT5JUbz_kMB28AzPifwQpwCybyUXHA4_U7aMijyrMc4x8IkU9xHtbcdRMzmxsvlJRs1Kb5aCRT8JjRFxf_g9a2VxVWte38qwRpG55wTa5ODI4yEi3NNMk" />
+                        </div>
+                        <div class="bill-details">
+                            <h3>Data Subscription</h3>
+                            <p>Affordable data plans for seamless browsing.</p>
+                            <button class="btn-proceed">Proceed</button>
+                        </div>
+                    </article>
+
+                    <!-- 3. BVN Verification -->
+                    <article class="bill-card">
+                        <div class="bill-image">
+                            <img alt="BVN Verification" src="https://lh3.googleusercontent.com/aida/AEtjO1WSNMd9n70DoBOijTiSdyUrniFu_TrunVlkYP_plC6SBElRFkfx9pFTXncTWaQoQnIc-FKn8NvAt2ltRSHgkd9nzvWxgTN9JJYAit09Re7O0DckSMpkE6Jtx0idu_xG5shp101WSCmISykB8QAIahj0VzWob1uSWNaecjy0HuklETSkCkMUyddHEd5ycOGisVxGSzvsWXlrw_nVu80EOCEY3SvRxvq2LlBLDCIuhc6NsM5z6GyUrF8vnLaO" />
+                        </div>
+                        <div class="bill-details">
+                            <h3>BVN Verification</h3>
+                            <p>Securely verify your Bank Verification Number.</p>
+                            <button class="btn-proceed">Proceed</button>
+                        </div>
+                    </article>
+
+                    <!-- 4. Print NIN Slip Online -->
+                    <article class="bill-card">
+                        <div class="bill-image">
+                            <img alt="Print NIN Slip Online" src="https://lh3.googleusercontent.com/aida/AEtjO1VOxTUNTrM2Y_bEn6rw4YPOSFCQjzeipG09Wi_2RUW5wHKONK9clJr52RLyKGHDXeaosuqC1wzD5hiPXtBRX8WxTgyZsN_Plq0U1iq7iHasSEdaMMn60tQ2xYKvv1xDPS1b9GNyhA3Sf4Xhksr1nB1cIIL2k8cT5CIgoGM03BbsH_OrYSy88afYy79WbbOLCS1EEjgm97yfXc9HvmX8YwKwj1KTRuU-dTLv8hfYKFcid4Okd2LTOJtHt8U" />
+                        </div>
+                        <div class="bill-details">
+                            <h3>Print NIN Slip Online</h3>
+                            <p>Retrieve and print your NIN slip instantly.</p>
+                            <button class="btn-proceed">Proceed</button>
+                        </div>
+                    </article>
+
+                    <!-- 5. Electricity -->
+                    <article class="bill-card">
+                        <div class="bill-image">
+                            <img alt="Buy Electricity" src="https://lh3.googleusercontent.com/aida/AEtjO1UAXJbsuHBqHNr2jWrsFqnGMQ-JRy-M6hs663-iuWZhvugWJXSei3i7na1H2fA5zYDEAKJNWW9C3ad3t7HPloLO7wCLPc9QHja6qRqxFrFYtVRSWosq6Qc9jv16TsdJEYjoyST5I11vW0PgVpwyaVobL0l34kepjZzO8CZJNzFMQu0nPIWZWW_id_HOQvd8uKN3m2XuxKViIoARPPm6T0KqRocl5837-0FTZEH8irKiDcGCRLVceq9xde1D" />
+                        </div>
+                        <div class="bill-details">
+                            <h3>Buy Electricity</h3>
+                            <p>Pay prepaid and postpaid electricity bills.</p>
+                            <button class="btn-proceed">Proceed</button>
+                        </div>
+                    </article>
+
+                    <!-- 6. TV -->
+                    <article class="bill-card">
+                        <div class="bill-image">
+                            <img alt="TV Subscriptions" src="https://lh3.googleusercontent.com/aida/AEtjO1VEmxot2mmUmvT3a6SWzI7wWEjFx1-4I5bSLFN2v3RfT1nVSt02cysfkXA4dbQgi-xLdPPJncoL4bcphFcmkVctnSqnA851F_9ZuAl0dIiLAtcYqM0EBdbch8EB3H8Kve6_uNZEjJZSGlJcQl0q7IPYFwY3uTnYntEzDuaKZDPRGSbZllYWIr4kN3CoMJSlnuu90FZa2bORo2Q3xFoUZ8TwcB7tMbYJCZbN57_JqoGeEEumecfLGDT7YGcf" />
+                        </div>
+                        <div class="bill-details">
+                            <h3>TV Subscriptions</h3>
+                            <p>Renew your Cable TV subscriptions instantly.</p>
+                            <button class="btn-proceed">Proceed</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ===== FOOTER (IMPROVED) ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img alt="Eduneeds Logo" class="footer-logo" src="https://lh3.googleusercontent.com/aida/AEtjO1WQ0q0TghtvG2g1DuBTkoWVxjBuNpcPnuB5uSVjOLG3egJ9lKO6wOpf38vSrUl5j14v9GtXU5Fv4TdMkIeT9EHikaTFMn1vL8OBeXRxe2FeMIKyGJxe5zqRgE7zFj1eEzGBZqMrBI9ap5xWubn-rJzFWJj18mDqi5j62pWuKwJdqR5wQ5d47OJJJczlJrcGwogdc_ch0D6SFEA-NqaVqDUSvxa1VI9TDxSyFSazFGuPdAEYXplNXEPae-y4" />
+                <span class="footer-brand-name">Eduneeds</span>
+            </div>
+
+            <nav class="footer-links">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Refund Policy</a>
+                <a href="#">Contact Support</a>
+                <a href="#">API Documentation</a>
+            </nav>
+
+            <div class="footer-copy">
+                <span>© 2026 Eduneeds.</span>
+                <span class="powered">Powered by <strong>Geosolution</strong></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP BUTTON ===== -->
+    <a class="whatsapp-btn" href="https://wa.me/">
+        <svg viewbox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
+        </svg>
+    </a>
+
+    <script src="../js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Check JAMB Admission Status - Eduneeds</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/jamb-service.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <div id="navbar-container"></div>
+
+    <!-- ===== MOBILE OVERLAY ===== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===== SIDE NAVIGATION BAR ===== -->
+    <div id="sidebar-container"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content" id="mainContent">
+
+        <div class="service-container">
+
+            <!-- ===== BREADCRUMB ===== -->
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined">home</span>
+                <a href="../pages/dashboard.html">Dashboard</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <a href="#">JAMB Services</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <span class="breadcrumb-name">Check Admission Status</span>
+            </div>
+
+            <!-- ===== PAGE HEADER ===== -->
+            <div class="service-header">
+                <div class="service-header-left">
+                    <div class="service-icon-header">
+                        <span class="material-symbols-outlined filled">verified</span>
+                    </div>
+                    <h1>Check Admission Status</h1>
+                </div>
+                <div class="service-price">₦5,000.00</div>
+            </div>
+
+            <!-- ===== SERVICE LAYOUT ===== -->
+            <div class="service-layout">
+
+                <!-- ===== LEFT COLUMN ===== -->
+                <div class="service-left">
+
+                    <!-- ===== PAYMENT SECTION ===== -->
+                    <div class="payment-section">
+                        <div class="wallet-bar">
+                            <span>Pay With <strong>Wallet (₦25,000.00)</strong></span>
+                            <button class="btn-fund-wallet">Fund Wallet</button>
+                        </div>
+
+                        <div class="payment-methods">
+                            <button class="payment-method active">Wallet</button>
+                            <button class="payment-method">Bank Transfer</button>
+                            <button class="payment-method">Debit Card</button>
+                        </div>
+                    </div>
+
+                    <!-- ===== SERVICE FORM ===== -->
+                    <div class="service-form-card">
+                        <form id="serviceForm" novalidate>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>JAMB Year</label>
+                                    <select id="jambYear">
+                                        <option value="">Select Year</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>JAMB Registration Number <span class="required">*</span></label>
+                                    <input type="text" id="regNumber" placeholder="Enter JAMB registration number" required />
+                                    <span class="error-message">Please enter your JAMB registration number</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name of Candidate <span class="optional">(optional)</span></label>
+                                    <input type="text" id="candidateName" placeholder="Enter full name" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address <span class="optional">(optional)</span></label>
+                                    <input type="email" id="email" placeholder="Enter email address" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label>Phone Number <span class="optional">(optional)</span></label>
+                                    <input type="tel" id="phone" placeholder="Enter phone number" />
+                                </div>
+                            </div>
+
+                            <!-- ===== SERVICE CONDITION ===== -->
+                            <div class="service-condition">
+                                <span class="material-symbols-outlined">info</span>
+                                <p><strong>Service Condition:</strong> Ensure the details are correct. Incorrect details will delay your request.</p>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                <span class="material-symbols-outlined">send</span>
+                                Submit Request
+                            </button>
+
+                        </form>
+                    </div>
+
+                    <!-- ===== SUBMITTED REQUESTS ===== -->
+                    <div class="requests-section">
+                        <h3>Your Submitted Requests</h3>
+
+                        <div class="search-bar">
+                            <input type="text" id="searchTransaction" placeholder="Enter Transaction ID" />
+                            <button class="btn-apply">Apply</button>
+                        </div>
+
+                        <div class="table-wrapper">
+                            <div class="table-scroll">
+                                <table class="requests-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Transaction ID</th>
+                                            <th>JAMB Year</th>
+                                            <th>Candidate Name</th>
+                                            <th>JAMB Reg No</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="requestsBody">
+                                        <tr>
+                                            <td colspan="6">
+                                                <div class="empty-state">
+                                                    <span class="material-symbols-outlined">grid_off</span>
+                                                    <p>No requests yet. Submit your first request above.</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ===== RIGHT COLUMN ===== -->
+                <div class="service-right">
+
+                    <div class="instructions-card">
+                        <h3>
+                            <span class="material-symbols-outlined">format_list_numbered</span>
+                            How to Check Your JAMB Admission Status
+                        </h3>
+                        <ol>
+                            <li>
+                                <span class="step-number">1.</span>
+                                <div>
+                                    <strong>Open our website</strong> - Go to www.tripleg.ng
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">2.</span>
+                                <div>
+                                    <strong>Enter Your JAMB Details</strong> - Input your JAMB Registration Number and the email address used during registration.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">3.</span>
+                                <div>
+                                    <strong>Verify Your Admission</strong> - After 30 minutes to 1 hour during working hours, go back to the same page.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">4.</span>
+                                <div>
+                                    <strong>View Your Admission Result</strong> - If you have been offered admission, your institution and course details will appear.
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/jamb-service.js"></script>
+</body>
+</html>

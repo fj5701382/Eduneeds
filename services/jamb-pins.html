@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JAMB PIN Vending - Eduneeds</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        /* =========================================================
+           PAGE-SPECIFIC STYLES FOR JAMB PIN VENDING
+           ========================================================= */
+        .sidebar {
+            display: none !important;
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                display: flex !important;
+            }
+        }
+        .sidebar.open {
+            display: flex !important;
+            transform: translateX(0) !important;
+        }
+
+        .main-content {
+            padding: 80px 16px 32px !important;
+            width: 100% !important;
+            min-height: calc(100vh - 64px);
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 280px !important;
+                padding: 80px 32px 32px !important;
+                width: auto !important;
+            }
+        }
+
+        .service-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb .material-symbols-outlined {
+            font-size: 18px;
+            color: #6b7280;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .breadcrumb a:hover {
+            color: #071b49;
+        }
+        .breadcrumb .breadcrumb-name {
+            color: #071b49;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 24px;
+        }
+        .page-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #071b49;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-header h1 .material-symbols-outlined {
+            color: #0040a1;
+            font-size: 32px;
+            font-variation-settings: 'FILL' 1;
+        }
+        .page-header p {
+            font-size: 16px;
+            color: #6b7280;
+            max-width: 640px;
+            margin-top: 4px;
+        }
+
+        /* Pins Grid */
+        .pins-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        @media (min-width: 640px) {
+            .pins-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 992px) {
+            .pins-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (min-width: 1200px) {
+            .pins-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Pin Card */
+        .pin-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .pin-card:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .pin-image {
+            aspect-ratio: 1;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        .pin-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+        .pin-card:hover .pin-image img {
+            transform: scale(1.05);
+        }
+
+        .pin-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .pin-badge.in-stock {
+            background: rgba(34, 197, 94, 0.12);
+            color: #16a34a;
+        }
+        .pin-badge.bundle {
+            background: #f3f4f6;
+            color: #111827;
+        }
+
+        .pin-details {
+            padding: 16px 20px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .pin-details h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #191b23;
+            margin-bottom: 4px;
+        }
+        .pin-details p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+            flex: 1;
+            margin-bottom: 12px;
+        }
+        .pin-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0040a1;
+            margin-bottom: 12px;
+        }
+        .btn-buy-pin {
+            width: 100%;
+            padding: 10px;
+            background: #0040a1;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-buy-pin:hover {
+            background: #003380;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-top: 32px;
+        }
+        .info-section .material-symbols-outlined {
+            color: #0040a1;
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-variation-settings: 'FILL' 1;
+        }
+        .info-section h4 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #191b23;
+            margin-bottom: 8px;
+        }
+        .info-section ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin: 0;
+        }
+        .info-section ul li {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Dark Mode */
+        body.dark-mode .pin-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .pin-details h3 {
+            color: #e8edf5;
+        }
+        body.dark-mode .pin-details p {
+            color: #9aabc0;
+        }
+        body.dark-mode .pin-price {
+            color: #6aafff;
+        }
+        body.dark-mode .btn-buy-pin {
+            background: #2a4a7a;
+        }
+        body.dark-mode .btn-buy-pin:hover {
+            background: #3a5a8a;
+        }
+        body.dark-mode .pin-image {
+            background: #0f1724;
+        }
+        body.dark-mode .info-section {
+            background: #0f1724;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .info-section h4 {
+            color: #e8edf5;
+        }
+        body.dark-mode .info-section ul li {
+            color: #9aabc0;
+        }
+        body.dark-mode .pin-badge.in-stock {
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+        }
+        body.dark-mode .pin-badge.bundle {
+            background: #1a2538;
+            color: #e8edf5;
+        }
+        body.dark-mode .breadcrumb .breadcrumb-name {
+            color: #6aafff;
+        }
+        body.dark-mode .breadcrumb a:hover {
+            color: #6aafff;
+        }
+        body.dark-mode .page-header h1 {
+            color: #e8edf5;
+        }
+        body.dark-mode .page-header p {
+            color: #9aabc0;
+        }
+
+        /* Responsive */
+        @media (max-width: 575px) {
+            .pins-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .pin-details {
+                padding: 12px 14px;
+            }
+            .pin-details h3 {
+                font-size: 14px;
+            }
+            .pin-details p {
+                font-size: 12px;
+            }
+            .pin-price {
+                font-size: 15px;
+            }
+            .btn-buy-pin {
+                padding: 8px;
+                font-size: 12px;
+            }
+            .info-section {
+                padding: 16px;
+                flex-direction: column;
+            }
+            .page-header h1 {
+                font-size: 22px;
+            }
+            .page-header p {
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 399px) {
+            .pins-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .pin-details {
+                padding: 10px 12px;
+            }
+            .pin-details h3 {
+                font-size: 13px;
+            }
+            .pin-price {
+                font-size: 14px;
+            }
+            .btn-buy-pin {
+                font-size: 11px;
+                padding: 6px;
+            }
+            .page-header h1 {
+                font-size: 18px;
+            }
+            .page-header h1 .material-symbols-outlined {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <div id="navbar-container"></div>
+
+    <!-- ===== MOBILE OVERLAY ===== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===== SIDE NAVIGATION BAR ===== -->
+    <div id="sidebar-container"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <div class="service-container">
+
+            <!-- ===== BREADCRUMB ===== -->
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined">home</span>
+                <a href="../pages/dashboard.html">Dashboard</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <a href="#">JAMB PIN Vending</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <span class="breadcrumb-name">JAMB PIN Vending</span>
+            </div>
+
+            <!-- ===== PAGE HEADER ===== -->
+            <div class="page-header">
+                <h1>
+                    <span class="material-symbols-outlined">vpn_key</span>
+                    JAMB PIN Vending
+                </h1>
+                <p>Purchase your Joint Admissions and Matriculation Board (JAMB) PINs securely. Select the appropriate PIN type below to proceed with your transaction.</p>
+            </div>
+
+            <!-- ===== PINS GRID ===== -->
+            <div class="pins-grid">
+
+                <!-- Card 1: Direct Entry PIN -->
+                <div class="pin-card">
+                    <div class="pin-image">
+                        <img alt="JAMB Direct Entry PIN" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1N-MElWZ8r3ZTsiEjfajT2N4YMShF1plX55wxlqLvdfpW2skcoI35N0uhmM-pKH3k8PuQyAFOOXuktpO_1lZIZesPjbQkq8MlUmRnqEtLeXd-27cvrgpjx9KbewECkS1mBbrbOiEG-AGEXPbe0jAQ9LsvLUe4MFCJn3DfpZxiPfxRCQrmH-bq4WQR6URamzQ_oRdg62HGjFFiOM7FD25qKKZc1UcjlfVik7-NcTrVb-0_q2ktJlMNBA" />
+                        <span class="pin-badge in-stock">In Stock</span>
+                    </div>
+                    <div class="pin-details">
+                        <h3>JAMB Direct Entry PIN</h3>
+                        <p>Official Direct Entry PIN for candidates with Diploma/NCE/ND aiming for University admission.</p>
+                        <div class="pin-price">₦4,700.00</div>
+                        <button class="btn-buy-pin" data-service="de-pin">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Mock Examination PIN -->
+                <div class="pin-card">
+                    <div class="pin-image">
+                        <img alt="JAMB Mock Examination PIN" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYUXsIiG0x06X1UN4veo1y-TnNoPR3KAZZJjnqQ4a9LdMnKSjUnei2yjCaQIjOzTwO2njzThn9pWPNzwdC54z7fek6FF8N5mTsevEU3OetwgzJjbeOshnJZzwMPUDs3YUReQ2UAjmv8sC7ZY2ousnTVCJgrK7WZY2zbGPQeeg4HlyLyo0t7fcpD8LbmB4VPUlPdTKgGT6fD0IbUlhT1kyuqF_Sr3lrEqQmKU5E_ZX70oZq7vf_MxMs3w" />
+                        <span class="pin-badge in-stock">In Stock</span>
+                    </div>
+                    <div class="pin-details">
+                        <h3>JAMB Mock Examination PIN</h3>
+                        <p>Registration PIN specifically for the JAMB preparatory Mock Examination.</p>
+                        <div class="pin-price">₦1,500.00</div>
+                        <button class="btn-buy-pin" data-service="mock-pin">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- Card 3: UTME PIN Only -->
+                <div class="pin-card">
+                    <div class="pin-image">
+                        <img alt="JAMB UTME PIN Only" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHkC2ARgjAUU5mQZWOsD_lrzYiZLXmmysGPqDtRjrjEcbnSt1fgMpgZBfQlfunZa3Uyw14_3YtzqaMidYeBrCs643w0pawku_O86PfBMQVyjYgYSZ0OlMO07CJaMSF7hs5g-TRRTWmkWT6Dok5xWyQu4nR68xnEUwpDLJLvCC_Gt-G4N98mYwM6M65TxqQPENWyXQf-NFp_gXjIZ3nisXZvTtrBbtv04n_D4Oocpb7RNqcvOVd_BcbkA" />
+                        <span class="pin-badge in-stock">In Stock</span>
+                    </div>
+                    <div class="pin-details">
+                        <h3>JAMB UTME PIN Only</h3>
+                        <p>Standard Unified Tertiary Matriculation Examination (UTME) registration PIN (excluding Mock).</p>
+                        <div class="pin-price">₦6,200.00</div>
+                        <button class="btn-buy-pin" data-service="utme-pin">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- Card 4: UTME With Mock (Bundle) -->
+                <div class="pin-card">
+                    <div class="pin-image">
+                        <img alt="JAMB UTME With Mock" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqp-X_VReDOEocj1yteo7uvPsqKBdlIW5DowzoUkP6Ics6yO5L0ZLvgYwLRUNO783a8yJmB9M9KtQveJ-lL5t7L4IsW7uWmJhwv_smQw5CkLd9E7JypoG62d4CeI--iY2sdnNyUoL9Usp6Nk1ucn8bdTqlHXe9yTyCpUehLu7YApOLLXGdLhy0-Olvin70bsXWphjoW2mPxPNVobYpUfASns8lKmGkL0agQQZ4DnMFEF_XPUgEnOwfnA" />
+                        <span class="pin-badge bundle">Bundle Deal</span>
+                        <span class="pin-badge in-stock" style="right: 12px; left: auto; background: rgba(34, 197, 94, 0.12); color: #16a34a;">In Stock</span>
+                    </div>
+                    <div class="pin-details">
+                        <h3>JAMB UTME With Mock</h3>
+                        <p>Comprehensive bundle including both UTME Registration and Mock Examination PINs.</p>
+                        <div class="pin-price">₦7,700.00</div>
+                        <button class="btn-buy-pin" data-service="utme-mock-pin">Buy Bundle</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== INFO SECTION ===== -->
+            <div class="info-section">
+                <span class="material-symbols-outlined">info</span>
+                <div>
+                    <h4>Important Information</h4>
+                    <ul>
+                        <li>Ensure you have created your JAMB profile code before purchasing a PIN.</li>
+                        <li>PINs are delivered instantly upon successful payment verification.</li>
+                        <li>All purchases are final and non-refundable. Please verify the exact PIN type required.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+        // Simple buy button handler
+        document.addEventListener('DOMContentLoaded', function() {
+            var buyButtons = document.querySelectorAll('.btn-buy-pin');
+
+            buyButtons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var service = this.getAttribute('data-service');
+                    var serviceName = this.closest('.pin-details').querySelector('h3').textContent;
+                    var price = this.closest('.pin-details').querySelector('.pin-price').textContent;
+
+                    if (confirm('Buy "' + serviceName + '" for ' + price + '?')) {
+                        var originalText = this.textContent;
+                        this.textContent = 'Processing...';
+                        this.disabled = true;
+
+                        setTimeout(function() {
+                            btn.textContent = '✓ Added';
+                            btn.style.background = '#16a34a';
+
+                            setTimeout(function() {
+                                btn.textContent = originalText;
+                                btn.style.background = '';
+                                btn.disabled = false;
+                                alert('Purchase successful! Your PIN will be delivered to your email.');
+                            }, 1200);
+                        }, 1500);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

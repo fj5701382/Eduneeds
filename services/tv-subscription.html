@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>TV Subscription - Eduneeds</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        .sidebar { display: none !important; }
+        @media (min-width: 768px) { .sidebar { display: flex !important; } }
+        .sidebar.open { display: flex !important; transform: translateX(0) !important; }
+
+        .main-content {
+            padding: 80px 16px 32px !important;
+            width: 100% !important;
+            min-height: calc(100vh - 64px);
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 280px !important;
+                padding: 80px 32px 32px !important;
+                width: auto !important;
+            }
+        }
+
+        .service-container {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb .material-symbols-outlined { font-size: 18px; color: #6b7280; }
+        .breadcrumb a { color: #6b7280; text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: #071b49; }
+        .breadcrumb .breadcrumb-name { color: #071b49; font-weight: 600; }
+
+        .page-header { margin-bottom: 24px; }
+        .page-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #071b49;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-header h1 .material-symbols-outlined { color: #0040a1; font-size: 32px; font-variation-settings: 'FILL' 1; }
+        .page-header p { font-size: 16px; color: #6b7280; max-width: 640px; margin-top: 4px; }
+
+        /* Provider Grid */
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        @media (min-width: 640px) {
+            .provider-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .provider-card {
+            cursor: pointer;
+            position: relative;
+        }
+        .provider-card input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .provider-card .provider-box {
+            padding: 20px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.2s;
+            background: #ffffff;
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .provider-card input:checked + .provider-box {
+            border-color: #0040a1;
+            background: rgba(0, 64, 161, 0.04);
+            box-shadow: 0 0 0 1px #0040a1;
+        }
+        .provider-card:hover .provider-box {
+            border-color: rgba(0, 64, 161, 0.3);
+        }
+        .provider-card .provider-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            margin: 0 auto;
+        }
+        .provider-card .provider-icon.dstv { background: #0055a4; }
+        .provider-card .provider-icon.gotv { background: #e31837; }
+        .provider-card .provider-icon.startimes { background: #ff6a00; }
+        .provider-card .provider-icon.showmax { background: #00e5ff; color: #111827; }
+        .provider-card .provider-name {
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #191b23;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #111827;
+            background: #ffffff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #0040a1;
+            box-shadow: 0 0 0 3px rgba(0, 64, 161, 0.08);
+        }
+        .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+
+        .amount-display {
+            padding: 14px 16px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .amount-display .label { color: #6b7280; font-size: 15px; }
+        .amount-display .value { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 700; color: #111827; }
+
+        .btn-verify {
+            padding: 14px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #111827;
+            font-family: 'Manrope', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-verify:hover { border-color: #0040a1; color: #0040a1; background: #f9fafb; }
+
+        .btn-submit-tv {
+            padding: 14px 20px;
+            background: #0040a1;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+        }
+        .btn-submit-tv:hover { background: #003380; box-shadow: 0 4px 20px rgba(0, 64, 161, 0.15); }
+
+        .form-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+        @media (min-width: 640px) { .form-actions { flex-direction: row; } }
+        @media (min-width: 640px) { .form-actions .btn-verify { flex: 1; } }
+
+        /* Recent History */
+        .history-section { margin-top: 32px; }
+        .history-section h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #191b23;
+            margin-bottom: 16px;
+        }
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+        .history-item:hover { background: #f9fafb; }
+        .history-item .left { display: flex; align-items: center; gap: 12px; }
+        .history-item .left .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0040a1;
+        }
+        .history-item .left .details .name { font-weight: 600; color: #191b23; font-size: 14px; }
+        .history-item .left .details .ref { font-size: 12px; color: #6b7280; }
+        .history-item .right { text-align: right; }
+        .history-item .right .status { font-size: 13px; font-weight: 600; color: #16a34a; }
+        .history-item .right .date { font-size: 12px; color: #6b7280; }
+
+        /* Dark Mode */
+        body.dark-mode .form-card { background: #141e2f; border-color: #1e2a3d; }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select { background: #0f1724; border-color: #1e2a3d; color: #e8edf5; }
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus { border-color: #4a8aff; }
+        body.dark-mode .amount-display { background: #0f1724; border-color: #1e2a3d; }
+        body.dark-mode .amount-display .value { color: #e8edf5; }
+        body.dark-mode .btn-verify { background: #0f1724; border-color: #1e2a3d; color: #e8edf5; }
+        body.dark-mode .btn-verify:hover { border-color: #4a8aff; color: #6aafff; }
+        body.dark-mode .btn-submit-tv { background: #2a4a7a; }
+        body.dark-mode .btn-submit-tv:hover { background: #3a5a8a; }
+        body.dark-mode .provider-card .provider-box { background: #0f1724; border-color: #1e2a3d; }
+        body.dark-mode .provider-card input:checked + .provider-box { border-color: #4a8aff; background: rgba(74, 138, 255, 0.06); }
+        body.dark-mode .provider-card .provider-name { color: #e8edf5; }
+        body.dark-mode .history-item { background: #141e2f; border-color: #1e2a3d; }
+        body.dark-mode .history-item:hover { background: #0f1724; }
+        body.dark-mode .history-item .left .details .name { color: #e8edf5; }
+        body.dark-mode .breadcrumb .breadcrumb-name { color: #6aafff; }
+        body.dark-mode .page-header h1 { color: #e8edf5; }
+        body.dark-mode .page-header p { color: #9aabc0; }
+        body.dark-mode .history-section h3 { color: #e8edf5; }
+        body.dark-mode .form-group label { color: #9aabc0; }
+        body.dark-mode .amount-display .label { color: #9aabc0; }
+
+        @media (max-width: 575px) {
+            .form-card { padding: 20px; }
+            .page-header h1 { font-size: 22px; }
+            .page-header p { font-size: 14px; }
+            .provider-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .provider-card .provider-box { height: 100px; padding: 12px; }
+            .provider-card .provider-icon { width: 44px; height: 44px; font-size: 12px; }
+            .form-group input, .form-group select { padding: 12px 14px; font-size: 14px; }
+            .history-item { flex-direction: column; gap: 8px; align-items: flex-start; }
+            .history-item .right { text-align: left; }
+        }
+        @media (max-width: 399px) {
+            .form-card { padding: 16px; }
+            .page-header h1 { font-size: 18px; }
+            .page-header h1 .material-symbols-outlined { font-size: 24px; }
+            .provider-grid { gap: 8px; }
+            .provider-card .provider-box { height: 80px; padding: 8px; }
+            .provider-card .provider-icon { width: 36px; height: 36px; font-size: 10px; }
+            .provider-card .provider-name { font-size: 12px; }
+            .form-actions { flex-direction: column; }
+            .btn-submit-tv, .btn-verify { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+        <div class="service-container">
+
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined">home</span>
+                <a href="../pages/dashboard.html">Dashboard</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <a href="#">Other Services</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <span class="breadcrumb-name">TV Subscription</span>
+            </div>
+
+            <div class="page-header">
+                <h1><span class="material-symbols-outlined">tv</span> TV Subscription</h1>
+                <p>Pay for your TV subscriptions instantly and securely.</p>
+            </div>
+
+            <!-- Provider Selection -->
+            <div class="provider-grid">
+                <label class="provider-card">
+                    <input type="radio" name="tv_provider" value="dstv" checked />
+                    <div class="provider-box">
+                        <div class="provider-icon dstv">DStv</div>
+                        <span class="provider-name">DSTV</span>
+                    </div>
+                </label>
+                <label class="provider-card">
+                    <input type="radio" name="tv_provider" value="gotv" />
+                    <div class="provider-box">
+                        <div class="provider-icon gotv">GOtv</div>
+                        <span class="provider-name">GOTV</span>
+                    </div>
+                </label>
+                <label class="provider-card">
+                    <input type="radio" name="tv_provider" value="startimes" />
+                    <div class="provider-box">
+                        <div class="provider-icon startimes">ST</div>
+                        <span class="provider-name">Startimes</span>
+                    </div>
+                </label>
+                <label class="provider-card">
+                    <input type="radio" name="tv_provider" value="showmax" />
+                    <div class="provider-box">
+                        <div class="provider-icon showmax">SM</div>
+                        <span class="provider-name">Showmax</span>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Form -->
+            <div class="form-card">
+                <form id="tvForm">
+                    <div class="form-group">
+                        <label for="tvPlan">Select Plan</label>
+                        <select id="tvPlan" required>
+                            <option value="" disabled selected>Choose a package</option>
+                            <option value="padi-2950">DStv Padi - ₦2,950</option>
+                            <option value="yanga-4200">DStv Yanga - ₦4,200</option>
+                            <option value="confam-7400">DStv Confam - ₦7,400</option>
+                            <option value="compact-12500">DStv Compact - ₦12,500</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="smartcard">Smartcard / IUC Number</label>
+                        <input type="text" id="smartcard" placeholder="Enter 10 or 11 digit number" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Amount to Pay</label>
+                        <div class="amount-display">
+                            <span class="label">Select a plan to see amount</span>
+                            <span class="value" id="tvAmount">₦0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-verify">
+                            <span class="material-symbols-outlined">person_search</span>
+                            Verify Decoder
+                        </button>
+                        <button type="submit" class="btn-submit-tv">
+                            Proceed to Payment
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Recent History -->
+            <div class="history-section">
+                <h3>Recent Subscriptions</h3>
+                <div class="history-item">
+                    <div class="left">
+                        <div class="icon"><span class="material-symbols-outlined">tv</span></div>
+                        <div class="details">
+                            <div class="name">DSTV Compact</div>
+                            <div class="ref">7012345678</div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="status">Successful</div>
+                        <div class="date">Oct 12, 2024</div>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="left">
+                        <div class="icon"><span class="material-symbols-outlined">tv</span></div>
+                        <div class="details">
+                            <div class="name">GOtv Max</div>
+                            <div class="ref">8012345678</div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="status" style="color: #f59e0b;">Pending</div>
+                        <div class="date">Oct 10, 2024</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var planSelect = document.getElementById('tvPlan');
+            var amountDisplay = document.getElementById('tvAmount');
+
+            planSelect.addEventListener('change', function() {
+                var selected = this.options[this.selectedIndex];
+                var price = selected.value.split('-')[1];
+                if (price) {
+                    amountDisplay.textContent = '₦' + parseInt(price).toLocaleString() + '.00';
+                    amountDisplay.style.color = '#0040a1';
+                } else {
+                    amountDisplay.textContent = '₦0.00';
+                }
+            });
+
+            document.getElementById('tvForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var plan = document.getElementById('tvPlan').value;
+                var smartcard = document.getElementById('smartcard').value.trim();
+
+                if (!plan) { alert('Please select a plan.'); return; }
+                if (!smartcard || smartcard.length < 10) { alert('Please enter a valid smartcard number.'); return; }
+
+                if (confirm('Subscribe to ' + planSelect.options[planSelect.selectedIndex].text + '?')) {
+                    var btn = this.querySelector('.btn-submit-tv');
+                    var orig = btn.innerHTML;
+                    btn.innerHTML = '<span class="material-symbols-outlined">progress_activity</span> Processing...';
+                    btn.disabled = true;
+
+                    setTimeout(function() {
+                        btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Success!';
+                        btn.style.background = '#16a34a';
+
+                        setTimeout(function() {
+                            btn.innerHTML = orig;
+                            btn.style.background = '';
+                            btn.disabled = false;
+                            alert('TV subscription successful!');
+                        }, 1500);
+                    }, 2000);
+                }
+            });
+
+            document.querySelector('.btn-verify').addEventListener('click', function() {
+                alert('Decoder verification successful! Customer: John Doe');
+            });
+        });
+    </script>
+
+</body>
+</html>

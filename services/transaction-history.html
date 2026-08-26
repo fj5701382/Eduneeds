@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Transaction History - Eduneeds</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        .sidebar { display: none !important; }
+        @media (min-width: 768px) { .sidebar { display: flex !important; } }
+        .sidebar.open { display: flex !important; transform: translateX(0) !important; }
+
+        .main-content {
+            padding: 80px 16px 32px !important;
+            width: 100% !important;
+            min-height: calc(100vh - 64px);
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 280px !important;
+                padding: 80px 32px 32px !important;
+                width: auto !important;
+            }
+        }
+
+        .service-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb .material-symbols-outlined { font-size: 18px; color: #6b7280; }
+        .breadcrumb a { color: #6b7280; text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: #071b49; }
+        .breadcrumb .breadcrumb-name { color: #071b49; font-weight: 600; }
+
+        .page-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        @media (min-width: 768px) {
+            .page-header { flex-direction: row; align-items: flex-end; }
+        }
+        .page-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #071b49;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-header h1 .material-symbols-outlined { color: #0040a1; font-size: 32px; font-variation-settings: 'FILL' 1; }
+        .page-header p { font-size: 16px; color: #6b7280; margin-top: 4px; }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .filter-bar select {
+            padding: 10px 36px 10px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #ffffff;
+            font-size: 14px;
+            color: #191b23;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .filter-bar select:focus { border-color: #0040a1; outline: none; }
+
+        /* Table */
+        .table-wrapper {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+        .table-scroll { overflow-x: auto; }
+
+        .tx-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 700px;
+        }
+        .tx-table thead {
+            background: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .tx-table th {
+            padding: 14px 20px;
+            text-align: left;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+        }
+        .tx-table td { padding: 14px 20px; border-bottom: 1px solid #e5e7eb; vertical-align: middle; }
+        .tx-table tbody tr:hover { background: #f9fafb; }
+        .tx-table tbody tr:last-child td { border-bottom: none; }
+
+        .tx-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e5e7eb;
+            color: #0040a1;
+        }
+        .tx-icon .material-symbols-outlined { font-size: 22px; }
+
+        .tx-service-name { font-weight: 600; color: #191b23; }
+        .tx-service-type { font-size: 12px; color: #6b7280; }
+
+        .tx-ref { font-size: 12px; color: #6b7280; }
+        .tx-ref span { background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 11px; }
+
+        .tx-amount { font-weight: 700; font-size: 16px; color: #191b23; text-align: right; }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 14px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            width: fit-content;
+            min-width: 90px;
+        }
+        .status-badge.completed { background: rgba(34, 197, 94, 0.1); color: #16a34a; border: 1px solid rgba(34, 197, 94, 0.15); }
+        .status-badge.failed { background: rgba(239, 68, 68, 0.1); color: #dc2626; border: 1px solid rgba(239, 68, 68, 0.15); }
+        .status-badge.pending { background: rgba(245, 158, 11, 0.1); color: #b45309; border: 1px solid rgba(245, 158, 11, 0.15); }
+
+        .btn-more {
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            opacity: 0;
+        }
+        .tx-table tbody tr:hover .btn-more { opacity: 1; }
+        .btn-more:hover { background: #f3f4f6; color: #191b23; }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            border-top: 1px solid #e5e7eb;
+            background: #ffffff;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .pagination .info { font-size: 14px; color: #6b7280; }
+        .pagination .buttons { display: flex; gap: 8px; }
+        .pagination .buttons button {
+            padding: 8px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background: #ffffff;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pagination .buttons button:hover:not(:disabled) { border-color: #0040a1; color: #0040a1; }
+        .pagination .buttons button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* Dark Mode */
+        body.dark-mode .table-wrapper { background: #141e2f; border-color: #1e2a3d; }
+        body.dark-mode .tx-table thead { background: #0f1724; border-bottom-color: #1e2a3d; }
+        body.dark-mode .tx-table th { color: #9aabc0; }
+        body.dark-mode .tx-table td { border-bottom-color: #1e2a3d; color: #e8edf5; }
+        body.dark-mode .tx-table tbody tr:hover { background: #0f1724; }
+        body.dark-mode .tx-service-name { color: #e8edf5; }
+        body.dark-mode .tx-amount { color: #e8edf5; }
+        body.dark-mode .tx-icon { background: #0f1724; border-color: #1e2a3d; color: #6aafff; }
+        body.dark-mode .tx-ref span { background: #0f1724; color: #9aabc0; }
+        body.dark-mode .filter-bar select { background: #0f1724; border-color: #1e2a3d; color: #e8edf5; }
+        body.dark-mode .filter-bar select:focus { border-color: #4a8aff; }
+        body.dark-mode .pagination { background: #141e2f; border-top-color: #1e2a3d; }
+        body.dark-mode .pagination .info { color: #9aabc0; }
+        body.dark-mode .pagination .buttons button { background: #0f1724; border-color: #1e2a3d; color: #9aabc0; }
+        body.dark-mode .pagination .buttons button:hover:not(:disabled) { border-color: #4a8aff; color: #6aafff; }
+        body.dark-mode .btn-more { color: #9aabc0; }
+        body.dark-mode .btn-more:hover { background: #0f1724; color: #e8edf5; }
+        body.dark-mode .status-badge.completed { background: rgba(34, 197, 94, 0.12); color: #4ade80; }
+        body.dark-mode .status-badge.failed { background: rgba(239, 68, 68, 0.12); color: #f87171; }
+        body.dark-mode .status-badge.pending { background: rgba(251, 146, 60, 0.12); color: #fb923c; }
+        body.dark-mode .breadcrumb .breadcrumb-name { color: #6aafff; }
+        body.dark-mode .breadcrumb a:hover { color: #6aafff; }
+        body.dark-mode .page-header h1 { color: #e8edf5; }
+        body.dark-mode .page-header p { color: #9aabc0; }
+
+        @media (max-width: 575px) {
+            .page-header h1 { font-size: 22px; }
+            .page-header h1 .material-symbols-outlined { font-size: 24px; }
+            .page-header p { font-size: 14px; }
+            .filter-bar { flex-direction: column; width: 100%; }
+            .filter-bar select { width: 100%; }
+            .tx-table { min-width: 500px; font-size: 13px; }
+            .tx-table th, .tx-table td { padding: 10px 14px; }
+            .tx-amount { font-size: 14px; }
+            .status-badge { font-size: 10px; min-width: 70px; padding: 3px 10px; }
+            .pagination { flex-direction: column; text-align: center; }
+            .pagination .buttons { width: 100%; justify-content: center; }
+            .tx-icon { width: 32px; height: 32px; }
+            .tx-icon .material-symbols-outlined { font-size: 18px; }
+        }
+        @media (max-width: 399px) {
+            .page-header h1 { font-size: 18px; }
+            .tx-table { min-width: 400px; font-size: 12px; }
+            .tx-table th, .tx-table td { padding: 8px 10px; }
+            .tx-amount { font-size: 13px; }
+            .pagination .buttons button { padding: 6px 12px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+        <div class="service-container">
+
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined">home</span>
+                <a href="../pages/dashboard.html">Dashboard</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <a href="#">Other Services</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <span class="breadcrumb-name">Transaction History</span>
+            </div>
+
+            <div class="page-header">
+                <div>
+                    <h1><span class="material-symbols-outlined">history</span> Transaction History</h1>
+                    <p>Review and track all your past service purchases.</p>
+                </div>
+                <div class="filter-bar">
+                    <select id="statusFilter">
+                        <option value="all">All Statuses</option>
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                    <select id="dateFilter">
+                        <option value="30">Last 30 Days</option>
+                        <option value="60">Last 60 Days</option>
+                        <option value="90">Last 90 Days</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-scroll">
+                    <table class="tx-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;"></th>
+                                <th>Service</th>
+                                <th>Details / Reference</th>
+                                <th>Date &amp; Time</th>
+                                <th style="text-align: right;">Amount</th>
+                                <th style="text-align: center;">Status</th>
+                                <th style="width: 50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody">
+                            <!-- Transaction 1 -->
+                            <tr>
+                                <td>
+                                    <div class="tx-icon">
+                                        <span class="material-symbols-outlined">school</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tx-service-name">WAEC Result Checker</div>
+                                    <div class="tx-service-type">Scratch Card</div>
+                                </td>
+                                <td>
+                                    <div class="tx-ref">PIN: <span>1234-5678-9012</span></div>
+                                    <div class="tx-ref" style="margin-top: 2px;">Ref: GEO-837492A</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 500; color: #191b23;">Oct 24, 2024</div>
+                                    <div style="font-size: 12px; color: #6b7280;">14:32 PM</div>
+                                </td>
+                                <td class="tx-amount">₦3,500.00</td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge completed">Completed</span>
+                                </td>
+                                <td>
+                                    <button class="btn-more"><span class="material-symbols-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+
+                            <!-- Transaction 2 -->
+                            <tr>
+                                <td>
+                                    <div class="tx-icon">
+                                        <span class="material-symbols-outlined" style="color: #f59e0b;">bolt</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tx-service-name">IKEDC Prepaid</div>
+                                    <div class="tx-service-type">Electricity Bill</div>
+                                </td>
+                                <td>
+                                    <div class="tx-ref">Meter: <span>4503829103</span></div>
+                                    <div class="tx-ref" style="margin-top: 2px;">Ref: GEO-726154B</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 500; color: #191b23;">Oct 23, 2024</div>
+                                    <div style="font-size: 12px; color: #6b7280;">09:15 AM</div>
+                                </td>
+                                <td class="tx-amount">₦10,000.00</td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge completed">Completed</span>
+                                </td>
+                                <td>
+                                    <button class="btn-more"><span class="material-symbols-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+
+                            <!-- Transaction 3 -->
+                            <tr style="background: rgba(239, 68, 68, 0.03);">
+                                <td>
+                                    <div class="tx-icon">
+                                        <span class="material-symbols-outlined" style="color: #006a6a;">phone_iphone</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tx-service-name">MTN Airtime</div>
+                                    <div class="tx-service-type">Mobile Top-up</div>
+                                </td>
+                                <td>
+                                    <div class="tx-ref">Phone: <span>0803 123 4567</span></div>
+                                    <div class="tx-ref" style="margin-top: 2px;">Ref: GEO-192837C</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 500; color: #191b23;">Oct 20, 2024</div>
+                                    <div style="font-size: 12px; color: #6b7280;">18:45 PM</div>
+                                </td>
+                                <td class="tx-amount">₦2,000.00</td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge failed">Failed</span>
+                                </td>
+                                <td>
+                                    <button class="btn-more"><span class="material-symbols-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+
+                            <!-- Transaction 4 -->
+                            <tr>
+                                <td>
+                                    <div class="tx-icon">
+                                        <span class="material-symbols-outlined">pin</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tx-service-name">JAMB E-PIN</div>
+                                    <div class="tx-service-type">Registration Pin</div>
+                                </td>
+                                <td>
+                                    <div class="tx-ref">NIN: <span>89012345678</span></div>
+                                    <div class="tx-ref" style="margin-top: 2px;">Ref: GEO-564738D</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 500; color: #191b23;">Oct 15, 2024</div>
+                                    <div style="font-size: 12px; color: #6b7280;">11:20 AM</div>
+                                </td>
+                                <td class="tx-amount">₦4,700.00</td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge completed">Completed</span>
+                                </td>
+                                <td>
+                                    <button class="btn-more"><span class="material-symbols-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+
+                            <!-- Transaction 5 -->
+                            <tr>
+                                <td>
+                                    <div class="tx-icon">
+                                        <span class="material-symbols-outlined" style="color: #16a34a;">wifi</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tx-service-name">Glo Data Plan</div>
+                                    <div class="tx-service-type">Data Subscription</div>
+                                </td>
+                                <td>
+                                    <div class="tx-ref">Plan: <span>5GB - 30 Days</span></div>
+                                    <div class="tx-ref" style="margin-top: 2px;">Ref: GEO-908172E</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 500; color: #191b23;">Oct 12, 2024</div>
+                                    <div style="font-size: 12px; color: #6b7280;">08:00 AM</div>
+                                </td>
+                                <td class="tx-amount">₦1,400.00</td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge completed">Completed</span>
+                                </td>
+                                <td>
+                                    <button class="btn-more"><span class="material-symbols-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+
+                            <!-- Transaction 6 -->
+                            <tr>
+                                <td>
+                                    <div class="tx-icon">
+                                        <span class="material-symbols-outlined" style="color: #7c3aed;">tv</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="tx-service-name">DSTV Compact</div>
+                                    <div class="tx-service-type">TV Subscription</div>
+                                </td>
+                                <td>
+                                    <div class="tx-ref">Smartcard: <span>7012345678</span></div>
+                                    <div class="tx-ref" style="margin-top: 2px;">Ref: GEO-345678F</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 500; color: #191b23;">Oct 10, 2024</div>
+                                    <div style="font-size: 12px; color: #6b7280;">15:30 PM</div>
+                                </td>
+                                <td class="tx-amount">₦12,500.00</td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge pending">Pending</span>
+                                </td>
+                                <td>
+                                    <button class="btn-more"><span class="material-symbols-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <span class="info">Showing 1 to 6 of 24 transactions</span>
+                    <div class="buttons">
+                        <button disabled>Previous</button>
+                        <button>Next</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Filter functionality
+            var statusFilter = document.getElementById('statusFilter');
+            var dateFilter = document.getElementById('dateFilter');
+            var rows = document.querySelectorAll('#transactionsBody tr');
+
+            function applyFilters() {
+                var status = statusFilter.value;
+                var date = dateFilter.value;
+
+                rows.forEach(function(row) {
+                    var statusEl = row.querySelector('.status-badge');
+                    var rowStatus = statusEl ? statusEl.textContent.trim().toLowerCase() : '';
+
+                    // Status filter
+                    var statusMatch = status === 'all' || rowStatus === status;
+
+                    // Date filter (simplified - just show/hide based on selection)
+                    // In a real app, you'd compare dates
+                    var dateMatch = true;
+
+                    if (statusMatch && dateMatch) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            statusFilter.addEventListener('change', applyFilters);
+            dateFilter.addEventListener('change', applyFilters);
+
+            // More button click
+            document.querySelectorAll('.btn-more').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var row = this.closest('tr');
+                    var service = row.querySelector('.tx-service-name').textContent;
+                    alert('Viewing details for: ' + service);
+                });
+            });
+
+            // Pagination
+            var nextBtn = document.querySelector('.pagination .buttons button:last-child');
+            var prevBtn = document.querySelector('.pagination .buttons button:first-child');
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    alert('Loading next page of transactions...');
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

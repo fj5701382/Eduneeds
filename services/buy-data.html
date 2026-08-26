@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Buy Data - Eduneeds</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        /* =========================================================
+           PAGE-SPECIFIC STYLES FOR BUY DATA
+           ========================================================= */
+        .sidebar {
+            display: none !important;
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                display: flex !important;
+            }
+        }
+        .sidebar.open {
+            display: flex !important;
+            transform: translateX(0) !important;
+        }
+
+        .main-content {
+            padding: 80px 16px 32px !important;
+            width: 100% !important;
+            min-height: calc(100vh - 64px);
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 280px !important;
+                padding: 80px 32px 32px !important;
+                width: auto !important;
+            }
+        }
+
+        .service-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb .material-symbols-outlined {
+            font-size: 18px;
+            color: #6b7280;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .breadcrumb a:hover {
+            color: #071b49;
+        }
+        .breadcrumb .breadcrumb-name {
+            color: #071b49;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 24px;
+        }
+        .page-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #071b49;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-header h1 .material-symbols-outlined {
+            color: #0040a1;
+            font-size: 32px;
+            font-variation-settings: 'FILL' 1;
+        }
+        .page-header p {
+            font-size: 16px;
+            color: #6b7280;
+            max-width: 640px;
+            margin-top: 4px;
+        }
+
+        /* Layout */
+        .data-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 992px) {
+            .data-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Form Card */
+        .form-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+        }
+
+        /* Network Selection */
+        .network-grid-data {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .network-option-data {
+            cursor: pointer;
+            position: relative;
+        }
+        .network-option-data input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .network-option-data .network-box-data {
+            padding: 12px 8px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.2s;
+            background: #ffffff;
+        }
+        .network-option-data input:checked + .network-box-data {
+            border-color: #0040a1;
+            background: rgba(0, 64, 161, 0.04);
+        }
+        .network-option-data:hover .network-box-data {
+            border-color: rgba(0, 64, 161, 0.3);
+        }
+        .network-option-data .network-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .network-option-data .network-circle.mtn { background: #f59e0b; color: #111827; }
+        .network-option-data .network-circle.airtel { background: #dc2626; }
+        .network-option-data .network-circle.glo { background: #16a34a; }
+        .network-option-data .network-circle.nine { background: #065f46; }
+        .network-option-data .network-name-data {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        /* Input with icon */
+        .input-with-icon {
+            position: relative;
+        }
+        .input-with-icon .icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+        .input-with-icon input,
+        .input-with-icon select {
+            width: 100%;
+            padding: 14px 14px 14px 44px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #111827;
+            background: #ffffff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+        }
+        .input-with-icon input:focus,
+        .input-with-icon select:focus {
+            border-color: #0040a1;
+            box-shadow: 0 0 0 3px rgba(0, 64, 161, 0.08);
+        }
+        .input-with-icon .dropdown-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            pointer-events: none;
+        }
+
+        /* Submit Button */
+        .btn-submit-data {
+            width: 100%;
+            padding: 16px;
+            background: #0040a1;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-submit-data:hover {
+            background: #003380;
+            box-shadow: 0 4px 20px rgba(0, 64, 161, 0.2);
+        }
+
+        /* Side Panel */
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .wallet-card-side {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+        .wallet-card-side .icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: #0040a1;
+        }
+        .wallet-card-side .balance-label {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+        }
+        .wallet-card-side .balance-amount {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin: 4px 0 12px;
+        }
+        .wallet-card-side .btn-fund {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: transparent;
+            color: #0040a1;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .wallet-card-side .btn-fund:hover {
+            background: #f9fafb;
+        }
+
+        .promo-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+        .promo-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .promo-card:hover img {
+            transform: scale(1.03);
+        }
+        .promo-card .promo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        }
+        .promo-card .promo-overlay h4 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+        }
+        .promo-card .promo-overlay p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 2px 0 0;
+        }
+
+        /* Dark Mode */
+        body.dark-mode .form-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .input-with-icon input,
+        body.dark-mode .input-with-icon select {
+            background: #0f1724;
+            border-color: #1e2a3d;
+            color: #e8edf5;
+        }
+        body.dark-mode .input-with-icon input:focus,
+        body.dark-mode .input-with-icon select:focus {
+            border-color: #4a8aff;
+        }
+        body.dark-mode .network-option-data .network-box-data {
+            background: #0f1724;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .network-option-data input:checked + .network-box-data {
+            border-color: #4a8aff;
+            background: rgba(74, 138, 255, 0.06);
+        }
+        body.dark-mode .network-option-data .network-name-data {
+            color: #e8edf5;
+        }
+        body.dark-mode .wallet-card-side {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .wallet-card-side .balance-amount {
+            color: #e8edf5;
+        }
+        body.dark-mode .wallet-card-side .btn-fund {
+            color: #6aafff;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .wallet-card-side .btn-fund:hover {
+            background: #0f1724;
+        }
+        body.dark-mode .promo-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .breadcrumb .breadcrumb-name {
+            color: #6aafff;
+        }
+        body.dark-mode .breadcrumb a:hover {
+            color: #6aafff;
+        }
+        body.dark-mode .page-header h1 {
+            color: #e8edf5;
+        }
+        body.dark-mode .page-header p {
+            color: #9aabc0;
+        }
+        body.dark-mode .btn-submit-data {
+            background: #2a4a7a;
+        }
+        body.dark-mode .btn-submit-data:hover {
+            background: #3a5a8a;
+        }
+        body.dark-mode .form-group label {
+            color: #9aabc0;
+        }
+        body.dark-mode .wallet-card-side .icon-wrap {
+            background: #0f1724;
+            color: #6aafff;
+        }
+        body.dark-mode .wallet-card-side .balance-label {
+            color: #9aabc0;
+        }
+
+        /* Responsive */
+        @media (max-width: 575px) {
+            .form-card {
+                padding: 20px;
+            }
+            .network-grid-data {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .network-option-data .network-box-data {
+                padding: 10px 6px;
+            }
+            .network-option-data .network-circle {
+                width: 32px;
+                height: 32px;
+                font-size: 8px;
+            }
+            .page-header h1 {
+                font-size: 22px;
+            }
+            .page-header p {
+                font-size: 14px;
+            }
+            .input-with-icon input,
+            .input-with-icon select {
+                padding: 12px 12px 12px 38px;
+                font-size: 14px;
+            }
+            .wallet-card-side .balance-amount {
+                font-size: 20px;
+            }
+            .promo-card img {
+                height: 130px;
+            }
+            .btn-submit-data {
+                padding: 14px;
+                font-size: 13px;
+            }
+        }
+        @media (max-width: 399px) {
+            .form-card {
+                padding: 16px;
+            }
+            .page-header h1 {
+                font-size: 18px;
+            }
+            .page-header h1 .material-symbols-outlined {
+                font-size: 24px;
+            }
+            .network-grid-data {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .input-with-icon input,
+            .input-with-icon select {
+                padding: 10px 10px 10px 34px;
+                font-size: 13px;
+            }
+            .wallet-card-side .balance-amount {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <div id="navbar-container"></div>
+
+    <!-- ===== MOBILE OVERLAY ===== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===== SIDE NAVIGATION BAR ===== -->
+    <div id="sidebar-container"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <div class="service-container">
+
+            <!-- ===== BREADCRUMB ===== -->
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined">home</span>
+                <a href="../pages/dashboard.html">Dashboard</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <a href="#">Other Services</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <span class="breadcrumb-name">Buy Data</span>
+            </div>
+
+            <!-- ===== PAGE HEADER ===== -->
+            <div class="page-header">
+                <h1>
+                    <span class="material-symbols-outlined">wifi</span>
+                    Buy Data
+                </h1>
+                <p>Purchase internet data instantly across all networks.</p>
+            </div>
+
+            <!-- ===== DATA LAYOUT ===== -->
+            <div class="data-layout">
+
+                <!-- ===== LEFT: FORM ===== -->
+                <div>
+
+                    <div class="form-card">
+
+                        <form id="dataForm">
+
+                            <!-- Network Selection -->
+                            <div class="form-group">
+                                <label>Select Network</label>
+                                <div class="network-grid-data">
+                                    <label class="network-option-data">
+                                        <input type="radio" name="network" value="MTN" checked />
+                                        <div class="network-box-data">
+                                            <div class="network-circle mtn">MTN</div>
+                                            <span class="network-name-data">MTN</span>
+                                        </div>
+                                    </label>
+                                    <label class="network-option-data">
+                                        <input type="radio" name="network" value="Airtel" />
+                                        <div class="network-box-data">
+                                            <div class="network-circle airtel">Airtel</div>
+                                            <span class="network-name-data">Airtel</span>
+                                        </div>
+                                    </label>
+                                    <label class="network-option-data">
+                                        <input type="radio" name="network" value="Glo" />
+                                        <div class="network-box-data">
+                                            <div class="network-circle glo">Glo</div>
+                                            <span class="network-name-data">Glo</span>
+                                        </div>
+                                    </label>
+                                    <label class="network-option-data">
+                                        <input type="radio" name="network" value="9mobile" />
+                                        <div class="network-box-data">
+                                            <div class="network-circle nine">9Mob</div>
+                                            <span class="network-name-data">9Mobile</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="form-group">
+                                <label for="data-phone">Phone Number</label>
+                                <div class="input-with-icon">
+                                    <span class="icon material-symbols-outlined">phone_iphone</span>
+                                    <input type="tel" id="data-phone" placeholder="e.g. 08012345678" required />
+                                </div>
+                            </div>
+
+                            <!-- Data Plan -->
+                            <div class="form-group">
+                                <label for="data-plan">Select Data Plan</label>
+                                <div class="input-with-icon">
+                                    <span class="icon material-symbols-outlined">wifi</span>
+                                    <select id="data-plan" required>
+                                        <option value="" disabled selected>Choose a data plan...</option>
+                                        <option value="1GB-300">1GB - 30 Days - ₦300</option>
+                                        <option value="2GB-600">2GB - 30 Days - ₦600</option>
+                                        <option value="5GB-1400">5GB - 30 Days - ₦1,400</option>
+                                        <option value="10GB-2800">10GB - 30 Days - ₦2,800</option>
+                                        <option value="15GB-3800">15GB - 30 Days - ₦3,800</option>
+                                    </select>
+                                    <span class="dropdown-icon material-symbols-outlined">expand_more</span>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn-submit-data">
+                                <span class="material-symbols-outlined">bolt</span>
+                                Proceed to Payment
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <!-- ===== RIGHT: SIDE PANEL ===== -->
+                <div class="side-panel">
+
+                    <!-- Wallet Balance -->
+                    <div class="wallet-card-side">
+                        <div class="icon-wrap">
+                            <span class="material-symbols-outlined">account_balance_wallet</span>
+                        </div>
+                        <div class="balance-label">Wallet Balance</div>
+                        <div class="balance-amount">₦4,500.00</div>
+                        <button class="btn-fund">Fund Wallet</button>
+                    </div>
+
+                    <!-- Promo Image -->
+                    <div class="promo-card">
+                        <img alt="Data Services" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmDcV4PmiQdFWIWAtkIqzQexJq_Av1Akv_6Mhxx6sUlkAAidu9EcteNeDi7ISeSlj6Uz7qgmw4i3KlWNRA_Pi-2f3wdPPCQn9CveCfHXFo-nS720An6F3G1WfzD_fi944N3RgxJDQPI9vfYmCzZQtfNjtc4x2RXtCa8tEwliEN2JUTnFV0II976ixHEH8cre_OahCvn_BfYQnkKYtWScoomH7VBHwV9XLp0v4UySHFVd2oiRxqQcrflm3ziu8nubdYryA" />
+                        <div class="promo-overlay">
+                            <h4>Stay Connected</h4>
+                            <p>Instant delivery on all networks.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Fund Wallet
+            var fundBtn = document.querySelector('.btn-fund');
+            if (fundBtn) {
+                fundBtn.addEventListener('click', function() {
+                    var amount = prompt('Enter amount to fund (₦):', '1000');
+                    if (amount && !isNaN(amount) && parseInt(amount) > 0) {
+                        alert('Wallet funded with ₦' + parseInt(amount).toLocaleString() + ' (Simulated)');
+                        var balanceEl = document.querySelector('.balance-amount');
+                        if (balanceEl) {
+                            var current = parseInt(balanceEl.textContent.replace(/[₦,.]/g, ''));
+                            var newBalance = current + parseInt(amount);
+                            balanceEl.textContent = '₦' + newBalance.toLocaleString() + '.00';
+                        }
+                    }
+                });
+            }
+
+            // Form submit
+            var form = document.getElementById('dataForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    var network = document.querySelector('input[name="network"]:checked');
+                    var phone = document.getElementById('data-phone').value.trim();
+                    var plan = document.getElementById('data-plan');
+                    var planValue = plan.value;
+
+                    if (!network) {
+                        alert('Please select a network.');
+                        return;
+                    }
+
+                    if (!phone || phone.length < 10) {
+                        alert('Please enter a valid phone number.');
+                        return;
+                    }
+
+                    if (!planValue) {
+                        alert('Please select a data plan.');
+                        return;
+                    }
+
+                    var planText = plan.options[plan.selectedIndex].text;
+
+                    if (confirm('Buy ' + planText + ' for ' + phone + ' on ' + network.value + '?')) {
+                        var submitBtn = form.querySelector('.btn-submit-data');
+                        var originalText = submitBtn.innerHTML;
+                        submitBtn.innerHTML = '<span class="material-symbols-outlined">progress_activity</span> Processing...';
+                        submitBtn.disabled = true;
+
+                        setTimeout(function() {
+                            submitBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Success!';
+                            submitBtn.style.background = '#16a34a';
+
+                            setTimeout(function() {
+                                submitBtn.innerHTML = originalText;
+                                submitBtn.style.background = '';
+                                submitBtn.disabled = false;
+                                form.reset();
+                                alert('Data purchase successful!');
+                            }, 1500);
+                        }, 2000);
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NIN / BVN Verification - Eduneeds</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        /* =========================================================
+           PAGE-SPECIFIC STYLES FOR NIN / BVN
+           ========================================================= */
+        .sidebar {
+            display: none !important;
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                display: flex !important;
+            }
+        }
+        .sidebar.open {
+            display: flex !important;
+            transform: translateX(0) !important;
+        }
+
+        .main-content {
+            padding: 80px 16px 32px !important;
+            width: 100% !important;
+            min-height: calc(100vh - 64px);
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 280px !important;
+                padding: 80px 32px 32px !important;
+                width: auto !important;
+            }
+        }
+
+        .service-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb .material-symbols-outlined {
+            font-size: 18px;
+            color: #6b7280;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .breadcrumb a:hover {
+            color: #071b49;
+        }
+        .breadcrumb .breadcrumb-name {
+            color: #071b49;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 24px;
+        }
+        .page-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #071b49;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-header h1 .material-symbols-outlined {
+            color: #0040a1;
+            font-size: 32px;
+            font-variation-settings: 'FILL' 1;
+        }
+        .page-header p {
+            font-size: 16px;
+            color: #6b7280;
+            max-width: 640px;
+            margin-top: 4px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Service Card */
+        .service-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .service-card:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .service-card-image {
+            height: 150px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 16px;
+        }
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+        .service-card:hover .service-card-image img {
+            transform: scale(1.05);
+        }
+
+        .service-card-image .version-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            padding: 2px 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e5e7eb;
+            font-size: 10px;
+            font-weight: 700;
+            color: #6b7280;
+            z-index: 1;
+            backdrop-filter: blur(4px);
+        }
+
+        .service-card-body {
+            padding: 16px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .service-card-body .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .service-card-body .top-row .tag {
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: #f3f4f6;
+            color: #111827;
+        }
+        .service-card-body .top-row .status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .service-card-body .top-row .status.active {
+            background: rgba(34, 197, 94, 0.12);
+            color: #16a34a;
+        }
+        .service-card-body .top-row .status.legacy {
+            background: rgba(245, 158, 11, 0.12);
+            color: #b45309;
+        }
+        .service-card-body .top-row .status .material-symbols-outlined {
+            font-size: 14px;
+        }
+
+        .service-card-body h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #191b23;
+            margin-bottom: 2px;
+        }
+        .service-card-body .version-text {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        .service-card-body .price {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0040a1;
+            margin: 10px 0 14px;
+            margin-top: auto;
+        }
+        .btn-select {
+            width: 100%;
+            padding: 10px;
+            background: #0040a1;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-select:hover {
+            background: #003380;
+        }
+        .btn-select-alt {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: #6b7280;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-select-alt:hover {
+            border-color: #0040a1;
+            color: #0040a1;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-top: 32px;
+        }
+        .info-section .material-symbols-outlined {
+            color: #0040a1;
+            font-size: 28px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-variation-settings: 'FILL' 1;
+        }
+        .info-section h4 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #191b23;
+            margin-bottom: 4px;
+        }
+        .info-section p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Dark Mode */
+        body.dark-mode .service-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .service-card-body h3 {
+            color: #e8edf5;
+        }
+        body.dark-mode .service-card-body .version-text {
+            color: #9aabc0;
+        }
+        body.dark-mode .service-card-body .price {
+            color: #6aafff;
+        }
+        body.dark-mode .btn-select {
+            background: #2a4a7a;
+        }
+        body.dark-mode .btn-select:hover {
+            background: #3a5a8a;
+        }
+        body.dark-mode .btn-select-alt {
+            color: #9aabc0;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .btn-select-alt:hover {
+            border-color: #4a8aff;
+            color: #6aafff;
+        }
+        body.dark-mode .service-card-image {
+            background: #0f1724;
+        }
+        body.dark-mode .service-card-image .version-badge {
+            background: rgba(20, 30, 47, 0.95);
+            border-color: #1e2a3d;
+            color: #9aabc0;
+        }
+        body.dark-mode .service-card-body .top-row .tag {
+            background: #1a2538;
+            color: #e8edf5;
+        }
+        body.dark-mode .service-card-body .top-row .status.active {
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+        }
+        body.dark-mode .service-card-body .top-row .status.legacy {
+            background: rgba(251, 146, 60, 0.12);
+            color: #fb923c;
+        }
+        body.dark-mode .info-section {
+            background: #0f1724;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .info-section h4 {
+            color: #e8edf5;
+        }
+        body.dark-mode .info-section p {
+            color: #9aabc0;
+        }
+        body.dark-mode .breadcrumb .breadcrumb-name {
+            color: #6aafff;
+        }
+        body.dark-mode .breadcrumb a:hover {
+            color: #6aafff;
+        }
+        body.dark-mode .page-header h1 {
+            color: #e8edf5;
+        }
+        body.dark-mode .page-header p {
+            color: #9aabc0;
+        }
+
+        /* Responsive */
+        @media (max-width: 575px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .page-header h1 {
+                font-size: 20px;
+            }
+            .page-header p {
+                font-size: 13px;
+            }
+            .service-card-body {
+                padding: 12px 14px 14px;
+            }
+            .service-card-body .price {
+                font-size: 15px;
+            }
+            .service-card-image {
+                height: 100px;
+                padding: 10px;
+            }
+            .service-card-body h3 {
+                font-size: 14px;
+            }
+            .btn-select,
+            .btn-select-alt {
+                font-size: 12px;
+                padding: 8px;
+            }
+            .info-section {
+                flex-direction: column;
+                padding: 14px 16px;
+            }
+            .service-card-body .top-row .tag,
+            .service-card-body .top-row .status {
+                font-size: 8px;
+                padding: 1px 8px;
+            }
+        }
+        @media (max-width: 399px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .page-header h1 {
+                font-size: 17px;
+            }
+            .page-header h1 .material-symbols-outlined {
+                font-size: 22px;
+            }
+            .service-card-image {
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <div id="navbar-container"></div>
+
+    <!-- ===== MOBILE OVERLAY ===== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===== SIDE NAVIGATION BAR ===== -->
+    <div id="sidebar-container"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <div class="service-container">
+
+            <!-- ===== BREADCRUMB ===== -->
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined">home</span>
+                <a href="../pages/dashboard.html">Dashboard</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <a href="#">NIN / BVN</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <span class="breadcrumb-name">NIN / BVN Verification</span>
+            </div>
+
+            <!-- ===== PAGE HEADER ===== -->
+            <div class="page-header">
+                <h1>
+                    <span class="material-symbols-outlined">fingerprint</span>
+                    Identity Verification Services
+                </h1>
+                <p>Access NIN and BVN printing and verification services instantly. Ensure your wallet is funded before initiating a transaction.</p>
+            </div>
+
+            <!-- ===== SERVICES GRID ===== -->
+            <div class="services-grid">
+
+                <!-- Card 1: Print With NIN Number -->
+                <div class="service-card">
+                    <div class="service-card-image" style="background: #e8f0fe;">
+                        <img alt="NIN Card" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1lHixdYqPJytzzg3qnnfYsl6w8Mg9SD3g2p3jmT8GB-JkDIdD6kDpIqC2bzBdJTSl0SVIKzNmtP-V1c_RgTfGD9n0pnxwMAcCCPmXRjIVk5dyW35h2dnw1RxNLGNJjqCICuAYKfjB5Uwl9Z4kyh3KDE1W72E89trZb2rR5A_P4uM1kAjagNvsPEC2JGX8tFcC1uCw8zdZvOjXbMsRcJk7fqo4N58UfV5gO0j_HB0jHlQ-K8Z1zBvNVtmc" />
+                    </div>
+                    <div class="service-card-body">
+                        <div class="top-row">
+                            <span class="tag">NIN SERVICE</span>
+                            <span class="status active">
+                                <span class="material-symbols-outlined">check_circle</span> Active
+                            </span>
+                        </div>
+                        <h3>Print With NIN Number</h3>
+                        <div class="price">₦310.00</div>
+                        <button class="btn-select" data-service="nin-print-nin">Select Service</button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Print With Phone Number -->
+                <div class="service-card">
+                    <div class="service-card-image" style="background: #e6f4f1;">
+                        <img alt="Phone NIN Print" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASbOssQmRZlNwLzh3lNpGX20msMgr62jCEk8hA1adKemh5PW7W1pRA-E4p69Qv6yIJm4TXNsxylIqNqiwfDHgAtr1N4Ok6MXDBUsgeBQGzws29bI-pqC8Bmfq8Xn7fQnWAPydML4BfKtJ3CfZx9_4u8m-GpxU7AvwVZ52EWL2E1hxi5KdG2Gffz9d9t1X3Z-SHqzlIrA5osWGsR_2zsHARj0M9Gx8PN4QG3pL5vWp6wMLuYHtyjPcBxw" />
+                    </div>
+                    <div class="service-card-body">
+                        <div class="top-row">
+                            <span class="tag">NIN SERVICE</span>
+                            <span class="status active">
+                                <span class="material-symbols-outlined">check_circle</span> Active
+                            </span>
+                        </div>
+                        <h3>Print With Phone Number</h3>
+                        <div class="price">₦310.00</div>
+                        <button class="btn-select" data-service="nin-print-phone">Select Service</button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Print With NIN Number v1.0 -->
+                <div class="service-card">
+                    <div class="service-card-image" style="background: #e8f0fe;">
+                        <img alt="NIN Card v1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1lHixdYqPJytzzg3qnnfYsl6w8Mg9SD3g2p3jmT8GB-JkDIdD6kDpIqC2bzBdJTSl0SVIKzNmtP-V1c_RgTfGD9n0pnxwMAcCCPmXRjIVk5dyW35h2dnw1RxNLGNJjqCICuAYKfjB5Uwl9Z4kyh3KDE1W72E89trZb2rR5A_P4uM1kAjagNvsPEC2JGX8tFcC1uCw8zdZvOjXbMsRcJk7fqo4N58UfV5gO0j_HB0jHlQ-K8Z1zBvNVtmc" />
+                        <span class="version-badge">v1.0</span>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="top-row">
+                            <span class="tag">NIN SERVICE</span>
+                            <span class="status active">
+                                <span class="material-symbols-outlined">check_circle</span> Active
+                            </span>
+                        </div>
+                        <h3>Print With NIN Number</h3>
+                        <div class="version-text">Version 1.0</div>
+                        <div class="price">₦310.00</div>
+                        <button class="btn-select-alt" data-service="nin-print-nin-v1">Select Alternative</button>
+                    </div>
+                </div>
+
+                <!-- Card 4: BVN Verification -->
+                <div class="service-card">
+                    <div class="service-card-image" style="background: #fdf0ea;">
+                        <img alt="BVN Verification" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzRl7sU9EPg9BcP7Bx7h-XktWzZLvx8wz-4QmQEy7kf9XtZ1E4Zm7_lqqCZl1TrSHcfBZB2o14E3QFTX1lZIZesPjbQkq8MlUmRnqEtLeXd-27cvrgpjx9KbewECkS1mBbrbOiEG-AGEXPbe0jAQ9LsvLUe4MFCJn3DfpZxiPfxRCQrmH-bq4WQR6URamzQ_oRdg62HGjFFiOM7FD25qKKZc1UcjlfVik7-NcTrVb-0_q2ktJlMNBA" />
+                    </div>
+                    <div class="service-card-body">
+                        <div class="top-row">
+                            <span class="tag">BVN SERVICE</span>
+                            <span class="status active">
+                                <span class="material-symbols-outlined">check_circle</span> Active
+                            </span>
+                        </div>
+                        <h3>BVN Verification</h3>
+                        <div class="price">₦260.00</div>
+                        <button class="btn-select" data-service="bvn-verification">Select Service</button>
+                    </div>
+                </div>
+
+                <!-- Card 5: BVN Verification v1.0 -->
+                <div class="service-card">
+                    <div class="service-card-image" style="background: #fdf0ea;">
+                        <img alt="BVN Verification v1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzRl7sU9EPg9BcP7Bx7h-XktWzZLvx8wz-4QmQEy7kf9XtZ1E4Zm7_lqqCZl1TrSHcfBZB2o14E3QFTX1lZIZesPjbQkq8MlUmRnqEtLeXd-27cvrgpjx9KbewECkS1mBbrbOiEG-AGEXPbe0jAQ9LsvLUe4MFCJn3DfpZxiPfxRCQrmH-bq4WQR6URamzQ_oRdg62HGjFFiOM7FD25qKKZc1UcjlfVik7-NcTrVb-0_q2ktJlMNBA" />
+                        <span class="version-badge">v1.0</span>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="top-row">
+                            <span class="tag">BVN SERVICE</span>
+                            <span class="status legacy">
+                                <span class="material-symbols-outlined">warning</span> Legacy
+                            </span>
+                        </div>
+                        <h3>BVN Verification</h3>
+                        <div class="version-text">Version 1.0</div>
+                        <div class="price">₦260.00</div>
+                        <button class="btn-select-alt" data-service="bvn-verification-v1">Select Alternative</button>
+                    </div>
+                </div>
+
+                <!-- Card 6: Print With Phone Number (N260) -->
+                <div class="service-card">
+                    <div class="service-card-image" style="background: #e6f4f1;">
+                        <img alt="Phone NIN Print" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASbOssQmRZlNwLzh3lNpGX20msMgr62jCEk8hA1adKemh5PW7W1pRA-E4p69Qv6yIJm4TXNsxylIqNqiwfDHgAtr1N4Ok6MXDBUsgeBQGzws29bI-pqC8Bmfq8Xn7fQnWAPydML4BfKtJ3CfZx9_4u8m-GpxU7AvwVZ52EWL2E1hxi5KdG2Gffz9d9t1X3Z-SHqzlIrA5osWGsR_2zsHARj0M9Gx8PN4QG3pL5vWp6wMLuYHtyjPcBxw" />
+                    </div>
+                    <div class="service-card-body">
+                        <div class="top-row">
+                            <span class="tag">NIN SERVICE</span>
+                            <span class="status active">
+                                <span class="material-symbols-outlined">check_circle</span> Active
+                            </span>
+                        </div>
+                        <h3>Print With Phone Number</h3>
+                        <div class="price">₦260.00</div>
+                        <button class="btn-select" data-service="bvn-print-phone">Select Service</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== INFO SECTION ===== -->
+            <div class="info-section">
+                <span class="material-symbols-outlined">info</span>
+                <div>
+                    <h4>Important Notice</h4>
+                    <p>Version 1.0 services are maintained for legacy system compatibility. For new verifications, please use the standard services. Ensure all details are entered correctly as verification transactions are non-refundable once processed by the respective agencies.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectBtns = document.querySelectorAll('.btn-select, .btn-select-alt');
+
+            selectBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var service = this.getAttribute('data-service');
+                    var serviceName = this.closest('.service-card-body').querySelector('h3').textContent;
+                    var price = this.closest('.service-card-body').querySelector('.price').textContent;
+
+                    if (confirm('Select "' + serviceName + '" for ' + price + '?')) {
+                        var originalText = this.textContent;
+                        this.textContent = 'Processing...';
+                        this.disabled = true;
+
+                        setTimeout(function() {
+                            btn.textContent = '✓ Selected';
+                            btn.style.background = '#16a34a';
+                            btn.style.color = '#ffffff';
+                            btn.style.borderColor = '#16a34a';
+
+                            setTimeout(function() {
+                                btn.textContent = originalText;
+                                btn.style.background = '';
+                                btn.style.color = '';
+                                btn.style.borderColor = '';
+                                btn.disabled = false;
+                                alert('Service selected! Redirecting to verification...');
+                            }, 1200);
+                        }, 1500);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

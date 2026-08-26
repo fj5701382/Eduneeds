@@ -1,0 +1,1020 @@
+/* =========================================================
+   Eduneeds REGISTRATION PAGE — MAIN STYLESHEET
+   ========================================================= */
+
+/* ----- RESET ----- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F8F9FA;
+    color: #191b23;
+    -webkit-font-smoothing: antialiased;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ----- MATERIAL ICONS ----- */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.header-inner {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.brand-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #071b49;
+}
+
+.search-wrapper {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 40px 0 16px;
+    border: 1px solid #d9dde5;
+    border-radius: 9999px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #191b23;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    border-color: #071b49;
+    box-shadow: 0 0 0 3px rgba(7, 27, 73, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 20px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+}
+
+.nav-link {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #071b49;
+}
+
+.nav-link.active {
+    color: #071b49;
+    border-bottom-color: #071b49;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.icon-btn:hover {
+    background: #f3f4f6;
+    color: #071b49;
+}
+
+.cart-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #006a6a;
+    border-radius: 8px;
+    background: transparent;
+    color: #006a6a;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.cart-btn:hover {
+    background: #006a6a;
+    color: #ffffff;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: #191b23;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.user-btn:hover {
+    background: #f3f4f6;
+}
+
+.user-name {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.user-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: 200px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    color: #191b23;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.user-dropdown a:hover {
+    background: #f3f4f6;
+}
+
+.user-dropdown hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 4px 0;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px 48px;
+}
+
+.register-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================================
+   REGISTER FORM (LEFT)
+   ========================================================= */
+.register-form-container {
+    width: 50%;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.register-logo {
+    height: 64px;
+    width: 64px;
+    margin: 0 auto 16px;
+    border-radius: 8px;
+    object-fit: contain;
+    display: block;
+}
+
+.register-header h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #191b23;
+    margin-bottom: 8px;
+}
+
+.register-header p {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* =========================================================
+   SOCIAL BUTTONS
+   ========================================================= */
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #191b23;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.social-btn:hover {
+    background: #f3f4f6;
+}
+
+.social-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.social-btn.google svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-btn.apple svg {
+    width: 20px;
+    height: 20px;
+    color: #191b23;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.divider span {
+    font-size: 14px;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   REGISTER FORM
+   ========================================================= */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+}
+
+.form-group input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    color: #191b23;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #071b49;
+    box-shadow: 0 0 0 2px rgba(7, 27, 73, 0.1);
+}
+
+.form-group input.error {
+    border-color: #dc2626;
+}
+
+.form-group input.error:focus {
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.form-group .error-message {
+    font-size: 12px;
+    color: #dc2626;
+    display: none;
+}
+
+.form-group.error .error-message {
+    display: block;
+}
+
+/* ----- Password Wrapper ----- */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.toggle-password:hover {
+    color: #6b7280;
+}
+
+.toggle-password .material-symbols-outlined {
+    font-size: 20px;
+}
+
+/* ----- Password Strength ----- */
+.password-strength {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.strength-bar {
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.strength-fill.weak {
+    width: 25%;
+    background: #dc2626;
+}
+
+.strength-fill.fair {
+    width: 50%;
+    background: #f59e0b;
+}
+
+.strength-fill.good {
+    width: 75%;
+    background: #3b82f6;
+}
+
+.strength-fill.strong {
+    width: 100%;
+    background: #16a34a;
+}
+
+.strength-text {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.strength-text.weak {
+    color: #dc2626;
+}
+
+.strength-text.fair {
+    color: #f59e0b;
+}
+
+.strength-text.good {
+    color: #3b82f6;
+}
+
+.strength-text.strong {
+    color: #16a34a;
+}
+
+/* ----- Submit Button ----- */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #071b49;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 8px;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ----- Register Footer ----- */
+.register-footer {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.register-footer p {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.register-footer a {
+    color: #071b49;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-footer a:hover {
+    text-decoration: underline;
+}
+
+.register-footer .terms {
+    font-size: 12px;
+    margin-top: 12px;
+    color: #9ca3af;
+}
+
+.register-footer .terms a {
+    font-weight: 400;
+    color: #6b7280;
+}
+
+.register-footer .terms a:hover {
+    color: #071b49;
+}
+
+/* =========================================================
+   REGISTER VISUAL (RIGHT)
+   ========================================================= */
+.register-visual {
+    width: 50%;
+    position: relative;
+    overflow: hidden;
+    background: #e5e7eb;
+}
+
+.visual-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAgBB7AKPmTemMgXyw1BGtIPgtDcheV-EQ9UnT_WvxEv3BTkDu-Kuqg6d4AcY2HheoISGXVaFLF8l2MOOKVuVyY84ss60l5EOS3sVHgNrvAY_tS2KnMqEEljQE4ZCYWmxVr-tkQLXoqy2raE1Z39YsPlph_habfv8Z8LLu9N0yh_HjiLas6_UKlp9z8w75nNzhreGKZE-rjeOu15LRigF0j6Fh_jkZ_FH-NclSTyknZ6h07I0m6eBuJeQ');
+    background-size: cover;
+    background-position: center;
+}
+
+.visual-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(218, 226, 255, 0.2), rgba(147, 242, 242, 0.2));
+    mix-blend-mode: multiply;
+}
+
+.visual-decorations {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.deco-circle-1 {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 128px;
+    height: 128px;
+    background: rgba(7, 27, 73, 0.1);
+    border-radius: 50%;
+    filter: blur(48px);
+}
+
+.deco-circle-2 {
+    position: absolute;
+    bottom: 25%;
+    right: 25%;
+    width: 192px;
+    height: 192px;
+    background: rgba(147, 242, 242, 0.2);
+    border-radius: 50%;
+    filter: blur(48px);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+    background: #f3f4f6;
+    padding: 48px 0 40px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 48px;
+}
+
+.footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-brand-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #071b49;
+}
+
+.footer-logo {
+    height: 36px;
+    width: 36px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+}
+
+.footer-links a {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #071b49;
+    text-decoration: underline;
+}
+
+.footer-copy {
+    text-align: right;
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.powered {
+    display: block;
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+.powered strong {
+    color: #071b49;
+    font-weight: 700;
+}
+
+/* =========================================================
+   =========================================================
+   =========================================================
+   MOBILE RESPONSIVE OVERRIDES
+   =========================================================
+   =========================================================
+   ========================================================= */
+
+/* =========================================================
+   TABLET (768px - 991px)
+   ========================================================= */
+@media (max-width: 991px) {
+
+    /* ----- HEADER ----- */
+    .nav-links {
+        display: none;
+    }
+
+    .cart-btn {
+        display: none;
+    }
+
+    .search-wrapper {
+        display: none;
+    }
+
+    .brand-name {
+        font-size: 20px;
+    }
+
+    /* ----- REGISTER ----- */
+    .register-wrapper {
+        max-width: 600px;
+        flex-direction: column;
+    }
+
+    .register-form-container {
+        width: 100%;
+        padding: 32px;
+    }
+
+    .register-visual {
+        display: none;
+    }
+
+    .register-header h1 {
+        font-size: 28px;
+    }
+
+    /* ----- FOOTER ----- */
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-copy {
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
+
+/* =========================================================
+   MOBILE (up to 767px)
+   ========================================================= */
+@media (max-width: 767px) {
+
+    /* ----- HEADER ----- */
+    .header {
+        height: 64px;
+    }
+
+    .header-inner {
+        padding: 0 16px;
+    }
+
+    .brand-logo {
+        height: 32px;
+        width: 32px;
+    }
+
+    .brand-name {
+        font-size: 18px;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .user-btn {
+        padding: 4px 8px;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .icon-btn .material-symbols-outlined {
+        font-size: 20px;
+    }
+
+    /* ----- MAIN ----- */
+    .main-content {
+        padding: 16px 12px 32px;
+        padding-top: 80px;
+    }
+
+    /* ----- REGISTER ----- */
+    .register-wrapper {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .register-form-container {
+        padding: 24px 20px;
+    }
+
+    .register-header {
+        margin-bottom: 20px;
+    }
+
+    .register-logo {
+        height: 48px;
+        width: 48px;
+    }
+
+    .register-header h1 {
+        font-size: 22px;
+    }
+
+    .register-header p {
+        font-size: 13px;
+    }
+
+    /* ----- SOCIAL BUTTONS ----- */
+    .social-buttons {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .social-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .social-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* ----- FORM ----- */
+    .register-form {
+        gap: 14px;
+    }
+
+    .form-group label {
+        font-size: 11px;
+    }
+
+    .form-group input {
+        height: 36px;
+        font-size: 13px;
+        padding: 0 10px;
+    }
+
+    .password-wrapper input {
+        padding-right: 36px;
+    }
+
+    .btn-submit {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    /* ----- REGISTER FOOTER ----- */
+    .register-footer p {
+        font-size: 13px;
+    }
+
+    .register-footer .terms {
+        font-size: 11px;
+    }
+
+    /* ----- FOOTER ----- */
+    .footer {
+        padding: 24px 0 20px;
+        margin-top: 24px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    .footer-brand-name {
+        font-size: 18px;
+    }
+
+    .footer-logo {
+        height: 30px;
+        width: 30px;
+    }
+
+    .footer-links {
+        gap: 10px 14px;
+    }
+
+    .footer-links a {
+        font-size: 10px;
+    }
+
+    .footer-copy {
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .powered {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   EXTRA SMALL (up to 480px)
+   ========================================================= */
+@media (max-width: 480px) {
+
+    .register-form-container {
+        padding: 20px 16px;
+    }
+
+    .register-header h1 {
+        font-size: 20px;
+    }
+
+    .register-logo {
+        height: 40px;
+        width: 40px;
+    }
+
+    .social-btn {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .form-group input {
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .btn-submit {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .register-footer p {
+        font-size: 12px;
+    }
+
+    .register-footer .terms {
+        font-size: 10px;
+    }
+}

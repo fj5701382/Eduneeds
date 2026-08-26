@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>O'Level Confirmation - Eduneeds</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/jamb-service.css" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+        /* =========================================================
+           PAGE-SPECIFIC FIXES
+           ========================================================= */
+        .sidebar {
+            display: none !important;
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                display: flex !important;
+            }
+        }
+        .sidebar.open {
+            display: flex !important;
+            transform: translateX(0) !important;
+        }
+
+        .main-content {
+            padding: 80px 16px 32px !important;
+            width: 100% !important;
+            min-height: calc(100vh - 64px);
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 280px !important;
+                padding: 80px 32px 32px !important;
+                width: auto !important;
+            }
+        }
+
+        .service-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .service-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        @media (min-width: 992px) {
+            .service-layout {
+                flex-direction: row;
+                gap: 32px;
+            }
+        }
+
+        .service-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 0;
+        }
+
+        .service-right {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        @media (min-width: 992px) {
+            .service-right {
+                width: 340px;
+                flex-shrink: 0;
+            }
+        }
+
+        /* ===== PAYMENT SECTION ===== */
+        .payment-section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px 24px;
+        }
+
+        .wallet-bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        @media (min-width: 480px) {
+            .wallet-bar {
+                flex-direction: row;
+            }
+        }
+
+        .wallet-bar span {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .wallet-bar span strong {
+            color: #0040a1;
+        }
+
+        .btn-fund-wallet {
+            padding: 8px 20px;
+            background: #0040a1;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-fund-wallet:hover {
+            background: #003380;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .payment-method {
+            padding: 8px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: transparent;
+            color: #6b7280;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .payment-method:hover {
+            border-color: #0040a1;
+            color: #0040a1;
+        }
+        .payment-method.active {
+            border-color: #0040a1;
+            color: #0040a1;
+            background: rgba(0, 64, 161, 0.05);
+        }
+
+        /* ===== SERVICE FORM ===== */
+        .service-form-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        @media (min-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #191b23;
+        }
+        .form-group .required {
+            color: #dc2626;
+        }
+        .form-group .optional {
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 44px;
+            padding: 0 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #ffffff;
+            font-size: 14px;
+            color: #191b23;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #0040a1;
+            box-shadow: 0 0 0 2px rgba(0, 64, 161, 0.08);
+        }
+        .form-group input.error,
+        .form-group select.error {
+            border-color: #dc2626;
+        }
+
+        .form-group .error-message {
+            font-size: 12px;
+            color: #dc2626;
+            display: none;
+        }
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* ===== SERVICE CONDITION ===== */
+        .service-condition {
+            display: flex;
+            gap: 12px;
+            padding: 14px 18px;
+            background: #f9fafb;
+            border-left: 4px solid #dc2626;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        .service-condition .material-symbols-outlined {
+            color: #dc2626;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .service-condition p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        .service-condition p strong {
+            color: #191b23;
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
+        .btn-submit {
+            width: 100%;
+            height: 48px;
+            background: #c9003d;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover {
+            background: #a80032;
+        }
+        .btn-submit .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        /* ===== REQUESTS SECTION ===== */
+        .requests-section {
+            margin-top: 4px;
+        }
+        .requests-section h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #071b49;
+            margin-bottom: 16px;
+        }
+
+        .search-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        @media (min-width: 480px) {
+            .search-bar {
+                flex-direction: row;
+                gap: 12px;
+            }
+        }
+
+        .search-bar input {
+            flex: 1;
+            height: 42px;
+            padding: 0 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #191b23;
+            outline: none;
+            transition: border-color 0.2s;
+            min-width: 0;
+        }
+        .search-bar input:focus {
+            border-color: #0040a1;
+        }
+
+        .btn-apply {
+            padding: 0 24px;
+            height: 42px;
+            background: #c9003d;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-apply:hover {
+            background: #a80032;
+        }
+
+        /* ===== TABLE ===== */
+        .table-wrapper {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .requests-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 700px;
+        }
+        .requests-table thead {
+            background: #f9fafb;
+        }
+        .requests-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            font-weight: 600;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .requests-table td {
+            padding: 12px 16px;
+            color: #191b23;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .requests-table tbody tr:hover {
+            background: #f9fafb;
+        }
+        .requests-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ===== STATUS BADGE ===== */
+        .status-badge {
+            display: inline-flex;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status-badge.completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .status-badge.failed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* ===== VIEW BUTTON ===== */
+        .btn-view {
+            padding: 4px 16px;
+            border: 1px solid #0040a1;
+            border-radius: 6px;
+            background: transparent;
+            color: #0040a1;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-view:hover {
+            background: #0040a1;
+            color: #ffffff;
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+        .empty-state .material-symbols-outlined {
+            font-size: 48px;
+            color: #e5e7eb;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ===== INSTRUCTIONS CARD ===== */
+        .instructions-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            position: sticky;
+            top: 88px;
+        }
+        .instructions-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #191b23;
+            margin-bottom: 16px;
+        }
+        .instructions-card h3 .material-symbols-outlined {
+            color: #0040a1;
+        }
+        .instructions-card ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .instructions-card ol li {
+            display: flex;
+            gap: 12px;
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        .instructions-card ol li .step-number {
+            font-weight: 700;
+            color: #0040a1;
+            flex-shrink: 0;
+        }
+        .instructions-card ol li strong {
+            color: #191b23;
+        }
+
+        /* =========================================================
+           DARK MODE
+           ========================================================= */
+        body.dark-mode .payment-section {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .wallet-bar {
+            background: #0f1724;
+        }
+        body.dark-mode .wallet-bar span {
+            color: #9aabc0;
+        }
+        body.dark-mode .wallet-bar span strong {
+            color: #6aafff;
+        }
+        body.dark-mode .payment-method {
+            color: #9aabc0;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .payment-method:hover {
+            border-color: #4a8aff;
+            color: #6aafff;
+        }
+        body.dark-mode .payment-method.active {
+            border-color: #4a8aff;
+            color: #6aafff;
+            background: rgba(74, 138, 255, 0.08);
+        }
+        body.dark-mode .service-form-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .form-group label {
+            color: #e8edf5;
+        }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select {
+            background: #0f1724;
+            border-color: #1e2a3d;
+            color: #e8edf5;
+        }
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus {
+            border-color: #4a8aff;
+        }
+        body.dark-mode .service-condition {
+            background: #0f1724;
+        }
+        body.dark-mode .service-condition p {
+            color: #9aabc0;
+        }
+        body.dark-mode .service-condition p strong {
+            color: #e8edf5;
+        }
+        body.dark-mode .requests-section h3 {
+            color: #e8edf5;
+        }
+        body.dark-mode .search-bar input {
+            background: #0f1724;
+            border-color: #1e2a3d;
+            color: #e8edf5;
+        }
+        body.dark-mode .table-wrapper {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .requests-table thead {
+            background: #0f1724;
+        }
+        body.dark-mode .requests-table th {
+            color: #9aabc0;
+            border-bottom-color: #1e2a3d;
+        }
+        body.dark-mode .requests-table td {
+            color: #e8edf5;
+            border-bottom-color: #1e2a3d;
+        }
+        body.dark-mode .requests-table tbody tr:hover {
+            background: #0f1724;
+        }
+        body.dark-mode .empty-state {
+            color: #9aabc0;
+        }
+        body.dark-mode .empty-state .material-symbols-outlined {
+            color: #1e2a3d;
+        }
+        body.dark-mode .instructions-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+        body.dark-mode .instructions-card h3 {
+            color: #e8edf5;
+        }
+        body.dark-mode .instructions-card h3 .material-symbols-outlined {
+            color: #6aafff;
+        }
+        body.dark-mode .instructions-card ol li {
+            color: #9aabc0;
+        }
+        body.dark-mode .instructions-card ol li strong {
+            color: #e8edf5;
+        }
+        body.dark-mode .instructions-card ol li .step-number {
+            color: #6aafff;
+        }
+        body.dark-mode .service-header h1 {
+            color: #e8edf5;
+        }
+        body.dark-mode .service-price {
+            color: #f87171;
+        }
+        body.dark-mode .breadcrumb .breadcrumb-name {
+            color: #6aafff;
+        }
+        body.dark-mode .breadcrumb a:hover {
+            color: #6aafff;
+        }
+        body.dark-mode .btn-fund-wallet {
+            background: #2a4a7a;
+        }
+        body.dark-mode .btn-fund-wallet:hover {
+            background: #3a5a8a;
+        }
+        body.dark-mode .btn-submit {
+            background: #c9003d;
+        }
+        body.dark-mode .btn-submit:hover {
+            background: #a80032;
+        }
+        body.dark-mode .btn-apply {
+            background: #c9003d;
+        }
+        body.dark-mode .btn-apply:hover {
+            background: #a80032;
+        }
+        body.dark-mode .btn-view {
+            border-color: #4a8aff;
+            color: #6aafff;
+        }
+        body.dark-mode .btn-view:hover {
+            background: #2a4a7a;
+            color: #ffffff;
+        }
+        body.dark-mode .service-icon-header {
+            background: rgba(74, 138, 255, 0.12);
+            color: #6aafff;
+        }
+        body.dark-mode .status-badge.pending {
+            background: rgba(251, 146, 60, 0.12);
+            color: #fb923c;
+        }
+        body.dark-mode .status-badge.completed {
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+        }
+        body.dark-mode .status-badge.failed {
+            background: rgba(239, 68, 68, 0.12);
+            color: #f87171;
+        }
+        body.dark-mode .footer {
+            background: #141e2f;
+            border-top-color: #1e2a3d;
+        }
+        body.dark-mode .footer-brand-name {
+            color: #e8edf5;
+        }
+        body.dark-mode .footer-copy-text {
+            color: #9aabc0;
+        }
+        body.dark-mode .footer-links a {
+            color: #9aabc0;
+        }
+        body.dark-mode .footer-links a:hover {
+            color: #e8edf5;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+        @media (max-width: 575px) {
+            .service-header h1 {
+                font-size: 20px;
+            }
+            .service-price {
+                font-size: 17px;
+            }
+            .payment-section {
+                padding: 16px;
+            }
+            .wallet-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .wallet-bar span {
+                font-size: 13px;
+                text-align: center;
+            }
+            .btn-fund-wallet {
+                width: 100%;
+            }
+            .payment-methods {
+                gap: 6px;
+            }
+            .payment-method {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            .service-form-card {
+                padding: 16px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .form-group input,
+            .form-group select {
+                height: 40px;
+                font-size: 13px;
+            }
+            .btn-submit {
+                height: 42px;
+                font-size: 14px;
+            }
+            .requests-table {
+                min-width: 500px;
+            }
+            .requests-table th,
+            .requests-table td {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            .search-bar {
+                flex-direction: column;
+            }
+            .search-bar input {
+                height: 38px;
+            }
+            .btn-apply {
+                height: 38px;
+                width: 100%;
+            }
+            .instructions-card {
+                padding: 16px;
+            }
+            .instructions-card h3 {
+                font-size: 16px;
+            }
+            .instructions-card ol li {
+                font-size: 13px;
+            }
+            .service-condition p {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 399px) {
+            .service-header h1 {
+                font-size: 17px;
+            }
+            .service-price {
+                font-size: 15px;
+            }
+            .payment-section {
+                padding: 12px;
+            }
+            .wallet-bar {
+                padding: 8px 10px;
+            }
+            .wallet-bar span {
+                font-size: 12px;
+            }
+            .btn-fund-wallet {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            .payment-method {
+                padding: 4px 10px;
+                font-size: 11px;
+            }
+            .service-form-card {
+                padding: 12px;
+            }
+            .form-group input,
+            .form-group select {
+                height: 36px;
+                font-size: 12px;
+                padding: 0 10px;
+            }
+            .form-group label {
+                font-size: 12px;
+            }
+            .btn-submit {
+                height: 38px;
+                font-size: 13px;
+            }
+            .requests-table {
+                min-width: 420px;
+                font-size: 12px;
+            }
+            .requests-table th,
+            .requests-table td {
+                padding: 8px 10px;
+            }
+            .instructions-card {
+                padding: 14px;
+            }
+            .instructions-card h3 {
+                font-size: 15px;
+            }
+            .instructions-card ol li {
+                font-size: 12px;
+                gap: 8px;
+            }
+            .search-bar input {
+                height: 34px;
+                font-size: 12px;
+            }
+            .btn-apply {
+                height: 34px;
+                font-size: 12px;
+                padding: 0 12px;
+            }
+            .empty-state {
+                padding: 20px 12px;
+            }
+            .empty-state .material-symbols-outlined {
+                font-size: 28px;
+            }
+            .empty-state p {
+                font-size: 12px;
+            }
+            .breadcrumb {
+                font-size: 11px;
+            }
+            .breadcrumb .material-symbols-outlined {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <div id="navbar-container"></div>
+
+    <!-- ===== MOBILE OVERLAY ===== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===== SIDE NAVIGATION BAR ===== -->
+    <div id="sidebar-container"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <div class="service-container">
+
+            <!-- ===== BREADCRUMB ===== -->
+            <div class="breadcrumb">
+                <span class="material-symbols-outlined">home</span>
+                <a href="../pages/dashboard.html">Dashboard</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <a href="#">JAMB Services</a>
+                <span class="material-symbols-outlined">chevron_right</span>
+                <span class="breadcrumb-name">O'Level Confirmation</span>
+            </div>
+
+            <!-- ===== PAGE HEADER ===== -->
+            <div class="service-header">
+                <div class="service-header-left">
+                    <div class="service-icon-header">
+                        <span class="material-symbols-outlined filled">verified</span>
+                    </div>
+                    <h1>O'Level Confirmation</h1>
+                </div>
+                <div class="service-price">₦1,000.00</div>
+            </div>
+
+            <!-- ===== SERVICE LAYOUT ===== -->
+            <div class="service-layout">
+
+                <!-- ===== LEFT COLUMN ===== -->
+                <div class="service-left">
+
+                    <!-- ===== PAYMENT SECTION ===== -->
+                    <div class="payment-section">
+                        <div class="wallet-bar">
+                            <span>Pay With <strong>Wallet (₦25,000.00)</strong></span>
+                            <button class="btn-fund-wallet">Fund Wallet</button>
+                        </div>
+
+                        <div class="payment-methods">
+                            <button class="payment-method active">Wallet</button>
+                            <button class="payment-method">Bank Transfer</button>
+                            <button class="payment-method">Debit Card</button>
+                        </div>
+                    </div>
+
+                    <!-- ===== SERVICE FORM ===== -->
+                    <div class="service-form-card">
+                        <form id="serviceForm" novalidate>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>JAMB Year <span class="required">*</span></label>
+                                    <select id="jambYear">
+                                        <option value="">Select Year</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>JAMB Registration Number <span class="required">*</span></label>
+                                    <input type="text" id="regNumber" placeholder="Enter JAMB registration number" required />
+                                    <span class="error-message">Please enter your JAMB registration number</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>O'Level Type <span class="required">*</span></label>
+                                    <select id="olevelType">
+                                        <option value="">Select Type</option>
+                                        <option value="WAEC">WAEC</option>
+                                        <option value="NECO">NECO</option>
+                                        <option value="NABTEB">NABTEB</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>O'Level Examination Number <span class="required">*</span></label>
+                                    <input type="text" id="olevelNumber" placeholder="Enter examination number" required />
+                                    <span class="error-message">Please enter your examination number</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name of Candidate <span class="optional">(optional)</span></label>
+                                    <input type="text" id="candidateName" placeholder="Enter full name" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address <span class="optional">(optional)</span></label>
+                                    <input type="email" id="email" placeholder="Enter email address" />
+                                </div>
+                            </div>
+
+                            <!-- ===== SERVICE CONDITION ===== -->
+                            <div class="service-condition">
+                                <span class="material-symbols-outlined">info</span>
+                                <p><strong>Service Condition:</strong> Ensure the details are correct. Incorrect details will delay your request.</p>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                <span class="material-symbols-outlined">send</span>
+                                Submit Request
+                            </button>
+
+                        </form>
+                    </div>
+
+                    <!-- ===== SUBMITTED REQUESTS ===== -->
+                    <div class="requests-section">
+                        <h3>Your Submitted Requests</h3>
+
+                        <div class="search-bar">
+                            <input type="text" id="searchTransaction" placeholder="Enter Transaction ID" />
+                            <button class="btn-apply">Apply</button>
+                        </div>
+
+                        <div class="table-wrapper">
+                            <div class="table-scroll">
+                                <table class="requests-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Transaction ID</th>
+                                            <th>JAMB Year</th>
+                                            <th>O'Level Type</th>
+                                            <th>Candidate Name</th>
+                                            <th>JAMB Reg No</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="requestsBody">
+                                        <tr>
+                                            <td colspan="7">
+                                                <div class="empty-state">
+                                                    <span class="material-symbols-outlined">grid_off</span>
+                                                    <p>No requests yet. Submit your first request above.</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ===== RIGHT COLUMN ===== -->
+                <div class="service-right">
+
+                    <div class="instructions-card">
+                        <h3>
+                            <span class="material-symbols-outlined">lightbulb</span>
+                            How It Works
+                        </h3>
+                        <ol>
+                            <li>
+                                <span class="step-number">1.</span>
+                                <div>
+                                    <strong>Fill in your details</strong> - Enter your JAMB and O'Level information accurately.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">2.</span>
+                                <div>
+                                    <strong>Payment</strong> - ₦1,000 will be deducted from your wallet.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">3.</span>
+                                <div>
+                                    <strong>Confirmation</strong> - Your O'Level confirmation will be processed and sent to your email.
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- ===== SECOND INSTRUCTIONS CARD ===== -->
+                    <div class="instructions-card">
+                        <h3>
+                            <span class="material-symbols-outlined">help</span>
+                            Why You Need This
+                        </h3>
+                        <ol>
+                            <li>
+                                <span class="step-number">•</span>
+                                <div>
+                                    <strong>Required for JAMB admission</strong> - O'Level confirmation is mandatory for admission processing.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">•</span>
+                                <div>
+                                    <strong>Fast and secure</strong> - Your results are verified and confirmed within minutes.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number">•</span>
+                                <div>
+                                    <strong>Official confirmation</strong> - Get an official confirmation of your O'Level results.
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/global.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/jamb-service.js"></script>
+</body>
+</html>

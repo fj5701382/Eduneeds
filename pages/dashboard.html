@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Eduneeds User Dashboard</title>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <nav class="top-navbar">
+        <div class="top-navbar-inner">
+            <div class="brand">
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <span class="brand-name">Eduneeds</span>
+            </div>
+
+            <div class="search-wrapper">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input class="search-input" placeholder="Search services..." type="text" />
+            </div>
+
+            <div class="nav-actions">
+                <button class="icon-btn theme-toggle" aria-label="Toggle theme">
+                    <span class="material-symbols-outlined theme-icon">dark_mode</span>
+                </button>
+                <button class="icon-btn" aria-label="Notifications">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="notification-dot"></span>
+                </button>
+                <button class="icon-btn hidden-mobile" aria-label="Help">
+                    <span class="material-symbols-outlined">help</span>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <button class="user-btn" id="userBtn">
+                        <div class="user-info">
+                            <span class="user-name">John Doe</span>
+                            <span class="user-role">Profile</span>
+                        </div>
+                        <div class="user-avatar">JD</div>
+                        <span class="material-symbols-outlined user-caret">expand_more</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="../services/profile.html">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            Profile
+                        </a>
+                        <a href="../services/wallet.html">
+                            <span class="material-symbols-outlined">wallet</span>
+                            Wallet
+                        </a>
+                        <hr />
+                        <a href="../pages/login.html" class="logout">
+                            <span class="material-symbols-outlined">logout</span>
+                            Sign Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE OVERLAY ===== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ===== SIDE NAVIGATION BAR ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-icon">G</div>
+                <span class="brand-text">Solution</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <!-- Dropdown 1: Scratch Cards / Result Services -->
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-toggle">
+                    <div class="nav-dropdown-label">
+                        <span class="material-symbols-outlined">credit_card</span>
+                        <span>Scratch Cards / Result Services</span>
+                    </div>
+                    <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="#" data-service="nabteb-alevel">NABTEB Nov/Dec A-Level</a>
+                    <a href="#" data-service="nabteb-olevel">NABTEB Nov/Dec O-Level</a>
+                    <a href="#" data-service="nabteb-scratch">NABTEB Scratch Card</a>
+                    <a href="#" data-service="nbais-scratch">NBAIS Scratch Card</a>
+                    <a href="#" data-service="neco-token">NECO Result Token</a>
+                    <a href="#" data-service="neco-verification">NECO Result Verification PIN</a>
+                    <a href="#" data-service="waec-gce">WAEC GCE Registration PIN</a>
+                    <a href="#" data-service="waec-scratch">WAEC Scratch Card</a>
+                    <a href="#" data-service="waec-verification">WAEC Verification PIN NYSC</a>
+                </div>
+            </div>
+
+            <!-- Dropdown 2: JAMB Services -->
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-toggle">
+                    <div class="nav-dropdown-label">
+                        <span class="material-symbols-outlined">school</span>
+                        <span>JAMB Services</span>
+                    </div>
+                    <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="#" data-service="jamb-admission-picture">Admission Letter with Picture</a>
+                    <a href="#" data-service="jamb-admission-status">Check Admission Status</a>
+                    <a href="#" data-service="jamb-admission-letter">JAMB Admission Letter</a>
+                    <a href="#" data-service="jamb-change-course">JAMB Change of Course</a>
+                    <a href="#" data-service="jamb-original-result">JAMB Original Result</a>
+                    <a href="#" data-service="jamb-reprinting">JAMB Reprinting Services</a>
+                    <a href="#" data-service="jamb-olevel">O'Level Confirmation</a>
+                    <a href="#" data-service="jamb-profile-code">Retrieve JAMB Profile Code</a>
+                    <a href="#" data-service="jamb-reg-number">Retrieve JAMB Registration Number</a>
+                </div>
+            </div>
+
+            <!-- Dropdown 3: JAMB PIN Vending -->
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-toggle">
+                    <div class="nav-dropdown-label">
+                        <span class="material-symbols-outlined">vpn_key</span>
+                        <span>JAMB PIN Vending</span>
+                    </div>
+                    <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="#" data-service="de-pin">Buy DE PIN</a>
+                    <a href="#" data-service="mock-pin">Buy Mock Only</a>
+                    <a href="#" data-service="utme-pin">Buy UTME PIN Only</a>
+                    <a href="#" data-service="utme-mock-pin">Buy UTME With Mock</a>
+                </div>
+            </div>
+
+            <!-- Dropdown 4: NIN / BVN -->
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-toggle">
+                    <div class="nav-dropdown-label">
+                        <span class="material-symbols-outlined">badge</span>
+                        <span>NIN / BVN</span>
+                    </div>
+                    <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="#" data-service="nin-verification">NIN Verification</a>
+                    <a href="#" data-service="bvn-verification">BVN Verification</a>
+                </div>
+            </div>
+
+            <!-- Dropdown 5: Other Services -->
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-toggle">
+                    <div class="nav-dropdown-label">
+                        <span class="material-symbols-outlined">grid_view</span>
+                        <span>Other Services</span>
+                    </div>
+                    <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="#" data-service="buy-airtime">Buy Airtime</a>
+                    <a href="#" data-service="buy-data">Buy Data Subscription</a>
+                    <a href="#" data-service="electricity">Electricity Bills</a>
+                    <a href="#" data-service="tv-subscription">TV Subscriptions</a>
+                    <a href="#" data-service="transaction-history">Transaction History</a>
+                    <a href="#" data-service="customer-support">Customer Support</a>
+                </div>
+            </div>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" data-service="customer-support">
+                <span class="material-symbols-outlined">support_agent</span>
+                <span>Support</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <div class="dashboard-container">
+
+            <!-- ===== ACCOUNT OVERVIEW / BALANCE CARD ===== -->
+            <section class="balance-card">
+                <div class="balance-card-bg"></div>
+                <div class="balance-card-content">
+                    <div>
+                        <span class="balance-label">Total Available Balance</span>
+                        <div class="balance-amount">₦25,500.00</div>
+                        <p class="balance-updated">Last updated: Just now</p>
+                    </div>
+                    <div class="balance-actions">
+                        <button class="btn-add-funds">
+                            <span class="material-symbols-outlined">add_circle</span>
+                            Add Funds
+                        </button>
+                        <button class="btn-transfer">
+                            <span class="material-symbols-outlined">swap_horiz</span>
+                            Transfer
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECTION 1: SCRATCH CARDS / RESULT SERVICES (9 items) ===== -->
+            <section class="services-section">
+                <div class="section-header">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <h2>Result Scratch Cards</h2>
+                </div>
+                <div class="services-grid-4">
+
+                    <!-- 1. WAEC Scratch Card -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>WAEC Scratch Card</h3>
+                        <p>Instant PIN generation for WAEC results checking.</p>
+                        <div class="service-price">₦3,500</div>
+                        <button class="btn-buy" data-service="waec-scratch">Buy Now</button>
+                    </div>
+
+                    <!-- 2. NECO Result Token -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>NECO Result Token</h3>
+                        <p>Secure tokens for NECO result verification.</p>
+                        <div class="service-price">₦1,300</div>
+                        <button class="btn-buy" data-service="neco-token">Buy Now</button>
+                    </div>
+
+                    <!-- 3. NABTEB Scratch Card -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>NABTEB Scratch Card</h3>
+                        <p>Valid PINs for NABTEB candidates.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="nabteb-scratch">Buy Now</button>
+                    </div>
+
+                    <!-- 4. NBAIS Result PIN -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>NBAIS Result PIN</h3>
+                        <p>Access NBAIS results seamlessly.</p>
+                        <div class="service-price">₦900</div>
+                        <button class="btn-buy" data-service="nbais-scratch">Buy Now</button>
+                    </div>
+
+                    <!-- 5. WAEC GCE Registration PIN -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>WAEC GCE Registration PIN</h3>
+                        <p>Private candidate registration.</p>
+                        <div class="service-price">₦16,500</div>
+                        <button class="btn-buy" data-service="waec-gce">Buy Now</button>
+                    </div>
+
+                    <!-- 6. NECO Result Verification PIN -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">verified</span>
+                        </div>
+                        <h3>NECO Result Verification PIN</h3>
+                        <p>Verify NECO results online.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="neco-verification">Buy Now</button>
+                    </div>
+
+                    <!-- 7. WAEC Verification PIN NYSC -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">shield</span>
+                        </div>
+                        <h3>WAEC Verification PIN NYSC</h3>
+                        <p>For NYSC mobilization.</p>
+                        <div class="service-price">₦1,500</div>
+                        <button class="btn-buy" data-service="waec-verification">Buy Now</button>
+                    </div>
+
+                    <!-- 8. NABTEB Nov/Dec O-Level -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>NABTEB Nov/Dec O-Level</h3>
+                        <p>Ordinary level result checking.</p>
+                        <div class="service-price">₦23,500</div>
+                        <button class="btn-buy" data-service="nabteb-olevel">Buy Now</button>
+                    </div>
+
+                    <!-- 9. NABTEB Nov/Dec A-Level -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>NABTEB Nov/Dec A-Level</h3>
+                        <p>Advanced level result checking.</p>
+                        <div class="service-price">₦27,000</div>
+                        <button class="btn-buy" data-service="nabteb-alevel">Buy Now</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== SECTION 2: JAMB SERVICES (9 items) ===== -->
+            <section class="services-section">
+                <div class="section-header">
+                    <span class="material-symbols-outlined">school</span>
+                    <h2>JAMB Services</h2>
+                </div>
+                <div class="services-grid-3">
+
+                    <!-- 1. O'Level Confirmation -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">verified</span>
+                        </div>
+                        <h3>O'Level Confirmation</h3>
+                        <p>Confirm your O'Level results on the JAMB portal.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="jamb-olevel">Buy Now</button>
+                    </div>
+
+                    <!-- 2. JAMB Original Result -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                        </div>
+                        <h3>JAMB Original Result</h3>
+                        <p>Print your official JAMB result slip.</p>
+                        <div class="service-price">₦2,000</div>
+                        <button class="btn-buy" data-service="jamb-original-result">Buy Now</button>
+                    </div>
+
+                    <!-- 3. JAMB Admission Letter -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h3>JAMB Admission Letter</h3>
+                        <p>Original JAMB admission letter printing.</p>
+                        <div class="service-price">₦2,500</div>
+                        <button class="btn-buy" data-service="jamb-admission-letter">Buy Now</button>
+                    </div>
+
+                    <!-- 4. Retrieve JAMB Reg Number -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">badge</span>
+                        </div>
+                        <h3>Retrieve JAMB Reg Number</h3>
+                        <p>Recover your JAMB registration details.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="jamb-reg-number">Buy Now</button>
+                    </div>
+
+                    <!-- 5. Retrieve JAMB Profile Code -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">key</span>
+                        </div>
+                        <h3>Retrieve JAMB Profile Code</h3>
+                        <p>Recover lost or forgotten JAMB profile codes.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="jamb-profile-code">Buy Now</button>
+                    </div>
+
+                    <!-- 6. Check Admission Status -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">fact_check</span>
+                        </div>
+                        <h3>Check Admission Status</h3>
+                        <p>Verify your JAMB admission status.</p>
+                        <div class="service-price">₦5,000</div>
+                        <button class="btn-buy" data-service="jamb-admission-status">Buy Now</button>
+                    </div>
+
+                    <!-- 7. JAMB Reprinting Services -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">print</span>
+                        </div>
+                        <h3>JAMB Reprinting Services</h3>
+                        <p>Slip and document reprinting.</p>
+                        <div class="service-price">₦1,500</div>
+                        <button class="btn-buy" data-service="jamb-reprinting">Buy Now</button>
+                    </div>
+
+                    <!-- 8. JAMB Change of Course -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">published_with_changes</span>
+                        </div>
+                        <h3>JAMB Change of Course</h3>
+                        <p>Update your institution or course preferences.</p>
+                        <div class="service-price">₦4,000</div>
+                        <button class="btn-buy" data-service="jamb-change-course">Buy Now</button>
+                    </div>
+
+                    <!-- 9. Admission Letter With Picture -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">account_box</span>
+                        </div>
+                        <h3>Admission Letter With Picture</h3>
+                        <p>Official JAMB admission letter with passport photograph.</p>
+                        <div class="service-price">₦2,500</div>
+                        <button class="btn-buy" data-service="jamb-admission-picture">Buy Now</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== SECTION 3: JAMB PIN VENDING (4 items) ===== -->
+            <section class="services-section">
+                <div class="section-header">
+                    <span class="material-symbols-outlined">vpn_key</span>
+                    <h2>JAMB PIN Vending</h2>
+                </div>
+                <div class="services-grid-4">
+
+                    <!-- 1. Direct Entry (DE) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+                        <h3>Direct Entry (DE) PIN</h3>
+                        <p>Official JAMB Direct Entry registration pin.</p>
+                        <div class="service-price">₦4,700</div>
+                        <div class="service-status unavailable">Unavailable</div>
+                        <button class="btn-buy disabled" data-service="de-pin" disabled>Buy Now</button>
+                    </div>
+
+                    <!-- 2. Mock PIN -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">edit_note</span>
+                        </div>
+                        <h3>Mock Examination PIN</h3>
+                        <p>Official JAMB Mock examination pin.</p>
+                        <div class="service-price">₦1,500</div>
+                        <button class="btn-buy" data-service="mock-pin">Buy Now</button>
+                    </div>
+
+                    <!-- 3. UTME PIN Only -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">history_edu</span>
+                        </div>
+                        <h3>UTME PIN Only</h3>
+                        <p>Official JAMB UTME registration pin.</p>
+                        <div class="service-price">₦6,200</div>
+                        <button class="btn-buy" data-service="utme-pin">Buy Now</button>
+                    </div>
+
+                    <!-- 4. UTME With Mock -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">layers</span>
+                        </div>
+                        <h3>UTME With Mock (Bundle)</h3>
+                        <p>Complete JAMB bundle including UTME and Mock pins.</p>
+                        <div class="service-price">₦7,700</div>
+                        <button class="btn-buy" data-service="utme-mock-pin">Buy Now</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== SECTION 4: NIN / BVN (2 items) ===== -->
+            <section class="services-section">
+                <div class="section-header">
+                    <span class="material-symbols-outlined">badge</span>
+                    <h2>Identity Services</h2>
+                </div>
+                <div class="services-grid-2">
+
+                    <!-- 1. NIN Verification -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">id_card</span>
+                        </div>
+                        <h3>NIN Verification</h3>
+                        <p>Fast and secure National Identification Number verification.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="nin-verification">Buy Now</button>
+                    </div>
+
+                    <!-- 2. BVN Verification -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">id_card</span>
+                        </div>
+                        <h3>BVN Verification</h3>
+                        <p>Fast and secure Bank Verification Number verification.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="bvn-verification">Buy Now</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== SECTION 5: UTILITIES / BILLS (4 items) ===== -->
+            <section class="services-section">
+                <div class="section-header">
+                    <span class="material-symbols-outlined">bolt</span>
+                    <h2>Utilities &amp; Bills</h2>
+                </div>
+                <div class="services-grid-4">
+
+                    <!-- 1. Airtime -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">smartphone</span>
+                        </div>
+                        <h3>Buy Airtime</h3>
+                        <p>Instant recharge for all major networks.</p>
+                        <div class="service-price">₦500</div>
+                        <button class="btn-buy" data-service="buy-airtime">Buy Now</button>
+                    </div>
+
+                    <!-- 2. Data Subscription -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">wifi</span>
+                        </div>
+                        <h3>Data Subscription</h3>
+                        <p>Affordable data plans for seamless browsing.</p>
+                        <div class="service-price">₦1,000</div>
+                        <button class="btn-buy" data-service="buy-data">Buy Now</button>
+                    </div>
+
+                    <!-- 3. Electricity -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">electrical_services</span>
+                        </div>
+                        <h3>Electricity Bills</h3>
+                        <p>Pay prepaid and postpaid electricity bills.</p>
+                        <div class="service-price">₦5,000</div>
+                        <button class="btn-buy" data-service="electricity">Buy Now</button>
+                    </div>
+
+                    <!-- 4. TV Subscription -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">tv</span>
+                        </div>
+                        <h3>TV Subscriptions</h3>
+                        <p>Renew your Cable TV subscriptions instantly.</p>
+                        <div class="service-price">₦4,400</div>
+                        <button class="btn-buy" data-service="tv-subscription">Buy Now</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== SECTION 6: OTHER SERVICES (2 items) ===== -->
+            <section class="services-section">
+                <div class="section-header">
+                    <span class="material-symbols-outlined">more_horiz</span>
+                    <h2>Other Services</h2>
+                </div>
+                <div class="services-grid-2">
+
+                    <!-- 1. Transaction History -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">history</span>
+                        </div>
+                        <h3>Transaction History</h3>
+                        <p>View your complete transaction history.</p>
+                        <div class="service-price">Free</div>
+                        <button class="btn-buy" data-service="transaction-history">View Now</button>
+                    </div>
+
+                    <!-- 2. Customer Support -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <span class="material-symbols-outlined">support_agent</span>
+                        </div>
+                        <h3>Customer Support</h3>
+                        <p>Contact our support team for assistance.</p>
+                        <div class="service-price">Free</div>
+                        <button class="btn-buy" data-service="customer-support">Contact Us</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== RECENT ACTIVITY ===== -->
+            <section class="recent-activity">
+                <div class="recent-activity-header">
+                    <h2>Recent Activity</h2>
+                    <button class="view-all-btn">View All</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="activity-table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="tx-service">
+                                        <span class="tx-icon"><span class="material-symbols-outlined">description</span></span>
+                                        <div>
+                                            <strong>WAEC Scratch Card</strong>
+                                            <span>Ref: GEO-12345</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="tx-amount">₦3,500.00</td>
+                                <td>Oct 24, 2024</td>
+                                <td><span class="status-badge status-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="tx-service">
+                                        <span class="tx-icon"><span class="material-symbols-outlined">bolt</span></span>
+                                        <div>
+                                            <strong>IKEDC Payment</strong>
+                                            <span>Ref: GEO-98765</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="tx-amount">₦5,000.00</td>
+                                <td>Oct 23, 2024</td>
+                                <td><span class="status-badge status-failed">Failed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="tx-service">
+                                        <span class="tx-icon"><span class="material-symbols-outlined">add</span></span>
+                                        <div>
+                                            <strong>Wallet Funding</strong>
+                                            <span>Bank Transfer</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="tx-amount">₦10,000.00</td>
+                                <td>Oct 22, 2024</td>
+                                <td><span class="status-badge status-completed">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+                <span class="footer-copy-text">© 2024 Eduneeds. Powered by Geosolution.</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
