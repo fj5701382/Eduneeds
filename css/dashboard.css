@@ -667,7 +667,6 @@ body.dark-mode .notification-dot {
    MOBILE OVERLAY
    ========================================================= */
 .mobile-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -676,17 +675,16 @@ body.dark-mode .notification-dot {
     z-index: 800;
     background: rgba(0, 0, 0, 0.4);
     opacity: 0;
-    transition: opacity 0.3s;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 .mobile-overlay.show {
     opacity: 1;
-}
-
-@media (max-width: 767px) {
-    .mobile-overlay.show {
-        display: block;
-    }
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
 }
 
 /* =========================================================
@@ -705,7 +703,8 @@ body.dark-mode .notification-dot {
     flex-direction: column;
     z-index: 900;
     overflow-y: auto;
-    transition: transform 0.3s, background 0.4s ease, border-color 0.4s ease;
+    will-change: transform;
+    transition: transform 0.3s ease, background 0.4s ease, border-color 0.4s ease;
 }
 
 @media (min-width: 768px) {
@@ -723,6 +722,7 @@ body.dark-mode .notification-dot {
         top: 0;
         padding-top: 16px;
         box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+        visibility: visible;
     }
     .sidebar.open {
         transform: translateX(0);

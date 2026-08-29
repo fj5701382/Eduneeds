@@ -60,16 +60,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function openSidebar() {
         if (sidebar) sidebar.classList.add('open');
         if (mobileOverlay) mobileOverlay.classList.add('show');
+        if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
     }
 
     function closeSidebar() {
         if (sidebar) sidebar.classList.remove('open');
         if (mobileOverlay) mobileOverlay.classList.remove('show');
+        if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
 
     if (hamburgerBtn) {
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
         hamburgerBtn.addEventListener('click', openSidebar);
     }
 
@@ -188,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sidebarLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
+            closeSidebar();
             e.preventDefault();
 
             var service = this.getAttribute('data-service');
@@ -205,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var supportLink = document.querySelector('.sidebar-footer a');
     if (supportLink) {
         supportLink.addEventListener('click', function(e) {
+            closeSidebar();
             e.preventDefault();
             var service = this.getAttribute('data-service');
             if (service) {
