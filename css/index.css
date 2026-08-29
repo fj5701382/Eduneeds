@@ -83,6 +83,12 @@ body {
     font-size: 24px;
     font-weight: 800;
     color: #0040a1;
+    text-decoration: none;
+}
+
+.brand-name:hover {
+    color: #0040a1;
+    text-decoration: none;
 }
 
 .search-wrapper {
