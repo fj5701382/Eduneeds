@@ -320,6 +320,36 @@ body.dark-mode .user-dropdown a {
     color: #e8edf5;
 }
 
+body.dark-mode .legal-header {
+    background: #141e2f;
+    border-bottom-color: #1e2a3d;
+}
+
+body.dark-mode .legal-header .logo,
+body.dark-mode .legal-header .back-btn,
+body.dark-mode .legal-card h1,
+body.dark-mode .legal-card h2 {
+    color: #e8edf5;
+}
+
+body.dark-mode .legal-card {
+    background: #141e2f;
+    border-color: #1e2a3d;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .legal-card p,
+body.dark-mode .legal-card ul,
+body.dark-mode .last-updated,
+body.dark-mode .legal-footer {
+    color: #c2ccda;
+}
+
+body.dark-mode .contact-box {
+    background: #1a2538;
+    border-left-color: #6aafff;
+}
+
 /* =========================================================
    HERO
    ========================================================= */

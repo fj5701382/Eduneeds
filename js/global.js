@@ -8,29 +8,37 @@
 // =========================================
 
 function initThemeToggle() {
-    var themeToggle = document.querySelector('.theme-toggle');
-    var themeIcon = document.querySelector('.theme-icon');
+    var themeToggles = document.querySelectorAll('.theme-toggle');
 
-    if (themeToggle) {
-        var savedTheme = localStorage.getItem('Eduneeds-theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            if (themeIcon) themeIcon.textContent = 'light_mode';
-        }
-
+    applyTheme(localStorage.getItem('theme') || localStorage.getItem('Eduneeds-theme') || 'light');
+    themeToggles.forEach(function(themeToggle) {
         themeToggle.removeEventListener('click', handleThemeToggle);
         themeToggle.addEventListener('click', handleThemeToggle);
-    }
+    });
 }
 
 function handleThemeToggle() {
-    document.body.classList.toggle('dark-mode');
-    var isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem('Eduneeds-theme', isDark ? 'dark' : 'light');
-    var themeIcon = document.querySelector('.theme-icon');
-    if (themeIcon) {
-        themeIcon.textContent = isDark ? 'light_mode' : 'dark_mode';
-    }
+    var nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+    applyTheme(nextTheme);
+}
+
+function applyTheme(theme) {
+    var normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', normalizedTheme);
+    document.documentElement.classList.toggle('dark-mode', normalizedTheme === 'dark');
+    document.body.classList.toggle('dark-mode', normalizedTheme === 'dark');
+    localStorage.setItem('theme', normalizedTheme);
+    localStorage.setItem('Eduneeds-theme', normalizedTheme);
+
+    document.querySelectorAll('.theme-icon').forEach(function(themeIcon) {
+        themeIcon.textContent = normalizedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+    });
+
+    document.querySelectorAll('.theme-toggle').forEach(function(themeToggle) {
+        var isDark = normalizedTheme === 'dark';
+        themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        themeToggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    });
 }
 
 // =========================================

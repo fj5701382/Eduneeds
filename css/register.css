@@ -26,6 +26,38 @@ body {
     min-height: 100vh;
 }
 
+body.dark-mode {
+    background: #0f1724;
+    color: #e8edf5;
+}
+
+body.dark-mode .header,
+body.dark-mode .register-form-container,
+body.dark-mode .footer {
+    background: #141e2f;
+    border-color: #1e2a3d;
+}
+
+body.dark-mode .register-header h1,
+body.dark-mode .register-header p,
+body.dark-mode .register-footer,
+body.dark-mode .register-footer a,
+body.dark-mode .form-group label {
+    color: #e8edf5;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .password-wrapper input {
+    background: #0f1724;
+    border-color: #2a3a50;
+    color: #e8edf5;
+}
+
+body.dark-mode .form-group input::placeholder,
+body.dark-mode .password-wrapper input::placeholder {
+    color: #7a8aa0;
+}
+
 /* ----- MATERIAL ICONS ----- */
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;

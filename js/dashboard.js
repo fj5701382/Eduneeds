@@ -12,20 +12,24 @@ document.addEventListener('DOMContentLoaded', function() {
     var themeIcon = document.querySelector('.theme-icon');
 
     if (themeToggle) {
-        var savedTheme = localStorage.getItem('Eduneeds-theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            if (themeIcon) themeIcon.textContent = 'light_mode';
-        }
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('Eduneeds-theme') || 'light';
+        applyDashboardTheme(savedTheme);
 
         themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            var isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('Eduneeds-theme', isDark ? 'dark' : 'light');
-            if (themeIcon) {
-                themeIcon.textContent = isDark ? 'light_mode' : 'dark_mode';
-            }
+            applyDashboardTheme(document.body.classList.contains('dark-mode') ? 'light' : 'dark');
         });
+    }
+
+    function applyDashboardTheme(theme) {
+        var normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', normalizedTheme);
+        document.documentElement.classList.toggle('dark-mode', normalizedTheme === 'dark');
+        document.body.classList.toggle('dark-mode', normalizedTheme === 'dark');
+        localStorage.setItem('theme', normalizedTheme);
+        localStorage.setItem('Eduneeds-theme', normalizedTheme);
+        if (themeIcon) themeIcon.textContent = normalizedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+        themeToggle.setAttribute('aria-label', normalizedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        themeToggle.setAttribute('title', normalizedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     }
 
     // =========================================
