@@ -91,11 +91,37 @@ body.dark-mode .password-wrapper input::placeholder {
     gap: 20px;
 }
 
+@media (max-width: 767px) {
+    .header-inner {
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .brand {
+        order: 2;
+        margin-left: 0;
+    }
+
+    .mobile-nav-toggle {
+        order: 1;
+        margin-right: 0;
+        padding: 0;
+    }
+}
+
+.nav-left-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-right: auto;
+}
+
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
+    margin-left: 0;
 }
 
 .brand-logo {

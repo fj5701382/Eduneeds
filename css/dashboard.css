@@ -398,10 +398,36 @@ body.dark-mode .notification-dot {
     gap: 16px;
 }
 
+@media (max-width: 767px) {
+    .top-navbar-inner {
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .brand {
+        order: 2;
+        margin-left: 0;
+    }
+
+    .hamburger-btn {
+        order: 1;
+        margin-right: 0;
+        padding: 0;
+    }
+}
+
+.nav-left-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-right: auto;
+}
+
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-left: 0;
 }
 
 .hamburger-btn {

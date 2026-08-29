@@ -60,6 +60,24 @@ body {
     display: contents;
 }
 
+@media (max-width: 767px) {
+    .header-inner {
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .brand {
+        order: 2;
+        margin-left: 0;
+    }
+
+    .mobile-nav-toggle {
+        order: 1;
+        margin-right: 0;
+        padding: 0;
+    }
+}
+
 .mobile-nav-toggle {
     display: none;
 }
@@ -68,11 +86,19 @@ body {
     display: none;
 }
 
+.nav-left-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-right: auto;
+}
+
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
+    margin-left: 0;
 }
 
 .brand-logo {
@@ -1375,6 +1401,12 @@ body.dark-mode .contact-box {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+    .header-actions {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+
     .mobile-nav-toggle {
         display: flex;
         align-items: center;
@@ -1405,10 +1437,6 @@ body.dark-mode .contact-box {
 
     .mobile-nav-toggle {
         order: 3;
-    }
-
-    .mobile-nav-menu .theme-toggle {
-        display: none;
     }
 
     .mobile-nav-toggle:hover,
@@ -1536,6 +1564,13 @@ body.dark-mode .contact-box {
         padding: 0 16px;
     }
 
+    .header-actions {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        order: 2;
+    }
+
     .mobile-nav-toggle {
         display: flex;
         align-items: center;
@@ -1543,7 +1578,7 @@ body.dark-mode .contact-box {
         width: 40px;
         height: 40px;
         flex-shrink: 0;
-        order: 2;
+        order: 3;
         padding: 0;
         border: 0;
         border-radius: 8px;
@@ -1562,14 +1597,6 @@ body.dark-mode .contact-box {
         order: 2;
         padding: 0;
         border-radius: 8px;
-    }
-
-    .mobile-nav-toggle {
-        order: 3;
-    }
-
-    .mobile-nav-menu .theme-toggle {
-        display: none;
     }
 
     .mobile-nav-toggle:hover,
