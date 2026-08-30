@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="../js/theme-init.js"></script>
+    <title>About Us | Eduneeds</title>
+    <meta name="description" content="Learn more about Eduneeds and our mission to make educational and digital services simple, accessible and convenient." />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* =========================================================
+           About Page Styles
+           ========================================================= */
+
+        /* ----- Hero Section ----- */
+        .about-hero {
+            padding: 64px 24px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .about-hero-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-hero-content h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0f1724;
+            margin-bottom: 16px;
+        }
+
+        .about-hero-label {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #0040a1;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .about-hero-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 32px;
+        }
+
+        .about-hero-visual {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #0040a1 0%, #0060ff 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 80px;
+        }
+
+        body.dark-mode .about-hero {
+            background: linear-gradient(135deg, #0f1724 0%, #141e2f 100%);
+        }
+
+        body.dark-mode .about-hero-content h1 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .about-hero-content p {
+            color: #c2ccda;
+        }
+
+        /* ----- Section Styles ----- */
+        .about-section {
+            padding: 64px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .about-section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0f1724;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        body.dark-mode .about-section {
+            border-bottom-color: #1e2a3d;
+        }
+
+        body.dark-mode .about-section h2 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .about-section p {
+            color: #c2ccda;
+        }
+
+        /* ----- Two Column Section ----- */
+        .about-section-two-col {
+            padding: 64px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .about-section-two-col-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-section-two-col h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0f1724;
+            margin-bottom: 24px;
+        }
+
+        .about-section-two-col p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 16px;
+        }
+
+        .about-section-visual-box {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0040a1;
+            font-size: 64px;
+        }
+
+        body.dark-mode .about-section-two-col {
+            border-bottom-color: #1e2a3d;
+        }
+
+        body.dark-mode .about-section-two-col h2 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .about-section-two-col p {
+            color: #c2ccda;
+        }
+
+        body.dark-mode .about-section-visual-box {
+            background: linear-gradient(135deg, #1a2538 0%, #141e2f 100%);
+            color: #8ac4ff;
+        }
+
+        /* ----- Cards Grid ----- */
+        .about-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 0;
+        }
+
+        .about-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .about-card:hover {
+            border-color: #0040a1;
+            box-shadow: 0 10px 30px rgba(0, 64, 161, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .about-card-icon {
+            font-size: 48px;
+            color: #0040a1;
+            text-align: center;
+        }
+
+        .about-card h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f1724;
+        }
+
+        .about-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0;
+        }
+
+        body.dark-mode .about-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+
+        body.dark-mode .about-card:hover {
+            border-color: #8ac4ff;
+            box-shadow: 0 10px 30px rgba(138, 196, 255, 0.2);
+        }
+
+        body.dark-mode .about-card h3 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .about-card p {
+            color: #c2ccda;
+        }
+
+        body.dark-mode .about-card-icon {
+            color: #8ac4ff;
+        }
+
+        /* ----- Timeline/Steps ----- */
+        .about-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .about-step {
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .about-step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-family: 'Manrope', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #0040a1;
+            opacity: 0.2;
+        }
+
+        .about-step h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f1724;
+            margin-bottom: 12px;
+        }
+
+        .about-step p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0;
+        }
+
+        body.dark-mode .about-step h3 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .about-step p {
+            color: #c2ccda;
+        }
+
+        body.dark-mode .about-step::before {
+            color: #8ac4ff;
+        }
+
+        /* ----- CTA Section ----- */
+        .about-cta {
+            padding: 64px 24px;
+            background: linear-gradient(135deg, #0040a1 0%, #0060ff 100%);
+            border-bottom: none;
+            text-align: center;
+        }
+
+        .about-cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-cta h2 {
+            color: #ffffff;
+            margin-bottom: 16px;
+            font-size: 40px;
+        }
+
+        .about-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .about-cta .btn-primary,
+        .about-cta .btn-outline {
+            margin: 0 8px;
+        }
+
+        .about-cta .btn-primary {
+            background: #ffffff;
+            color: #0040a1;
+        }
+
+        .about-cta .btn-primary:hover {
+            background: #f0f4ff;
+        }
+
+        .about-cta .btn-outline {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .about-cta .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ----- Responsive ----- */
+        @media (max-width: 768px) {
+            .about-hero-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .about-hero-content h1 {
+                font-size: 32px;
+            }
+
+            .about-section-two-col-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .about-section h2,
+            .about-section-two-col h2,
+            .about-cta h2 {
+                font-size: 28px;
+            }
+
+            .about-hero,
+            .about-section,
+            .about-section-two-col,
+            .about-cta {
+                padding: 48px 24px;
+            }
+
+            .about-card,
+            .about-step {
+                padding: 24px 20px;
+            }
+
+            .about-step {
+                padding-left: 50px;
+            }
+
+            .about-step::before {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero-content h1 {
+                font-size: 24px;
+            }
+
+            .about-hero-content p {
+                font-size: 14px;
+            }
+
+            .about-section h2,
+            .about-section-two-col h2,
+            .about-cta h2 {
+                font-size: 22px;
+            }
+
+            .about-hero,
+            .about-section,
+            .about-section-two-col,
+            .about-cta {
+                padding: 32px 16px;
+            }
+
+            .about-cards-grid,
+            .about-steps {
+                gap: 16px;
+            }
+
+            .about-hero-visual {
+                font-size: 48px;
+            }
+
+            .about-section-visual-box {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="nav-left-group">
+                <button class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+
+                <div class="brand">
+                    <a href="index.html" class="brand-name">Eduneeds</a>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark mode">
+                    <span class="material-symbols-outlined theme-icon">dark_mode</span>
+                </button>
+            </div>
+
+            <div class="mobile-nav-menu">
+
+                <!-- Navigation -->
+                <nav class="nav-links">
+                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link active" href="about.html">About</a>
+                    <a class="nav-link" href="#jamb-services">Services</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="header-actions">
+                    <button class="icon-btn" aria-label="Notifications">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <button class="icon-btn" aria-label="Help">
+                        <span class="material-symbols-outlined">help_outline</span>
+                    </button>
+                    <button class="cart-btn">
+                        <span class="material-symbols-outlined">shopping_cart</span> Cart
+                    </button>
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            <span class="user-name">GET STARTED</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="login.html"><span class="material-symbols-outlined">login</span> Login</a>
+                            <a href="register.html"><span class="material-symbols-outlined">person_add</span> Sign up</a>
+                            <a href="#"><span class="material-symbols-outlined">contact_support</span> Contact us</a>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="about-hero">
+            <div class="about-hero-inner">
+                <div class="about-hero-content">
+                    <span class="about-hero-label">About Eduneeds</span>
+                    <h1>Empowering You With Simple, Accessible Digital Services</h1>
+                    <p>Eduneeds is a digital platform designed to make educational, examination, identity and everyday digital services easier and more convenient to access.</p>
+                </div>
+                <div class="about-hero-visual">
+                    <span class="material-symbols-outlined" style="font-size: 80px;">lightbulb</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WHO WE ARE ===== -->
+        <section class="about-section-two-col">
+            <div class="about-section-two-col-inner">
+                <div>
+                    <h2>Who We Are</h2>
+                    <p>Eduneeds is built to simplify access to essential educational and digital services. We bring commonly needed services together in one convenient platform, helping students and individuals save time and complete important tasks with less stress.</p>
+                    <p>Our commitment is to provide a trusted, user-friendly experience that makes accessing critical services straightforward and hassle-free.</p>
+                </div>
+                <div class="about-section-visual-box">
+                    <span class="material-symbols-outlined" style="font-size: 64px;">people</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WHAT WE OFFER ===== -->
+        <section class="about-section">
+            <div class="about-section-inner">
+                <h2>What We Offer</h2>
+                <div class="about-cards-grid">
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+                        <h3>Educational Services</h3>
+                        <p>Access educational and examination-related services from one convenient platform.</p>
+                    </article>
+
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                        </div>
+                        <h3>JAMB Services</h3>
+                        <p>Access selected JAMB-related services designed to make important processes easier.</p>
+                    </article>
+
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </div>
+                        <h3>Bills & Digital Services</h3>
+                        <p>Convenient access to services such as airtime, data, electricity and other digital services.</p>
+                    </article>
+
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">verified_user</span>
+                        </div>
+                        <h3>Identity Services</h3>
+                        <p>Access selected identity and verification-related services through a simple digital experience.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== OUR MISSION ===== -->
+        <section class="about-section-two-col">
+            <div class="about-section-two-col-inner">
+                <div class="about-section-visual-box">
+                    <span class="material-symbols-outlined" style="font-size: 64px;">target</span>
+                </div>
+                <div>
+                    <h2>Our Mission</h2>
+                    <p>Our mission is to make essential educational and digital services simple, accessible and convenient for everyone.</p>
+                    <p>We believe that access to these services should not be complicated or time-consuming. By consolidating multiple services on a single platform, we empower individuals to manage their educational and digital needs efficiently.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== OUR VISION ===== -->
+        <section class="about-section-two-col">
+            <div class="about-section-two-col-inner">
+                <div>
+                    <h2>Our Vision</h2>
+                    <p>Our vision is to build a trusted digital platform that connects people with the educational and everyday services they need, whenever and wherever they need them.</p>
+                    <p>We aim to be the go-to platform where students and individuals can confidently access verified, reliable services that support their education and digital needs.</p>
+                </div>
+                <div class="about-section-visual-box">
+                    <span class="material-symbols-outlined" style="font-size: 64px;">visibility</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WHY CHOOSE EDUNEEDS ===== -->
+        <section class="about-section">
+            <div class="about-section-inner">
+                <h2>Why Choose Eduneeds?</h2>
+                <div class="about-cards-grid">
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </div>
+                        <h3>Convenience</h3>
+                        <p>Access multiple services from one platform.</p>
+                    </article>
+
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">palette</span>
+                        </div>
+                        <h3>Simple Experience</h3>
+                        <p>Designed with a clear and easy-to-use interface.</p>
+                    </article>
+
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">expand_circle_down</span>
+                        </div>
+                        <h3>Accessible Services</h3>
+                        <p>Find commonly needed educational and digital services in one place.</p>
+                    </article>
+
+                    <article class="about-card">
+                        <div class="about-card-icon">
+                            <span class="material-symbols-outlined">handshake</span>
+                        </div>
+                        <h3>Customer Focused</h3>
+                        <p>Built around making everyday service access easier.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section class="about-section">
+            <div class="about-section-inner">
+                <h2>How It Works</h2>
+                <div class="about-steps">
+                    <article class="about-step" data-step="01">
+                        <h3>Choose a Service</h3>
+                        <p>Select the educational or digital service you need from our platform.</p>
+                    </article>
+
+                    <article class="about-step" data-step="02">
+                        <h3>Sign In</h3>
+                        <p>Log in to your Eduneeds account to continue with your request.</p>
+                    </article>
+
+                    <article class="about-step" data-step="03">
+                        <h3>Complete Your Request</h3>
+                        <p>Follow the simple instructions for the selected service.</p>
+                    </article>
+
+                    <article class="about-step" data-step="04">
+                        <h3>Get Your Service</h3>
+                        <p>Complete the process and receive the requested service or delivery.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CALL TO ACTION ===== -->
+        <section class="about-cta">
+            <div class="about-cta-inner">
+                <h2>Ready to Get Started?</h2>
+                <p>Explore our services and find what you need in just a few clicks.</p>
+                <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
+                    <button class="btn-primary"><a href="register.html" style="text-decoration: none; color: inherit;">Get Started</a></button>
+                    <button class="btn-outline"><a href="index.html" style="text-decoration: none; color: inherit;">Explore Services</a></button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER (IMPROVED) ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+            </div>
+
+            <nav class="footer-links">
+                <a href="about.html">About</a>
+                <a href="#">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#">Refund Policy</a>
+                <a href="#">Contact Support</a>
+            </nav>
+
+            <div class="footer-copy">
+                <span>© 2026 Eduneeds.</span>
+                <span class="powered">Powered by <strong>Geosolution</strong></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP BUTTON ===== -->
+    <a class="whatsapp-btn" href="https://wa.me/23407014673935?text=Hello!%20Anyone%20available%20to%20help%20%3F%20">
+        <svg viewbox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
+        </svg>
+    </a>
+
+    <script src="../js/public-nav.js"></script>
+    <script src="../js/global.js"></script>
+</body>
+</html>
