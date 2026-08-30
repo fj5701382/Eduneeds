@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="../js/theme-init.js"></script>
+    <title>Contact Us | Eduneeds</title>
+    <meta name="description" content="Get in touch with Eduneeds. We're here to help answer your questions and support you with any issues." />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* =========================================================
+           Contact Page Styles
+           ========================================================= */
+
+        /* ----- Hero Section ----- */
+        .contact-hero {
+            padding: 64px 24px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .contact-hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-hero h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0f1724;
+            margin-bottom: 16px;
+        }
+
+        .contact-hero-label {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #0040a1;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .contact-hero p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 32px;
+        }
+
+        body.dark-mode .contact-hero {
+            background: linear-gradient(135deg, #0f1724 0%, #141e2f 100%);
+        }
+
+        body.dark-mode .contact-hero h1 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .contact-hero p {
+            color: #c2ccda;
+        }
+
+        /* ----- Contact Section ----- */
+        .contact-section {
+            padding: 64px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .contact-section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .contact-form-wrapper h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f1724;
+            margin-bottom: 24px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #0f1724;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #191b23;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0040a1;
+            box-shadow: 0 0 0 3px rgba(0, 64, 161, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .contact-form button {
+            padding: 12px 32px;
+            background: #0040a1;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .contact-form button:hover {
+            background: #003380;
+        }
+
+        body.dark-mode .contact-form-wrapper h2 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .form-group label {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: #141e2f;
+            border-color: #1e2a3d;
+            color: #e8edf5;
+        }
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group textarea:focus {
+            border-color: #8ac4ff;
+            box-shadow: 0 0 0 3px rgba(138, 196, 255, 0.2);
+        }
+
+        /* ----- Contact Info Cards ----- */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-info h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f1724;
+            margin-bottom: 8px;
+        }
+
+        .contact-info-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            border-color: #0040a1;
+            box-shadow: 0 10px 30px rgba(0, 64, 161, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .contact-info-icon {
+            font-size: 32px;
+            color: #0040a1;
+            flex-shrink: 0;
+        }
+
+        .contact-info-content h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f1724;
+            margin-bottom: 8px;
+        }
+
+        .contact-info-content p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0;
+        }
+
+        .contact-info-content a {
+            color: #0040a1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: text-decoration 0.2s;
+        }
+
+        .contact-info-content a:hover {
+            text-decoration: underline;
+        }
+
+        body.dark-mode .contact-info-card {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+
+        body.dark-mode .contact-info-card:hover {
+            border-color: #8ac4ff;
+            box-shadow: 0 10px 30px rgba(138, 196, 255, 0.2);
+        }
+
+        body.dark-mode .contact-info-icon {
+            color: #8ac4ff;
+        }
+
+        body.dark-mode .contact-info-content h3 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .contact-info-content p {
+            color: #c2ccda;
+        }
+
+        body.dark-mode .contact-info-content a {
+            color: #8ac4ff;
+        }
+
+        /* ----- FAQ Section ----- */
+        .faq-section {
+            padding: 64px 24px;
+            background: #f5f7fa;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .faq-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-section h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0f1724;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #0f1724;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #f5f7fa;
+        }
+
+        .faq-question .material-symbols-outlined {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-question .material-symbols-outlined {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .faq-item.open .faq-answer {
+            padding: 0 20px 20px 20px;
+            max-height: 500px;
+        }
+
+        body.dark-mode .faq-section {
+            background: #0f1724;
+        }
+
+        body.dark-mode .faq-section h2 {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .faq-item {
+            background: #141e2f;
+            border-color: #1e2a3d;
+        }
+
+        body.dark-mode .faq-question {
+            color: #e8edf5;
+        }
+
+        body.dark-mode .faq-question:hover {
+            background: #1a2538;
+        }
+
+        body.dark-mode .faq-answer {
+            color: #c2ccda;
+        }
+
+        /* ----- CTA Section ----- */
+        .contact-cta {
+            padding: 64px 24px;
+            background: linear-gradient(135deg, #0040a1 0%, #0060ff 100%);
+            border-bottom: none;
+            text-align: center;
+        }
+
+        .contact-cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-cta h2 {
+            color: #ffffff;
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .contact-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        /* ----- Responsive ----- */
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 32px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .contact-form-wrapper h2,
+            .contact-info h2,
+            .faq-section h2,
+            .contact-cta h2 {
+                font-size: 28px;
+            }
+
+            .contact-hero,
+            .contact-section,
+            .faq-section,
+            .contact-cta {
+                padding: 48px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero h1 {
+                font-size: 24px;
+            }
+
+            .contact-hero p {
+                font-size: 14px;
+            }
+
+            .contact-form-wrapper h2,
+            .contact-info h2,
+            .faq-section h2,
+            .contact-cta h2 {
+                font-size: 22px;
+            }
+
+            .contact-hero,
+            .contact-section,
+            .faq-section,
+            .contact-cta {
+                padding: 32px 16px;
+            }
+
+            .contact-grid {
+                gap: 24px;
+            }
+
+            .contact-info-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info-icon {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="nav-left-group">
+                <button class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+
+                <div class="brand">
+                    <a href="index.html" class="brand-name">Eduneeds</a>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark mode">
+                    <span class="material-symbols-outlined theme-icon">dark_mode</span>
+                </button>
+            </div>
+
+            <div class="mobile-nav-menu">
+
+                <!-- Navigation -->
+                <nav class="nav-links">
+                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link" href="#jamb-services">Services</a>
+                    <a class="nav-link active" href="contact.html">Contact</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="header-actions">
+                    <button class="icon-btn" aria-label="Notifications">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <button class="icon-btn" aria-label="Help">
+                        <span class="material-symbols-outlined">help_outline</span>
+                    </button>
+                    <button class="cart-btn">
+                        <span class="material-symbols-outlined">shopping_cart</span> Cart
+                    </button>
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            <span class="user-name">GET STARTED</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="login.html"><span class="material-symbols-outlined">login</span> Login</a>
+                            <a href="register.html"><span class="material-symbols-outlined">person_add</span> Sign up</a>
+                            <a href="#"><span class="material-symbols-outlined">contact_support</span> Contact us</a>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="contact-hero">
+            <div class="contact-hero-inner">
+                <span class="contact-hero-label">Get In Touch</span>
+                <h1>We're Here to Help</h1>
+                <p>Have questions about our services? Need support with an order? Our team is ready to assist you.</p>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT SECTION ===== -->
+        <section class="contact-section">
+            <div class="contact-section-inner">
+                <div class="contact-grid">
+                    <!-- Contact Form -->
+                    <div class="contact-form-wrapper">
+                        <h2>Send us a Message</h2>
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="Your full name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="your@email.com" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="How can we help?" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" placeholder="Tell us more about your inquiry..." required></textarea>
+                            </div>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <h2>Contact Information</h2>
+
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <span class="material-symbols-outlined">email</span>
+                            </div>
+                            <div class="contact-info-content">
+                                <h3>Email</h3>
+                                <p><a href="mailto:support@eduneeds.com">support@eduneeds.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <span class="material-symbols-outlined">phone</span>
+                            </div>
+                            <div class="contact-info-content">
+                                <h3>Phone</h3>
+                                <p><a href="tel:+2347014673935">+234 701 467 3935</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <span class="material-symbols-outlined">location_on</span>
+                            </div>
+                            <div class="contact-info-content">
+                                <h3>Address</h3>
+                                <p>Eduneeds Services<br>Lagos, Nigeria</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="contact-info-content">
+                                <h3>Response Time</h3>
+                                <p>We typically respond within 24 hours during business days.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FAQ SECTION ===== -->
+        <section class="faq-section">
+            <div class="faq-inner">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How quickly will I receive a response?</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        We aim to respond to all inquiries within 24 hours during business days. For urgent matters, you can reach our support team via phone or WhatsApp.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        We accept bank transfers, online payment platforms, and other digital payment methods. Visit our services page to see all available payment options.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I track my service request?</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        Once you place an order, you can log into your Eduneeds account to view the status of your service request in real-time.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are there any hidden fees?</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        No, there are no hidden fees. All prices are displayed clearly before you complete your transaction. You'll see exactly what you're paying for.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I get a refund if I'm not satisfied?</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer refunds under certain conditions. Please review our Refund Policy or contact our support team to discuss your specific situation.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA SECTION ===== -->
+        <section class="contact-cta">
+            <div class="contact-cta-inner">
+                <h2>Still Have Questions?</h2>
+                <p>Our support team is available to help. Reach out to us and we'll get back to you as soon as possible.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER (IMPROVED) ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Eduneeds</span>
+            </div>
+
+            <nav class="footer-links">
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#">Refund Policy</a>
+            </nav>
+
+            <div class="footer-copy">
+                <span>© 2026 Eduneeds.</span>
+                <span class="powered">Powered by <strong>Geosolution</strong></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP BUTTON ===== -->
+    <a class="whatsapp-btn" href="https://wa.me/23407014673935?text=Hello!%20Anyone%20available%20to%20help%20%3F%20">
+        <svg viewbox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
+        </svg>
+    </a>
+
+    <script src="../js/public-nav.js"></script>
+    <script src="../js/global.js"></script>
+    <script>
+        // FAQ Accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    item.classList.toggle('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
