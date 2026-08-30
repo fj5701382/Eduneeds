@@ -272,3 +272,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Eduneeds loaded. Products:', totalProducts, 'Per view:', getProductsPerView());
 });
+
+/* =========================================================
+   3. BUY NOW / PROCEED -> AUTH LOGIN REDIRECT (index.html only)
+   - Event delegation: also covers slider-cloned cards
+   - Single listener = no duplicate handlers
+   - Same-tab navigation to the existing login page
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', function () {
+    var loginUrl = '../pages/login.html';
+
+    document.addEventListener('click', function (event) {
+        var button = event.target.closest('.btn-buy, .btn-proceed');
+        if (!button) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Frontend-safe: pass selected service name to the auth page
+        var card = button.closest('.product-card, .pin-card, .bill-card, .service-card') || button.parentElement;
+        var serviceName = '';
+        if (card) {
+            var title = card.querySelector('h3, h4, .pin-title, .service-title');
+            serviceName = title ? title.textContent.trim() : '';
+        }
+
+        var url = serviceName
+            ? loginUrl + '?service=' + encodeURIComponent(serviceName)
+            : loginUrl;
+
+        window.location.href = url;
+    });
+});
