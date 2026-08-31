@@ -988,6 +988,8 @@ body.dark-mode .contact-box {
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -1065,6 +1067,8 @@ body.dark-mode .contact-box {
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
