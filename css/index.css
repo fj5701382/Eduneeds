@@ -513,14 +513,18 @@ body.dark-mode .contact-box {
 
 .slider-track {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
     flex-wrap: nowrap !important;
+    width: 100%;
 }
 
 .slide {
     flex: 0 0 100% !important;
     max-width: 100% !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
     padding: 0 8px;
 }
 
@@ -807,27 +811,80 @@ body.dark-mode .contact-box {
 .slider-dots {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .dot {
+    position: relative;
     width: 10px;
     height: 10px;
     border: none;
     border-radius: 50%;
     background: #e5e7eb;
     cursor: pointer;
-    transition: background 0.3s;
+    padding: 0;
+    transition: background 0.3s ease, transform 0.2s ease, opacity 0.2s ease;
+    flex-shrink: 0;
+}
+
+.dot::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    bottom: -8px;
+    left: -6px;
+    right: -6px;
 }
 
 .dot.active {
     background: #c9003d;
+    transform: scale(1.2);
 }
 
 .dot:hover {
     background: #c9003d;
     opacity: 0.7;
+}
+
+body.dark-mode .slider-btn {
+    background: #141e2f;
+    color: #e8edf5;
+    border: 1px solid #1e2a3d;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .slider-btn:hover {
+    background: #1a2538;
+    color: #c9003d;
+}
+
+body.dark-mode .dot {
+    background: #2a3a50;
+}
+
+body.dark-mode .dot.active {
+    background: #c9003d;
+}
+
+body.dark-mode .product-card {
+    background: #141e2f;
+    border-color: #1e2a3d;
+}
+
+body.dark-mode .product-card h3 {
+    color: #e8edf5;
+}
+
+body.dark-mode .product-card ul li {
+    color: #9aabc0;
+}
+
+body.dark-mode .slide-header h2,
+body.dark-mode .slide-icon {
+    color: #e8edf5;
 }
 
 /* =========================================================
@@ -2077,9 +2134,14 @@ body.dark-mode .contact-box {
         right: 0;
     }
 
+    .slider-dots {
+        gap: 5px;
+        margin-top: 12px;
+    }
+
     .dot {
-        width: 6px;
-        height: 6px;
+        width: 8px;
+        height: 8px;
     }
 
     .product-card {

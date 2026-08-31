@@ -9,46 +9,47 @@ document.addEventListener('DOMContentLoaded', function() {
     // =========================================
 
     var track = document.getElementById('academicSlider');
-    var slides = document.querySelectorAll('.slide');
-    var dots = document.querySelectorAll('.dot');
-    var prevBtn = document.getElementById('prevSlide');
-    var nextBtn = document.getElementById('nextSlide');
-    var section = document.querySelector('.slider-section');
+    if (!track) return;
 
-    var currentIndex = 0;
-    var interval;
+    var initialSlides = track.querySelectorAll('.slide');
+    var productData = []; // Store original products with their category headers
 
-    // Get all product items from all slides (flatten into one array)
-    var allProducts = [];
-    slides.forEach(function(slide) {
-        var items = slide.querySelectorAll('.product-card');
-        items.forEach(function(item) {
-            allProducts.push(item);
+    initialSlides.forEach(function(slide) {
+        var headerEl = slide.querySelector('.slide-header');
+        var catTitle = headerEl ? (headerEl.querySelector('h2') ? headerEl.querySelector('h2').innerHTML : 'Academic Resources') : 'Academic Resources';
+        var catIcon = headerEl ? (headerEl.querySelector('.slide-icon') ? headerEl.querySelector('.slide-icon').textContent : 'library_books') : 'library_books';
+
+        var cards = slide.querySelectorAll('.product-card');
+        cards.forEach(function(card) {
+            productData.push({
+                headerTitle: catTitle,
+                headerIcon: catIcon,
+                cardNode: card.cloneNode(true)
+            });
         });
     });
 
-    var totalProducts = allProducts.length;
+    var totalProducts = productData.length;
+    var currentIndex = 0;
+    var slides = [];
+    var autoPlayInterval = null;
+    var autoPlayDelay = 5000;
 
-    // Get total number of slides needed (based on products per view)
-    function getTotalSlides() {
-        var perView = getProductsPerView();
-        return Math.ceil(totalProducts / perView);
-    }
-
-    // Products per view based on screen size
+    // Determine products per view based on viewport width
     function getProductsPerView() {
-        if (window.innerWidth < 480) return 1;
         if (window.innerWidth < 768) return 1;
         if (window.innerWidth < 992) return 2;
         return 3;
     }
 
-    // Build slides from products
+    var currentPerView = getProductsPerView();
+
+    // Build slides dynamically for the current breakpoint
     function buildSlides() {
         var perView = getProductsPerView();
-        var totalSlides = getTotalSlides();
+        var totalSlides = Math.ceil(totalProducts / perView);
 
-        // Clear existing slides
+        // Clear existing slides in the track
         track.innerHTML = '';
 
         for (var i = 0; i < totalSlides; i++) {
@@ -58,12 +59,18 @@ document.addEventListener('DOMContentLoaded', function() {
             var slideDiv = document.createElement('div');
             slideDiv.className = 'slide';
 
+            // Category header from first item in this slide
+            var slideHeader = document.createElement('div');
+            slideHeader.className = 'slide-header';
+            slideHeader.innerHTML = '<span class="material-symbols-outlined slide-icon">' + productData[start].headerIcon + '</span><h2>' + productData[start].headerTitle + '</h2>';
+            slideDiv.appendChild(slideHeader);
+
+            // Grid for product cards
             var gridDiv = document.createElement('div');
             gridDiv.className = 'slide-grid';
 
             for (var j = start; j < end; j++) {
-                var productClone = allProducts[j].cloneNode(true);
-                gridDiv.appendChild(productClone);
+                gridDiv.appendChild(productData[j].cardNode.cloneNode(true));
             }
 
             slideDiv.appendChild(gridDiv);
@@ -71,13 +78,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         slides = track.querySelectorAll('.slide');
-        updateDots(totalSlides);
-        currentIndex = 0;
-        updateSlider();
+        buildDots(totalSlides);
+
+        // Clamp index within bounds
+        if (currentIndex >= totalSlides) {
+            currentIndex = totalSlides - 1;
+        }
+        if (currentIndex < 0) {
+            currentIndex = 0;
+        }
+
+        updateSlider(false);
     }
 
-    // Update dots
-    function updateDots(total) {
+    // Build dot buttons
+    function buildDots(total) {
         var dotsContainer = document.querySelector('.slider-dots');
         if (!dotsContainer) return;
 
@@ -85,33 +100,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (var i = 0; i < total; i++) {
             var dot = document.createElement('button');
-            dot.className = 'dot';
-            if (i === 0) dot.classList.add('active');
+            dot.className = 'dot' + (i === currentIndex ? ' active' : '');
             dot.setAttribute('data-index', i);
-
-            dot.addEventListener('click', function(e) {
-                var index = parseInt(this.getAttribute('data-index'));
-                goToSlide(index);
-                stopAutoPlay();
-                setTimeout(startAutoPlay, 5000);
-            });
-
+            dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+            dot.setAttribute('type', 'button');
             dotsContainer.appendChild(dot);
         }
-
-        dots = document.querySelectorAll('.dot');
     }
 
-    // Update slider position
-    function updateSlider() {
+    // Update slider position & active dot
+    function updateSlider(animate) {
         var totalSlides = slides.length;
         if (totalSlides === 0) return;
 
-        var offset = currentIndex * (100 / totalSlides);
+        if (animate === false) {
+            track.style.transition = 'none';
+        } else {
+            track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+        }
+
+        // Each slide is 100% width of the slider container, so translateX is simply currentIndex * 100%
+        var offset = currentIndex * 100;
         track.style.transform = 'translateX(-' + offset + '%)';
 
-        dots.forEach(function(dot, index) {
-            if (index === currentIndex) {
+        if (animate === false) {
+            void track.offsetHeight; // Force reflow
+            track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+        }
+
+        // Update active dot class
+        var allDots = document.querySelectorAll('.slider-dots .dot');
+        allDots.forEach(function(dot, idx) {
+            if (idx === currentIndex) {
                 dot.classList.add('active');
             } else {
                 dot.classList.remove('active');
@@ -119,14 +139,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Go to specific slide
+    // Navigation functions
     function goToSlide(index) {
         var totalSlides = slides.length;
         if (totalSlides === 0) return;
-        if (index < 0) index = totalSlides - 1;
-        if (index >= totalSlides) index = 0;
+
+        if (index < 0) {
+            index = totalSlides - 1;
+        } else if (index >= totalSlides) {
+            index = 0;
+        }
+
         currentIndex = index;
-        updateSlider();
+        updateSlider(true);
     }
 
     function nextSlide() {
@@ -137,31 +162,23 @@ document.addEventListener('DOMContentLoaded', function() {
         goToSlide(currentIndex - 1);
     }
 
+    // Autoplay controllers
     function startAutoPlay() {
-        if (interval) clearInterval(interval);
-        var delay = window.innerWidth < 768 ? 5000 : 4000;
-        interval = setInterval(nextSlide, delay);
+        stopAutoPlay();
+        autoPlayInterval = setInterval(function() {
+            nextSlide();
+        }, autoPlayDelay);
     }
 
     function stopAutoPlay() {
-        clearInterval(interval);
-        interval = null;
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+        }
     }
 
-    // Handle responsive
-    function handleResponsive() {
-        buildSlides();
-        var newDots = document.querySelectorAll('.dot');
-        newDots.forEach(function(dot) {
-            dot.addEventListener('click', function(e) {
-                var index = parseInt(this.getAttribute('data-index'));
-                goToSlide(index);
-                stopAutoPlay();
-                setTimeout(startAutoPlay, 5000);
-            });
-        });
-        dots = newDots;
-        updateSlider();
+    function resetAutoPlay() {
+        stopAutoPlay();
         startAutoPlay();
     }
 
@@ -169,12 +186,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // EVENT LISTENERS
     // =========================================
 
+    // Prev / Next button listeners
+    var prevBtn = document.getElementById('prevSlide');
+    var nextBtn = document.getElementById('nextSlide');
+
     if (prevBtn) {
         prevBtn.addEventListener('click', function(e) {
             e.preventDefault();
             prevSlide();
-            stopAutoPlay();
-            setTimeout(startAutoPlay, 5000);
+            resetAutoPlay();
         });
     }
 
@@ -182,58 +202,93 @@ document.addEventListener('DOMContentLoaded', function() {
         nextBtn.addEventListener('click', function(e) {
             e.preventDefault();
             nextSlide();
-            stopAutoPlay();
-            setTimeout(startAutoPlay, 5000);
+            resetAutoPlay();
         });
     }
 
-    // Touch swipe
-    var touchStartX = 0;
-    var touchEndX = 0;
-
-    if (track) {
-        track.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        track.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            var diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 30) {
-                if (diff > 0) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
-                stopAutoPlay();
-                setTimeout(startAutoPlay, 5000);
+    // Dot click listener (Event delegation)
+    var dotsContainer = document.querySelector('.slider-dots');
+    if (dotsContainer) {
+        dotsContainer.addEventListener('click', function(e) {
+            var dot = e.target.closest('.dot');
+            if (!dot) return;
+            var idx = parseInt(dot.getAttribute('data-index'), 10);
+            if (!isNaN(idx)) {
+                goToSlide(idx);
+                resetAutoPlay();
             }
-        }, { passive: true });
+        });
     }
 
-    // Hover pause
+    // Touch / Swipe support with vertical scrolling protection
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchEndX = 0;
+    var touchEndY = 0;
+    var isSwiping = false;
+
+    track.addEventListener('touchstart', function(e) {
+        if (!e.touches || e.touches.length === 0) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchEndX = touchStartX;
+        touchEndY = touchStartY;
+        isSwiping = true;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', function(e) {
+        if (!isSwiping || !e.touches || e.touches.length === 0) return;
+        touchEndX = e.touches[0].clientX;
+        touchEndY = e.touches[0].clientY;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(e) {
+        if (!isSwiping) return;
+        isSwiping = false;
+
+        var deltaX = touchStartX - touchEndX;
+        var deltaY = touchStartY - touchEndY;
+        var absX = Math.abs(deltaX);
+        var absY = Math.abs(deltaY);
+
+        // Only trigger horizontal slide navigation if horizontal delta clearly exceeds vertical delta
+        if (absX > absY && absX > 35) {
+            if (deltaX > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            resetAutoPlay();
+        }
+    }, { passive: true });
+
+    // Desktop hover pause
+    var section = document.querySelector('.slider-section');
     if (section) {
         section.addEventListener('mouseenter', stopAutoPlay);
-        section.addEventListener('mouseleave', function() {
-            startAutoPlay();
-        });
+        section.addEventListener('mouseleave', startAutoPlay);
     }
 
-    // Resize
+    // Responsive resize handler (debounced)
     var resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            handleResponsive();
-        }, 300);
+            var newPerView = getProductsPerView();
+            if (newPerView !== currentPerView) {
+                currentPerView = newPerView;
+                buildSlides();
+            } else {
+                updateSlider(false);
+            }
+        }, 150);
     });
 
-    // =========================================
-    // INIT
-    // =========================================
-
+    // Initialize slider
     buildSlides();
+    startAutoPlay();
 
+    // Expose controls for testing / debugging
     window.sliderControls = {
         next: nextSlide,
         prev: prevSlide,
