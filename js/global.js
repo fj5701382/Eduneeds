@@ -10,7 +10,7 @@
 function initThemeToggle() {
     var themeToggles = document.querySelectorAll('.theme-toggle');
 
-    applyTheme(localStorage.getItem('theme') || localStorage.getItem('Eduneeds-theme') || 'light');
+    applyTheme(localStorage.getItem('theme') || localStorage.getItem('Eduneeds-theme') || 'light', false);
     themeToggles.forEach(function(themeToggle) {
         themeToggle.removeEventListener('click', handleThemeToggle);
         themeToggle.addEventListener('click', handleThemeToggle);
@@ -19,10 +19,10 @@ function initThemeToggle() {
 
 function handleThemeToggle() {
     var nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-    applyTheme(nextTheme);
+    applyTheme(nextTheme, true);
 }
 
-function applyTheme(theme) {
+function applyTheme(theme, animate) {
     var normalizedTheme = theme === 'dark' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', normalizedTheme);
     document.documentElement.classList.toggle('dark-mode', normalizedTheme === 'dark');
@@ -31,7 +31,17 @@ function applyTheme(theme) {
     localStorage.setItem('Eduneeds-theme', normalizedTheme);
 
     document.querySelectorAll('.theme-icon').forEach(function(themeIcon) {
-        themeIcon.textContent = normalizedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+        if (animate) {
+            // Animate icon on user-triggered switch
+            themeIcon.classList.add('switching');
+            setTimeout(function() {
+                themeIcon.textContent = normalizedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+                themeIcon.classList.remove('switching');
+            }, 180);
+        } else {
+            // No animation on initial page load
+            themeIcon.textContent = normalizedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+        }
     });
 
     document.querySelectorAll('.theme-toggle').forEach(function(themeToggle) {

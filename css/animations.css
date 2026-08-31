@@ -1,0 +1,715 @@
+/* =========================================================
+   Eduneeds - ANIMATIONS & TRANSITIONS
+   Professional, subtle, performant animations
+   Added on top of existing styles - no design changes.
+   ========================================================= */
+
+/* =========================================================
+   1. REDUCED MOTION - GLOBAL OVERRIDE
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =========================================================
+   2. LIGHT / DARK MODE - SMOOTH TRANSITIONS
+   ========================================================= */
+
+body,
+.header,
+.top-navbar,
+.sidebar,
+.main-content,
+.footer,
+.login-brand,
+.login-form-container,
+.login-card {
+    transition:
+        background-color 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.brand-name,
+.brand-text,
+.brand-icon,
+.user-name,
+.user-role,
+.user-avatar,
+.notification-dot {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.nav-link,
+.nav-dropdown-toggle,
+.nav-dropdown-menu a,
+.sidebar-footer a,
+.footer-links a,
+.footer-brand-name,
+.footer-copy-text {
+    transition:
+        color 0.25s ease,
+        background-color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.service-card,
+.product-card,
+.pin-card,
+.bill-card,
+.jamb-pin-card,
+.jamb-service-card,
+.recent-activity,
+.recent-activity-header,
+.balance-card,
+.activity-table thead,
+.activity-table th,
+.activity-table td,
+.tx-icon,
+.section-header h2,
+.section-header .material-symbols-outlined {
+    transition:
+        background-color 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.search-input {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.user-dropdown {
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* =========================================================
+   3. THEME TOGGLE ICON ANIMATION
+   ========================================================= */
+.theme-icon {
+    display: inline-block;
+    transition:
+        transform 0.35s ease,
+        opacity 0.2s ease;
+}
+
+.theme-icon.switching {
+    transform: rotate(30deg) scale(0.8);
+    opacity: 0.5;
+}
+
+/* =========================================================
+   4. NAVBAR HOVER EFFECTS - PUBLIC SITE
+   ========================================================= */
+.nav-link {
+    position: relative;
+    transition:
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.icon-btn {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.icon-btn:hover {
+    transform: scale(1.05);
+}
+
+.icon-btn:active {
+    transform: scale(0.96);
+}
+
+/* =========================================================
+   5. HAMBURGER BUTTON ANIMATION (PUBLIC SITE)
+   ========================================================= */
+.mobile-nav-toggle {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.mobile-nav-toggle .material-symbols-outlined {
+    display: inline-block;
+    transition:
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.2s ease;
+}
+
+.mobile-menu-open .mobile-nav-toggle .material-symbols-outlined {
+    transform: rotate(90deg);
+}
+
+.mobile-nav-menu {
+    transition:
+        max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.25s ease,
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        padding 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* =========================================================
+   6. DASHBOARD HAMBURGER BUTTON ANIMATION
+   ========================================================= */
+.hamburger-btn {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.hamburger-btn .material-symbols-outlined {
+    display: inline-block;
+    transition:
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.2s ease;
+}
+
+.hamburger-btn.active .material-symbols-outlined {
+    transform: rotate(90deg);
+}
+
+/* =========================================================
+   7. SIDEBAR ANIMATION - DASHBOARD
+   ========================================================= */
+.sidebar {
+    transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+    will-change: transform;
+}
+
+.sidebar-close {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.sidebar-close:hover {
+    transform: scale(1.1);
+}
+
+/* =========================================================
+   8. SIDEBAR DROPDOWN ANIMATIONS
+   ========================================================= */
+.nav-dropdown-menu {
+    transition:
+        max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.25s ease;
+}
+
+.dropdown-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-dropdown-toggle {
+    transition:
+        background-color 0.2s ease,
+        color 0.25s ease;
+}
+
+.nav-dropdown-menu a {
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+.nav-dropdown-menu a:hover {
+    padding-left: 16px;
+}
+
+/* =========================================================
+   9. BUTTON HOVER ANIMATIONS
+   ========================================================= */
+.btn-primary,
+.btn-submit,
+.btn-buy,
+.btn-outline-buy,
+.btn-download,
+.btn-proceed,
+.btn-add-funds,
+.btn-transfer,
+.btn-outline,
+.cart-btn {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease,
+        opacity 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-submit:hover,
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-buy:hover:not(:disabled):not(.disabled),
+.btn-outline-buy:hover,
+.btn-proceed:hover,
+.btn-outline:hover,
+.cart-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add-funds:hover,
+.btn-transfer:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary:active,
+.btn-submit:active,
+.btn-buy:active,
+.btn-proceed:active,
+.btn-add-funds:active,
+.btn-transfer:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.user-btn {
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.social-btn {
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   10. CARD HOVER ANIMATIONS
+   ========================================================= */
+.product-card {
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.pin-card {
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
+}
+
+.pin-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.pin-image img {
+    transition: transform 0.5s ease;
+}
+
+.pin-card:hover .pin-image img {
+    transform: scale(1.05);
+}
+
+.bill-card {
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
+}
+
+.bill-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.bill-image img {
+    transition: transform 0.5s ease;
+}
+
+.bill-card:hover .bill-image img {
+    transform: scale(1.05);
+}
+
+.jamb-pin-card,
+.jamb-service-card {
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.jamb-pin-card:hover,
+.jamb-service-card:hover {
+    transform: translateY(-2px);
+}
+
+.service-card {
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.service-icon {
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.08);
+}
+
+.jamb-pin-icon,
+.jamb-service-icon {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.jamb-arrow {
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.jamb-pin-card:hover .jamb-arrow,
+.jamb-service-card:hover .jamb-arrow {
+    transform: translateX(3px);
+}
+
+/* =========================================================
+   11. TABLE ROW HOVER
+   ========================================================= */
+.activity-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+/* =========================================================
+   12. USER DROPDOWN ORIGIN
+   ========================================================= */
+.user-dropdown {
+    transform-origin: top right;
+}
+
+/* =========================================================
+   13. SLIDER CONTROLS ANIMATION
+   ========================================================= */
+.slider-btn {
+    transition:
+        opacity 0.25s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+.slider-btn:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.slider-btn:active {
+    transform: translateY(-50%) scale(0.96);
+}
+
+.dot {
+    transition:
+        background-color 0.25s ease,
+        transform 0.2s ease;
+}
+
+.dot.active {
+    transform: scale(1.2);
+}
+
+/* =========================================================
+   14. WHATSAPP BUTTON ANIMATION
+   ========================================================= */
+.whatsapp-btn {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+}
+
+/* =========================================================
+   15. KEYFRAMES
+   ========================================================= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInToast {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOutToast {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* =========================================================
+   16. PAGE LOAD ENTRANCE ANIMATIONS
+   ========================================================= */
+.header,
+.top-navbar {
+    animation: fadeInDown 0.4s ease both;
+}
+
+.hero-content {
+    animation: fadeInUp 0.5s ease both;
+    animation-delay: 0.05s;
+}
+
+.login-card {
+    animation: scaleIn 0.4s ease both;
+    animation-delay: 0.05s;
+}
+
+.brand-content {
+    animation: fadeInUp 0.5s ease both;
+    animation-delay: 0.1s;
+}
+
+.balance-card {
+    animation: fadeInUp 0.45s ease both;
+    animation-delay: 0.05s;
+}
+
+.services-section {
+    animation: fadeInUp 0.45s ease both;
+    animation-delay: 0.1s;
+}
+
+.recent-activity {
+    animation: fadeInUp 0.45s ease both;
+    animation-delay: 0.15s;
+}
+
+/* =========================================================
+   17. SCROLL-BASED ENTRANCE ANIMATIONS
+   JS adds .visible class via IntersectionObserver
+   ========================================================= */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-on-scroll:nth-child(2) { transition-delay: 0.05s; }
+.animate-on-scroll:nth-child(3) { transition-delay: 0.1s; }
+.animate-on-scroll:nth-child(4) { transition-delay: 0.15s; }
+.animate-on-scroll:nth-child(5) { transition-delay: 0.2s; }
+.animate-on-scroll:nth-child(6) { transition-delay: 0.25s; }
+
+/* =========================================================
+   18. FORM INPUT FOCUS ANIMATIONS
+   ========================================================= */
+.form-group input,
+.password-wrapper input {
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+/* =========================================================
+   19. TOAST / NOTIFICATION ANIMATIONS
+   ========================================================= */
+.toast,
+.notification,
+.alert-toast {
+    animation: slideInToast 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.toast.hide,
+.notification.hide,
+.alert-toast.hide {
+    animation: slideOutToast 0.25s ease forwards;
+}
+
+/* =========================================================
+   20. MODAL ANIMATIONS
+   ========================================================= */
+.modal-overlay {
+    transition:
+        opacity 0.25s ease,
+        visibility 0s linear 0.25s;
+}
+
+.modal-overlay.open {
+    transition:
+        opacity 0.25s ease,
+        visibility 0s;
+}
+
+.modal-box,
+.modal-content {
+    transition:
+        opacity 0.25s ease,
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================
+   21. MOBILE OVERLAY FADE
+   ========================================================= */
+.mobile-overlay {
+    transition:
+        opacity 0.3s ease,
+        visibility 0s linear 0.3s;
+}
+
+.mobile-overlay.show {
+    transition:
+        opacity 0.3s ease,
+        visibility 0s;
+}
+
+/* =========================================================
+   22. MOBILE - DISABLE HOVER TRANSFORMS ON TOUCH DEVICES
+   ========================================================= */
+@media (max-width: 767px) and (hover: none) {
+    .product-card:hover,
+    .pin-card:hover,
+    .bill-card:hover,
+    .service-card:hover,
+    .jamb-pin-card:hover,
+    .jamb-service-card:hover {
+        transform: none;
+    }
+
+    .icon-btn:hover {
+        transform: none;
+    }
+
+    .btn-primary:hover,
+    .btn-submit:hover,
+    .btn-buy:hover,
+    .btn-proceed:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* =========================================================
+   23. SCROLLBAR TRANSITION
+   ========================================================= */
+::-webkit-scrollbar-thumb {
+    transition: background-color 0.2s ease;
+}
