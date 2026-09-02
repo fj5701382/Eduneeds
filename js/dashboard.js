@@ -4,6 +4,23 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    var currentUser = window.EduneedsAuth && EduneedsAuth.getCurrentUser();
+    if (!currentUser) {
+        window.location.replace('login.html');
+        return;
+    }
+    var userName = document.querySelector('.user-name');
+    var userAvatar = document.querySelector('.user-avatar');
+    if (userName) userName.textContent = currentUser.fullName;
+    if (userAvatar) userAvatar.textContent = currentUser.fullName.split(/\s+/).slice(0, 2).map(function (part) { return part.charAt(0); }).join('').toUpperCase();
+    document.querySelectorAll('.logout').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            EduneedsAuth.logoutUser();
+            window.location.href = 'login.html';
+        });
+    });
+
     // =========================================
     // 1. DARK MODE TOGGLE
     // =========================================

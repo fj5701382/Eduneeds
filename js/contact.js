@@ -1,0 +1,8 @@
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('.contact-form'); if (!form) return;
+    function setError(input, message) { var field = input.closest('.form-group'); field.classList.add('error'); var error = field.querySelector('.error-message'); if (!error) { error = document.createElement('span'); error.className = 'error-message'; field.appendChild(error); } error.textContent = message; }
+    function clearError(input) { input.closest('.form-group').classList.remove('error'); }
+    function validate(input) { var value = input.value.trim(); if (!value) { setError(input, 'This field is required'); return false; } if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { setError(input, 'Please enter a valid email address'); return false; } clearError(input); return true; }
+    form.querySelectorAll('input, textarea').forEach(function (input) { input.addEventListener('blur', function () { validate(input); }); input.addEventListener('input', function () { clearError(input); }); });
+    form.addEventListener('submit', function (event) { event.preventDefault(); if (!Array.from(form.querySelectorAll('input, textarea')).every(validate)) return; var name = form.querySelector('#name').value.trim(); var email = form.querySelector('#email').value.trim(); var subject = form.querySelector('#subject').value.trim(); var message = form.querySelector('#message').value.trim(); alert('Your message has been sent to the company email, wait for response.'); form.reset(); window.location.href = 'mailto:support@eduneeds.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message); });
+});
