@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var userAvatar = document.querySelector('.user-avatar');
     if (userName) userName.textContent = currentUser.fullName;
     if (userAvatar) userAvatar.textContent = currentUser.fullName.split(/\s+/).slice(0, 2).map(function (part) { return part.charAt(0); }).join('').toUpperCase();
+    if (window.EduneedsWallet) EduneedsWallet.renderBalance();
     document.querySelectorAll('.logout').forEach(function (link) {
         link.addEventListener('click', function (event) {
             event.preventDefault();
@@ -312,6 +313,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var addFundsBtn = document.querySelector('.btn-add-funds');
     if (addFundsBtn) {
+        addFundsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            window.location.href = '../services/wallet.html';
+        });
         addFundsBtn.addEventListener('click', function(e) {
             e.preventDefault();
             var amount = prompt('Enter amount to fund (₦):', '1000');

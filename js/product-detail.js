@@ -239,6 +239,11 @@ function setupBuyNow(service) {
             return;
         }
 
+        if (method !== 'wallet') {
+            if (window.EduneedsWallet) EduneedsWallet.notify('Wallet payment is available in this frontend demo.', 'error');
+            return;
+        }
+
         var price = service.price;
         if (service.priceTiers) {
             for (var i = 0; i < service.priceTiers.length; i++) {
@@ -261,6 +266,26 @@ function setupBuyNow(service) {
             var originalText = buyBtn.innerHTML;
             buyBtn.innerHTML = '<span class="material-symbols-outlined">progress_activity</span> Processing...';
             buyBtn.disabled = true;
+
+            if (method === 'wallet' && window.EduneedsWallet) {
+                var result = EduneedsWallet.purchase(total, service.name + ' × ' + qty);
+                if (!result.ok) {
+                    buyBtn.innerHTML = originalText;
+                    buyBtn.disabled = false;
+                    EduneedsWallet.notify(result.reason === 'insufficient' ? 'Insufficient balance.' : 'Please select a valid purchase amount.', 'error');
+                    return;
+                }
+                EduneedsWallet.renderBalance();
+                buyBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Success!';
+                buyBtn.style.background = '#16a34a';
+                setTimeout(function() {
+                    buyBtn.innerHTML = originalText;
+                    buyBtn.style.background = '';
+                    buyBtn.disabled = false;
+                    EduneedsWallet.notify('Your purchase was successful from your wallet balance.');
+                }, 900);
+                return;
+            }
 
             setTimeout(function() {
                 buyBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Success!';
