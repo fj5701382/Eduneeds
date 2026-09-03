@@ -24,15 +24,19 @@
         var record = walletForUser(); if (!record) return { ok: false, reason: 'login' };
         record.wallet.balanceKobo += kobo;
         record.wallet.transactions.unshift({ id: transactionId(), type: 'credit', category: 'funding', method: method, amountKobo: kobo, description: 'Wallet funding via ' + method, date: new Date().toISOString(), balanceAfterKobo: record.wallet.balanceKobo });
-        persist(record); return { ok: true, balanceKobo: record.wallet.balanceKobo };
+        persist(record);
+        if (window.EduneedsNotifications) window.EduneedsNotifications.add({ type: 'wallet_funding', title: 'Wallet funded successfully', message: format(kobo) + ' was added to your wallet via ' + method + '.', amount: kobo / 100 });
+        return { ok: true, balanceKobo: record.wallet.balanceKobo };
     }
     function purchase(amount, description) {
         var kobo = amountToKobo(amount); if (!kobo) return { ok: false, reason: 'invalid' };
         var record = walletForUser(); if (!record) return { ok: false, reason: 'login' };
-        if (record.wallet.balanceKobo < kobo) return { ok: false, reason: 'insufficient' };
+        if (record.wallet.balanceKobo < kobo) { if (window.EduneedsNotifications) window.EduneedsNotifications.add({ type: 'insufficient_balance', title: 'Insufficient balance', message: 'You do not have enough wallet balance to complete this purchase.', amount: kobo / 100 }); return { ok: false, reason: 'insufficient' }; }
         record.wallet.balanceKobo -= kobo;
         record.wallet.transactions.unshift({ id: transactionId(), type: 'debit', category: 'purchase', amountKobo: kobo, description: 'Purchase: ' + description, date: new Date().toISOString(), balanceAfterKobo: record.wallet.balanceKobo });
-        persist(record); return { ok: true, balanceKobo: record.wallet.balanceKobo };
+        persist(record);
+        if (window.EduneedsNotifications) window.EduneedsNotifications.add({ type: 'purchase', title: 'Purchase successful', message: 'Your purchase of ' + description + ' for ' + format(kobo) + ' was successful.', amount: kobo / 100 });
+        return { ok: true, balanceKobo: record.wallet.balanceKobo };
     }
     function notify(message, type) {
         var toast = document.createElement('div'); toast.className = 'eduneeds-toast ' + (type || 'success'); toast.textContent = message; document.body.appendChild(toast);
